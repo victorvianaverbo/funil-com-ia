@@ -46,10 +46,16 @@ p  { margin: 0 0 16px; }
   padding: clamp(3rem, 8vw, 4.5rem) 20px clamp(2.5rem, 7vw, 3.5rem);
   text-align: center;
 }
+/* A marca d'água precisa sangrar até as bordas da tela, senão fica um retângulo
+   recortado dentro da coluna de leitura de 680px. */
 .hero::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
   z-index: -1;
   background-image: url('/.netlify/images?url=/images/mesa-de-guerra.png&w=1200&q=45&fm=webp');
   background-size: cover;
