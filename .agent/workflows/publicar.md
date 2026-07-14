@@ -1,5 +1,5 @@
 ---
-description: publicar
+description: "Coloque o site no ar na internet, pronto para receber visita"
 ---
 
 # Instrucoes
@@ -28,7 +28,8 @@ Apos o deploy:
 
 1. Informe que o site esta no ar
 2. Forneca o link do site
-3. Sugira o proximo passo: "Site no ar! Agora use `/anuncios` para criarmos os anuncios que vao levar clientes ate a sua pagina."
+3. Sugira o proximo passo: "Site no ar! Agora use `/otimizar` para deixar a pagina rapida — pagina lenta perde venda."
+   - Se o modelo for lancamento pago e esta foi a pagina do ingresso, o proximo passo e voltar ao `/escrever` para construir a pagina do produto
 4. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento

@@ -1,5 +1,5 @@
 ---
-description: oferta
+description: "Transforme a promessa em produto vendável: preço, formato, order bump e upsell"
 ---
 
 # Instruções
@@ -15,6 +15,7 @@ Este workflow APENAS:
 - Salva o resultado em `produto/oferta.md`
 
 Este workflow NÃO:
+- Escolhe o modelo de funil (lançamento pago ou perpétuo) — isso é o `/mapear`
 - Escreve a copy da página nem constrói nada
 - Executa nenhuma etapa seguinte
 
@@ -39,17 +40,17 @@ Este workflow NÃO:
 "Vamos quebrar a entrega em 3 a 5 passos/módulos numa jornada lógica. Quais seriam?"
 
 ### Fase 5: O preço e a escada de valor
-- Confirme a faixa de preço escolhida em `/descoberta` (ou escolha agora com `ref-precificacao`, seção "Como escolher a sua faixa"), cruzando com a faixa sugerida pela pesquisa de mercado.
+- Confirme a faixa de preço escolhida em `/bussola` (ou escolha agora com `ref-precificacao`, seção "Como escolher a sua faixa"), cruzando com a faixa sugerida pela pesquisa de mercado.
 - Defina o preço exato dentro da faixa: low ticket R$27–97 / ticket médio R$197–997 / high ticket R$1.000+.
 - Esboce a escada de valor completa e marque qual degrau é o produto de ENTRADA — pode ser qualquer um. Degraus abaixo da entrada podem virar downsell; degraus acima, upsell e ofertas futuras — ver `ref-precificacao`.
 
 ### Fase 6: Order bump, upsell e downsell
 - **Order bump:** "Que item complementar (em torno de 10–30% do valor do produto) dá para adicionar com um clique no checkout?"
-- **Upsell:** "Qual é o próximo passo lógico, de maior valor, para quem comprou?" (No iafunil, o webinário é o upsell — cite como exemplo opcional quando fizer sentido.)
+- **Upsell:** "Qual é o próximo passo lógico, de maior valor, para quem comprou?"
 - **Downsell:** "Qual alternativa mais barata oferecer a quem recusar o upsell?"
 
-### Fase 7: Lançamento (opcional — visão geral)
-O caminho principal é a venda direta contínua (anúncios sempre ligados). Se o aluno quiser um evento de lançamento como reforço, explique brevemente o cronograma (pré-lançamento, lançamento, pós) e a sequência de e-mails base — ver `ref-oferta-funil`, seção 6.
+### Fase 7: NÃO escolha o modelo de funil aqui
+Se o aluno perguntar como vai vender (aula ao vivo? anúncio direto?), diga que essa decisão tem etapa própria — o `/mapear`, no fim da estratégia — e siga em frente. Aqui a gente define **o que** se vende; lá se define **como**.
 
 ## Saída
 
@@ -83,13 +84,11 @@ R$ ...
 - High ticket: ...
 - Recorrência: ...
 
-## Funil
+## Elementos de funil
+(o modelo de funil é escolhido depois, no `/mapear`)
 - Order bump: ...
 - Upsell: ...
 - Downsell: ...
-
-## Lançamento (opcional)
-...
 ```
 
 ## Ao Finalizar
@@ -97,7 +96,7 @@ R$ ...
 1. Informe que a oferta foi salva
 2. Mostre o resumo da oferta e da escada de valor
 3. Pergunte se quer ajustar algo
-4. Sugira a próxima etapa: "Com a oferta pronta, use `/narrativa` para definir a big idea, ou `/criar-produto` para produzir o conteúdo."
+4. Sugira a próxima etapa: "Com a oferta pronta, use `/posicionar` para definir a big idea, ou `/criar-produto` para produzir o conteúdo."
 5. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento

@@ -1,0 +1,332 @@
+﻿/* ==========================================================================
+   QUIZ — Operação Estrutura no Ar
+   Cores, fontes e componentes vêm de /marca/tokens.css.
+   Funil fechado: uma etapa por tela, sem menu, sem rodapé, sem saída.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* O display do autor vence o do navegador, então [hidden] precisa ser explícito.
+   Sem isto, a barra apareceria na capa e as opções do vídeo não esperariam. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--font-corpo);
+  font-size: var(--t-corpo);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+h2 { font-size: clamp(1.5rem, 5.6vw, 1.75rem); line-height: 1.25; margin: 0 0 24px; }
+p  { margin: 0 0 16px; }
+
+.voz {
+  font-family: var(--font-maquina);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--tinta-suave);
+}
+
+.quiz {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;   /* conta a barra do navegador no celular */
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- Barra de progresso ---------- */
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0 16px;
+}
+.barra__marca, .barra__conta {
+  font-family: var(--font-ficha);
+  font-size: var(--t-meta);
+  letter-spacing: 2px;
+  color: var(--grafite-papel);
+  white-space: nowrap;
+}
+.barra__trilho { flex: 1; height: 4px; background: #d5cfbd; }
+.barra__preenche {
+  height: 100%;
+  width: 0;
+  background: var(--oliva-escuro);
+  transition: width 0.35s ease;
+}
+
+/* ---------- Palco: uma etapa por vez, centralizada ---------- */
+.palco {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 16px 0 48px;
+}
+
+.etapa {
+  display: flex;
+  flex-direction: column;
+  animation: entrar 0.35s ease-out both;
+}
+.etapa--centro { align-items: center; text-align: center; }
+
+/* A capa é o hero: pinta de primeira, sem fade, sem deslocamento. */
+.etapa--capa {
+  animation: none;
+  align-items: center;
+  text-align: center;
+}
+
+/* O quadriculado, só na capa. Fixed pra vazar do container de 640px e cobrir a
+   tela. Some sozinho quando o quiz começa (a capa sai do DOM), deixando as
+   perguntas num fundo limpo. CSS puro: nenhuma imagem, nenhum request. */
+.etapa--capa::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right,  rgba(28, 26, 21, .10) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(28, 26, 21, .10) 1px, transparent 1px);
+  background-size: 44px 44px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 30%, transparent 100%);
+          mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 30%, transparent 100%);
+  pointer-events: none;
+}
+
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+.ficha {
+  font-family: var(--font-ficha);
+  font-size: var(--t-meta);
+  letter-spacing: 3px;
+  color: var(--grafite-papel);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.ficha--carimbo { color: var(--carimbo); letter-spacing: 3px; margin: 14px 0 2px; }
+
+.micro {
+  font-family: var(--font-ficha);
+  font-size: var(--t-ficha);
+  color: var(--grafite-papel);
+  margin: 14px 0 0;
+}
+
+/* ==========================================================================
+   ETAPA 0 — CAPA
+   ========================================================================== */
+.etapa--capa .carimbo  { margin-bottom: 20px; }
+.etapa--capa h1 {
+  font-size: clamp(1.625rem, 6.4vw, 2rem);
+  line-height: 1.2;
+  margin: 24px 0 0;
+}
+.incentivo {
+  border: 1px dashed var(--oliva-escuro);
+  padding: 16px 20px;
+  margin: 24px 0 0;
+  font-family: var(--font-maquina);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--oliva-escuro);
+}
+.etapa--capa .botao { margin-top: 28px; width: 100%; }
+
+/* ==========================================================================
+   PERGUNTAS
+   ========================================================================== */
+.opcoes { display: grid; gap: 12px; width: 100%; }
+
+.opcao {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: var(--papel);
+  border: var(--borda);
+  padding: 16px 18px;
+  cursor: pointer;
+  font-family: var(--font-corpo);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--tinta);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+.opcao:hover  { background: var(--tinta); color: var(--papel); }
+.opcao:active { transform: scale(0.99); }
+.opcao__icone { font-size: 1.25rem; line-height: 1.2; flex-shrink: 0; }
+
+/* ==========================================================================
+   TELA "LIGUE O SOM"
+   ========================================================================== */
+.icone-som { font-size: 3rem; margin: 8px 0 16px; }
+.etapa--centro .botao { margin-top: 24px; width: 100%; }
+
+/* ==========================================================================
+   ETAPAS DE VÍDEO
+   ========================================================================== */
+.vsl { position: relative; margin-bottom: 18px; }
+.vsl__som {
+  position: absolute; top: -11px; left: 14px; z-index: 2;
+  background: var(--carimbo);
+  color: var(--papel);
+  font-family: var(--font-ficha);
+  font-size: var(--t-meta);
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 3px 9px;
+}
+
+.player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: var(--papel-sombra);
+  border: var(--borda-forte);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.player--prova { margin-bottom: 18px; }
+.player > iframe, .player > video, .player > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; border: 0;
+}
+.player__aviso {
+  font-family: var(--font-ficha);
+  font-size: var(--t-meta);
+  letter-spacing: 1px;
+  color: var(--grafite-papel);
+  text-align: center;
+  padding: 12px;
+  line-height: 1.5;
+}
+
+.legenda { margin: 0 0 22px; }
+
+.acao { display: grid; gap: 12px; width: 100%; }
+.acao .botao { width: 100%; }
+
+/* Contagem até a ação liberar: incentiva assistir o corte */
+.espera {
+  font-family: var(--font-ficha);
+  font-size: var(--t-ficha);
+  color: var(--grafite-papel);
+  text-align: center;
+  margin: 0;
+}
+.espera__num { color: var(--carimbo); font-weight: 600; }
+
+/* ==========================================================================
+   LOADING
+   ========================================================================== */
+.carga {
+  width: 100%;
+  max-width: 420px;
+  height: 10px;
+  border: var(--borda);
+  margin-bottom: 24px;
+}
+.carga__preenche {
+  height: 100%;
+  width: 0;
+  background: var(--oliva-escuro);
+  transition: width 0.3s linear;
+}
+.carga__msg {
+  font-size: 1.125rem;
+  color: var(--tinta);
+  min-height: 56px;   /* trava a altura: a frase troca sem empurrar a tela */
+  margin: 0;
+}
+
+/* ==========================================================================
+   DIAGNÓSTICO
+   ========================================================================== */
+.liberado {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--oliva-escuro);
+  margin: 0 0 18px;
+}
+.diagnostico { display: grid; gap: 12px; margin-bottom: 26px; }
+.diagnostico__linha {
+  border-left: 3px solid var(--carimbo);
+  background: var(--papel-sombra);
+  padding: 12px 16px;
+  margin: 0;
+  font-family: var(--font-maquina);
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   OFERTA
+   ========================================================================== */
+.recap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 26px;
+}
+.recap div {
+  border: var(--borda);
+  padding: 14px 10px;
+  font-family: var(--font-ficha);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.de-por { font-size: 0.9375rem; color: var(--grafite-papel); margin: 0; }
+.de-por s { color: var(--grafite-papel); }
+
+.preco {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 16vw, 4.5rem);
+  color: var(--oliva-escuro);
+  line-height: 1;
+  margin: 0;
+}
+.preco__nota {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--tinta-suave);
+  max-width: 440px;
+  margin: 16px 0 0;
+}
+.escassez { font-size: 0.8125rem; color: var(--carimbo); margin: 14px 0 0; }
+
+.etapa--centro .botao--carimbo { margin-top: 24px; }
+
+/* ==========================================================================
+   ACESSIBILIDADE
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

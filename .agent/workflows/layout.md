@@ -1,5 +1,5 @@
 ---
-description: gerar-layout
+description: "Especifique seção por seção o que entra na página, e em que ordem"
 ---
 
 # Instrucoes
@@ -22,7 +22,7 @@ Este workflow NAO:
 - Implementa nada
 - Executa nenhuma etapa seguinte
 
-A implementacao sera feita APENAS quando o usuario usar `/desenvolver`.
+A implementacao sera feita APENAS quando o usuario usar `/construir`.
 
 ---
 
@@ -30,7 +30,7 @@ A implementacao sera feita APENAS quando o usuario usar `/desenvolver`.
 
 ### Identificar a Pasta da Pagina
 
-Identifique em qual pasta da pagina voce esta trabalhando. Os arquivos devem estar dentro da pasta criada pelo `/gerar-copy` (ex: `pagina-vendas/`).
+Identifique em qual pasta da pagina voce esta trabalhando. Os arquivos devem estar dentro da pasta criada pelo `/escrever` (ex: `pagina-vendas/`).
 
 **IMPORTANTE:** Pastas com prefixo `_backup_` sao versoes antigas - IGNORE-AS.
 
@@ -228,7 +228,7 @@ Apos salvar o arquivo `layout.md`:
 3. Liste: "Secao X: Arquetipo [Y] + Constraints [A, B, C]"
 4. Destaque os elementos mais interessantes/surpreendentes planejados
 5. Pergunte se quer ajustar algo
-6. Sugira a proxima etapa: "Quando a especificacao estiver aprovada, use `/desenvolver` para construir a pagina completa."
+6. Sugira a proxima etapa: "Quando a especificacao estiver aprovada, use `/construir` para construir a pagina completa."
 7. **PARE COMPLETAMENTE**
 
 ---
@@ -237,5 +237,5 @@ Apos salvar o arquivo `layout.md`:
 
 - NUNCA continue para a proxima etapa automaticamente
 - NUNCA comece a implementar HTML, CSS ou JavaScript
-- Se o usuario aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/desenvolver`
+- Se o usuario aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/construir`
 - AGUARDE o usuario digitar o proximo comando explicitamente

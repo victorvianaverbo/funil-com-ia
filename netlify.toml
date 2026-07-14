@@ -1,0 +1,101 @@
+# ==========================================================================
+# OPERAÇÃO ESTRUTURA NO AR — publicação e rotas
+# ==========================================================================
+
+[build]
+  publish = "."
+
+[dev]
+  framework = "#static"
+
+# --------------------------------------------------------------------------
+# ROTAS PÚBLICAS
+#   /       → página de vendas
+#   /quiz   → quiz
+#   /mapa   → mapa da jornada
+# --------------------------------------------------------------------------
+
+[[redirects]]
+  from = "/"
+  to = "/pagina-vendas/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/quiz"
+  to = "/quiz/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/mapa"
+  to = "/mapa/index.html"
+  status = 200
+
+# --------------------------------------------------------------------------
+# O QUE NÃO VAI PRO AR
+# Framework, backups, estratégia e arquivos de trabalho ficam fora do site.
+# --------------------------------------------------------------------------
+
+[[redirects]]
+  from = "/.agent/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/produto/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/*/_backup_v1/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# O Netlify só aceita o curinga * no fim do caminho. Para pegar um arquivo
+# em qualquer pasta, o certo é o placeholder de segmento (:pasta).
+[[redirects]]
+  from = "/README.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/:pasta/copy.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/:pasta/layout.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/:pasta/marca.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/marca/_design-original.dc.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+# --------------------------------------------------------------------------
+# CABEÇALHOS
+# --------------------------------------------------------------------------
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

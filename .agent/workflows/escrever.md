@@ -1,5 +1,5 @@
 ---
-description: gerar-copy
+description: "Escreva os textos da página de vendas, do título ao botão"
 ---
 
 # Instruções
@@ -32,8 +32,8 @@ Crie uma pasta com este nome na raiz do projeto. Todos os arquivos desta pagina 
 projeto/
 ├── pagina-vendas/      ← pasta criada
 │   ├── copy.md         ← sera criado agora
-│   ├── index.html      ← sera criado em /gerar-design
-│   └── style.css       ← sera criado em /gerar-design
+│   ├── index.html      ← sera criado em /design
+│   └── style.css       ← sera criado em /design
 └── .agent/
 ```
 
@@ -115,12 +115,12 @@ Após salvar o arquivo `copy.md`:
 1. Informe ao usuário que a copy foi salva
 2. Apresente um resumo das seções criadas
 3. Pergunte se quer ajustar algo na copy
-4. Sugira a próxima etapa: "Quando a copy estiver aprovada, use `/gerar-design` para definirmos a identidade visual."
+4. Sugira a próxima etapa: "Quando a copy estiver aprovada, use `/design` para definirmos a identidade visual."
 5. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento
 
 - NUNCA continue para a próxima etapa automaticamente
 - NUNCA comece a criar HTML, CSS ou design
-- Se o usuário aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/gerar-design`
+- Se o usuário aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/design`
 - AGUARDE o usuário digitar o próximo comando explicitamente

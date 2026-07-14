@@ -4,7 +4,7 @@ description: ref-copy-anuncios
 
 # Referência: Copy e Anúncios
 
-Como escrever textos que vendem e roteiros de anúncio que prendem. Consultada pelos workflows `/anuncios` e (apoio) `/gerar-copy`. Reúne o método RMBC, a estrutura de anúncio Hook-Story-Offer, as objeções e desejos do comprador e um banco de modelos de copy.
+Como escrever textos que vendem. Consultada pelo workflow `/escrever`. Reúne o método RMBC, as objeções e desejos do comprador e um banco de modelos de copy. A estrutura Hook-Story-Offer fica aqui como referência de gancho, mesmo o kit não construindo anúncios.
 
 ---
 
@@ -12,7 +12,7 @@ Como escrever textos que vendem e roteiros de anúncio que prendem. Consultada p
 
 Estrutura para criar anúncios e copy persuasiva em 4 etapas:
 
-- **R — Research (pesquisa):** conheça profundamente o público (dores, desejos, medos) e a concorrência. Quanto mais informado, mais alinhada a mensagem. → já feito em `/persona` e `/pesquisa-mercado`.
+- **R — Research (pesquisa):** conheça profundamente o público (dores, desejos, medos) e a concorrência. Quanto mais informado, mais alinhada a mensagem. → já feito em `/persona` e `/espionar`.
 - **M — Mechanism (mecanismo):** o diferencial único do seu produto — o "segredo" que torna a oferta única e crível. Precisa ser demonstrável, não promessa vaga.
 - **B — Brief (briefing):** organize tom de voz, roteiro e pontos-chave da mensagem, alinhados ao objetivo da campanha.
 - **C — Copy (redação):** transforme tudo em texto que captura atenção, gera interesse e leva à ação. Sempre teste variações.
@@ -107,5 +107,4 @@ Elas não reagem à realidade, mas à interpretação dela — formada por exper
 ---
 
 ## Como usar esta referência
-- `/anuncios` → método RMBC + Hook-Story-Offer + objeções/desejos, e salvar `produto/anuncios.md`.
-- `/gerar-copy` → banco de headlines, bullets e blocos "para você que / não é para você".
+- `/escrever` → método RMBC, objeções/desejos, banco de headlines, bullets e blocos "para você que / não é para você".

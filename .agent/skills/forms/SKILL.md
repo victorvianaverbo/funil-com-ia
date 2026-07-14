@@ -405,7 +405,7 @@ O `script.js` ja dispara automaticamente no submit bem-sucedido:
 - `fbq('track', 'Lead')` - Meta Pixel
 - `dataLayer.push({ event: 'generate_lead' })` - GTM
 
-Para configurar os snippets de tracking (GTM e/ou Meta Pixel), use `/configurar-tracking` ou consulte a skill `tracking`.
+Para configurar os snippets de tracking (GTM e/ou Meta Pixel), use `/rastrear` ou consulte a skill `tracking`.
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: descoberta
+description: "Descubra qual produto digital você vai criar, a partir do que você já sabe e já viveu"
 ---
 
 # Instruções
@@ -27,8 +27,8 @@ Crie uma pasta chamada `produto` na raiz do projeto. Todos os arquivos do proces
 projeto/
 ├── produto/
 │   ├── descoberta.md       ← será criado agora
-│   ├── pesquisa-mercado.md ← será criado em /pesquisa-mercado
-│   └── narrativa.md        ← será criado em /narrativa
+│   ├── pesquisa-mercado.md ← será criado em /espionar
+│   └── narrativa.md        ← será criado em /posicionar
 └── .agent/
 ```
 
@@ -51,7 +51,7 @@ Para cada opção, avalie em voz alta:
 - **Demanda:** existe gente pagando por isso hoje?
 - **Transformação clara:** dá pra descrever o antes e o depois do aluno?
 - **Autoridade mínima:** o aluno tem credibilidade suficiente para ensinar isso?
-- **Venda direta:** dá para vender numa página de vendas com checkout imediato (sem precisar de call de vendas ou evento ao vivo)?
+- **Vendável no kit:** dá para vender por página de vendas + checkout — seja direto (perpétuo), seja depois de uma aula ao vivo (lançamento pago)? O modelo exato é escolhido depois, no `/mapear`; aqui basta saber que não é um produto que só se vende presencialmente ou por negociação longa.
 
 ### Fase 2.5: Escolha da Faixa de Preço
 
@@ -73,7 +73,7 @@ Ao registrar a escolha, alinhe a mentalidade da faixa (1 ponto, da `ref-precific
 - **Médio:** o lucro já aparece no front-end; menos volume, mais qualificação.
 - **Alto:** poucas vendas valem o mês; o teste é mais longo e exige capital.
 
-Deixe claro que a faixa é uma **hipótese**: será confirmada em `/oferta`, depois da `/pesquisa-mercado`.
+Deixe claro que a faixa é uma **hipótese**: será confirmada em `/oferta`, depois da `/espionar`.
 
 ### Fase 3: Boas Práticas de Infoproduto
 
@@ -127,7 +127,7 @@ Justificativa: ...
 1. Informe que a descoberta foi salva
 2. Mostre um resumo do produto definido
 3. Pergunte se quer ajustar algo
-4. Sugira a próxima etapa: "Com o produto definido, use `/pesquisa-mercado` para analisarmos o mercado e os concorrentes."
+4. Sugira a próxima etapa: "Com o produto definido, use `/espionar` para analisarmos o mercado e os concorrentes."
 5. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento

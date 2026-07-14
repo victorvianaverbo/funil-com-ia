@@ -1,120 +1,76 @@
-/* Interactive Logic - Funil de Vendas com IA */
+/* ==========================================================================
+   PÁGINA DE VENDAS — Operação Estrutura no Ar
+   ========================================================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // ==========================================
-    // 1. FAQ Accordion Control
-    // ==========================================
-    const faqItems = document.querySelectorAll('.faq-item');
+/* --------------------------------------------------------------------------
+   LINK DO CHECKOUT — o único lugar pra mexer quando o pagamento estiver pronto.
+   Deixe vazio e os botões rolam até o bloco de oferta (comportamento atual).
+   Preencha com a URL do checkout e TODOS os botões passam a apontar pra lá.
+   Ex.: var CHECKOUT_URL = 'https://pay.kiwify.com.br/xxxxx';
+   -------------------------------------------------------------------------- */
+var CHECKOUT_URL = '';
 
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        question.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            
-            // Close all items
-            faqItems.forEach(otherItem => {
-                otherItem.classList.remove('active');
-            });
+(function () {
+  'use strict';
 
-            // Toggle clicked item
-            if (!isActive) {
-                item.classList.add('active');
-            }
-        });
-    });
+  /* ======================================================================
+     ANIMAÇÃO DE SCROLL
+     Faz o mesmo que a biblioteca AOS e lê os mesmos atributos (data-aos,
+     data-aos-delay), mas nativo: a lib custava 2 requests ao unpkg.com no
+     caminho crítico (~300ms de latência no 4G) por 7 KB de fade-up.
+     O hero nunca entra aqui — ele pinta de primeira, por regra.
+     ====================================================================== */
+  var alvos = document.querySelectorAll('[data-aos]');
+  var querMenosMovimento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // ==========================================
-    // 3. Timeline Progress and Step Activation
-    // ==========================================
-    const timeline = document.querySelector('.timeline-container');
-    const timelineSteps = document.querySelectorAll('.timeline-step');
-    const progressBar = document.querySelector('.timeline-progress-bar');
+  function revelarTudo() {
+    Array.prototype.forEach.call(alvos, function (el) { el.classList.add('visivel'); });
+  }
 
-    const handleTimelineScroll = () => {
-        if (!timeline) return;
+  if (!('IntersectionObserver' in window) || querMenosMovimento) {
+    revelarTudo();
+  } else {
+    var observador = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (entrada) {
+        if (!entrada.isIntersecting) return;
+        var atraso = parseInt(entrada.target.getAttribute('data-aos-delay'), 10) || 0;
+        setTimeout(function () { entrada.target.classList.add('visivel'); }, atraso);
+        observador.unobserve(entrada.target);   // anima uma vez só
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
 
-        const rect = timeline.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
-        
-        // Calculate scroll progress within timeline container
-        // Start progress when container top reaches middle of viewport
-        const timelineStart = rect.top - (viewportHeight / 2);
-        const timelineHeight = rect.height;
-        
-        let progress = 0;
-        if (timelineStart < 0) {
-            progress = Math.min(100, Math.max(0, (-timelineStart / (timelineHeight - viewportHeight / 2)) * 100));
-        }
+    Array.prototype.forEach.call(alvos, function (el) { observador.observe(el); });
+  }
 
-        // Update progress bar height
-        progressBar.style.height = `${progress}%`;
+  /* ======================================================================
+     RASTREAMENTO
+     ====================================================================== */
+  var variante = document.documentElement.getAttribute('data-ab') || '1';
 
-        // Activate steps when their center passes middle of viewport
-        timelineSteps.forEach(step => {
-            const stepRect = step.getBoundingClientRect();
-            const stepMiddle = stepRect.top + (stepRect.height / 2);
-            if (stepMiddle < viewportHeight / 2 + 100) {
-                step.classList.add('active');
-            } else {
-                step.classList.remove('active');
-            }
-        });
-    };
+  /* Empurra pro dataLayer se houver um. O /rastrear pluga o pixel depois. */
+  function rastrear(evento, dados) {
+    window.dataLayer = window.dataLayer || [];
+    var payload = { event: evento, headline_variante: variante };
+    for (var k in dados) { if (dados.hasOwnProperty(k)) payload[k] = dados[k]; }
+    window.dataLayer.push(payload);
+  }
 
-    window.addEventListener('scroll', handleTimelineScroll);
-    window.addEventListener('resize', handleTimelineScroll);
-    handleTimelineScroll(); // Initial check
+  rastrear('pagina_vista', { pagina: 'pagina-vendas' });
 
-    // ==========================================
-    // 4. Testimonials Drag-to-Scroll Carousel
-    // ==========================================
-    const carouselWrapper = document.querySelector('.testimonials-carousel-wrapper');
-    const track = document.getElementById('testimonials-track');
+  /* ======================================================================
+     BOTÕES DE COMPRA
+     ====================================================================== */
+  var botoes = document.querySelectorAll('[data-cta]');
 
-    if (carouselWrapper && track) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        carouselWrapper.addEventListener('mousedown', (e) => {
-            isDown = true;
-            carouselWrapper.style.cursor = 'grabbing';
-            startX = e.pageX - carouselWrapper.offsetLeft;
-            scrollLeft = carouselWrapper.scrollLeft;
-        });
-
-        carouselWrapper.addEventListener('mouseleave', () => {
-            isDown = false;
-            carouselWrapper.style.cursor = 'grab';
-        });
-
-        carouselWrapper.addEventListener('mouseup', () => {
-            isDown = false;
-            carouselWrapper.style.cursor = 'grab';
-        });
-
-        carouselWrapper.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - carouselWrapper.offsetLeft;
-            const walk = (x - startX) * 1.5; // Drag speed multiplier
-            carouselWrapper.scrollLeft = scrollLeft - walk;
-        });
-
-        // Touch support for mobiles
-        let touchStartX = 0;
-        let touchScrollLeft = 0;
-        
-        carouselWrapper.addEventListener('touchstart', (e) => {
-            touchStartX = e.touches[0].pageX - carouselWrapper.offsetLeft;
-            touchScrollLeft = carouselWrapper.scrollLeft;
-        }, { passive: true });
-
-        carouselWrapper.addEventListener('touchmove', (e) => {
-            const x = e.touches[0].pageX - carouselWrapper.offsetLeft;
-            const walk = (x - touchStartX) * 1.5;
-            carouselWrapper.scrollLeft = touchScrollLeft - walk;
-        }, { passive: true });
+  Array.prototype.forEach.call(botoes, function (botao) {
+    if (CHECKOUT_URL) {
+      botao.href = CHECKOUT_URL;
+      botao.target = '_blank';
+      botao.rel = 'noopener';
     }
-});
+
+    botao.addEventListener('click', function () {
+      rastrear('checkout_clicado', { origem: botao.getAttribute('data-cta') });
+    });
+  });
+})();

@@ -1,5 +1,5 @@
 ---
-description: criar-produto
+description: "Produza de verdade o conteúdo do seu produto (e-book, mini-curso, desafio)"
 ---
 
 # Instruções
@@ -76,7 +76,7 @@ Salve o roteiro em `produto/produto-roteiro.md`:
 
 1. Informe que o roteiro foi salvo
 2. Pergunte se quer ajustar algo
-3. Sugira a próxima etapa: "Com o produto em mãos, vamos construir a página de vendas: use `/gerar-copy`."
+3. Sugira a próxima etapa: "Com o produto em mãos, falta decidir COMO você vai vender: use `/mapear` para escolher entre a aula ao vivo com ingresso ou o anúncio direto para a página. É essa escolha que define quantas páginas a gente vai construir."
 4. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento

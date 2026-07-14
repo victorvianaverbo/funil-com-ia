@@ -1,5 +1,5 @@
 ---
-description: gerar-design
+description: "Defina o visual da página: cores, fontes e o topo pronto como demonstração"
 ---
 
 # Instrucoes
@@ -19,7 +19,7 @@ Este workflow NAO:
 - Cria o layout completo
 - Executa nenhuma etapa seguinte
 
-A pagina completa sera criada APENAS quando o usuario usar `/desenvolver` apos aprovar o `/gerar-layout`.
+A pagina completa sera criada APENAS quando o usuario usar `/construir` apos aprovar o `/layout`.
 
 ---
 
@@ -27,7 +27,7 @@ A pagina completa sera criada APENAS quando o usuario usar `/desenvolver` apos a
 
 ### Identificar a Pasta da Pagina
 
-Primeiro, identifique em qual pasta voce esta trabalhando. O `/gerar-copy` ja deve ter criado a pasta da pagina (ex: `pagina-vendas/`).
+Primeiro, identifique em qual pasta voce esta trabalhando. O `/escrever` ja deve ter criado a pasta da pagina (ex: `pagina-vendas/`).
 
 Leia o arquivo `copy.md` dentro da pasta da pagina. Se nao existir, pergunte ao usuario.
 
@@ -206,7 +206,7 @@ Apos criar, informe ao usuario:
 1. O que foi criado (hero + primeira secao)
 2. Qual arquetipo e constraints usados
 3. Qual font pairing escolhido
-4. Como visualizar: use a skill `local-server` ou `/visualizar-local`
+4. Como visualizar: use a skill `local-server` ou `/espiar`
 5. Peca feedback: "O que achou? Quer ajustar algo antes de continuarmos?"
 
 ---
@@ -215,7 +215,7 @@ Apos criar, informe ao usuario:
 
 - Esta etapa NAO cria a pagina inteira, apenas Hero + 1 secao
 - O objetivo e estabelecer a linguagem visual
-- O usuario deve aprovar antes de prosseguir para `/gerar-layout`
+- O usuario deve aprovar antes de prosseguir para `/layout`
 - Se o usuario pedir ajustes, faca quantas iteracoes forem necessarias
 - Use fontes do Google Fonts (adicione os links necessarios)
 - Hero sem animacao de ENTRADA, mas com animacao pos-carregamento
@@ -230,7 +230,7 @@ Apos criar o Hero + primeira secao:
 2. Explique as escolhas de design (arquetipo + constraints + font pairing)
 3. Forneca o link para visualizar (use a skill `local-server` para obter a URL correta) (OBRIGATÓRIO)
 4. Pergunte se quer ajustar algo
-5. Sugira a proxima etapa: "Quando o design estiver aprovado, use `/gerar-layout` para criar a especificacao detalhada de todas as secoes."
+5. Sugira a proxima etapa: "Quando o design estiver aprovado, use `/layout` para criar a especificacao detalhada de todas as secoes."
 6. **PARE COMPLETAMENTE**
 
 ---
@@ -239,5 +239,5 @@ Apos criar o Hero + primeira secao:
 
 - NUNCA continue para a proxima etapa automaticamente
 - NUNCA crie mais secoes alem do Hero + primeira secao
-- Se o usuario aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/gerar-layout`
+- Se o usuario aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/layout`
 - AGUARDE o usuario digitar o proximo comando explicitamente

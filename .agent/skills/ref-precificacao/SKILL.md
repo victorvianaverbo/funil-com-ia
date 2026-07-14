@@ -4,13 +4,19 @@ description: ref-precificacao
 
 # Referência: Precificação, Faixas de Preço e Escada de Valor
 
-Base de conhecimento consultável pelos workflows de estratégia (`/descoberta`, `/oferta`, `/anuncios`). Define as faixas de preço do produto digital, como escolher a faixa certa para o aluno e como qualquer faixa se encaixa no modelo de **venda direta** (tráfego pago → página de vendas → checkout) e numa máquina de vendas que se auto-financia.
+Base de conhecimento consultável pelos workflows de estratégia (`/bussola`, `/oferta`, `/mapear`). Define as faixas de preço do produto digital, como escolher a faixa certa para o aluno e como qualquer faixa se encaixa numa máquina de vendas que se auto-financia.
 
 ---
 
 ## O modelo de venda direta
 
-O framework trabalha com um único modelo: anúncio → página de vendas → checkout (com order bump) → upsell. Ele funciona em **qualquer faixa de preço** — o que muda é o tipo de página, o orçamento de teste e a expectativa de conversão.
+O framework trabalha com **venda direta**: a pessoa clica num botão e compra no checkout. Isso vale em **qualquer faixa de preço** — o que muda é o tipo de página, o orçamento de teste e a expectativa de conversão.
+
+O que muda é o que acontece ANTES do botão, e isso é decidido no `/mapear` (ver `ref-funis`):
+- **Perpétuo:** anúncio → página de vendas → checkout.
+- **Lançamento pago:** anúncio → página do ingresso → checkout → evento ao vivo → página do produto → checkout.
+
+Única exceção ao checkout: **lançamento pago com ticket alto (R$1.000+)**, em que o fim do evento leva a um formulário de aplicação e a venda fecha numa call.
 
 ### Front-end vs back-end
 - **Front-end:** o que você vende para quem NUNCA comprou de você. O produto de entrada vive aqui.
@@ -51,7 +57,7 @@ A lógica central: quanto menor o ticket, mais rápido o caixa gira e re-financi
 - **Página:** VSL ou página longa com muita prova, garantia robusta e parcelamento em 12x no checkout.
 - **Comportamento de compra:** o cliente pesquisa o vendedor antes de comprar; conversão abaixo de 0,5%; CPA alto — julgue o funil por métricas intermediárias antes da venda.
 
-> Acima de ~R$3.000, o padrão de mercado é vender por call (funil de telefone). Ainda é possível vender em venda direta com VSL forte e parcelamento, mas com CPA alto e teste longo. A call de vendas fica fora do escopo deste framework — citada só como referência.
+> Acima de ~R$3.000, quase ninguém compra clicando num botão sem falar com alguém. Por isso, em ticket alto o kit recomenda o **lançamento pago com desfecho em aplicação/call**: a aula ao vivo qualifica e a venda fecha na conversa (ver `ref-funis`). A alternativa — perpétuo com VSL forte e parcelamento — é possível, mas exige CPA alto e teste longo.
 
 Para roteiro de VSL (páginas de ticket médio/alto), existe a skill `vsl-builder` neste kit.
 
@@ -82,7 +88,7 @@ O cliente não fica parado num degrau — ele sobe. Os funis não são desconect
 
 **O seu produto de ENTRADA pode ser qualquer degrau.** A escada continua existindo acima e abaixo dele: degraus abaixo da entrada podem virar downsell; degraus acima viram upsell e ofertas futuras.
 
-Sobre tipos de funil: o mercado usa formatos diferentes por faixa (funil de leads para captura, webinário/apresentação para ticket médio, telefone para R$3.000+). Este framework implementa **venda direta para todas as faixas** — os outros formatos são caminhos opcionais, citados como referência.
+Sobre o modelo de funil: a faixa de preço influencia a escolha, mas quem decide é o `/mapear` (ver `ref-funis`). O padrão do kit é o **lançamento pago** em qualquer faixa; o **perpétuo** entra quando o aluno não quer depender de estar ao vivo.
 
 ---
 
@@ -119,10 +125,12 @@ Em low ticket, a venda chega rápido e é o próprio termômetro. Em ticket méd
 | Funil de lead (gratuito) | ~20% |
 | Funil de lead com confirmação (2 etapas) | ~15% |
 | Conversão de venda em funil | 1% a 5% |
-| Carta de vendas (tráfego direto) | 1% a 3% |
-| Inscrição em webinário (caminho opcional) | ~20% |
-| Comparecimento ao webinário ao vivo (caminho opcional) | ~10% |
-| Compra em webinário ao vivo (caminho opcional) | ~10% |
+| Carta de vendas (tráfego direto — modelo perpétuo) | 1% a 3% |
+| Venda do ingresso (lançamento pago) | 1% a 3% |
+| Comparecimento ao evento ao vivo, entre quem pagou | 40% a 60% |
+| Compra do produto no fim do evento, entre quem compareceu | 5% a 15% |
+
+> No **lançamento pago**, o comparecimento é muito maior do que num webinário gratuito (onde fica na casa dos 10%), justamente porque a pessoa pagou pelo ingresso. É esse o ganho do modelo.
 
 > Use como referência inicial, não como promessa. Cada nicho, faixa de preço e tráfego se comportam diferente — quanto maior o ticket, menor a conversão esperada.
 
@@ -141,6 +149,6 @@ Cada seta é um degrau da escada. **O produto de entrada pode ser qualquer um de
 ---
 
 ## Como usar esta referência
-- `/descoberta` → seções "Como escolher a sua faixa" e "As 3 faixas de preço".
+- `/bussola` → seções "Como escolher a sua faixa" e "As 3 faixas de preço".
 - `/oferta` → seções "As 3 faixas de preço", "A escada de valor" e "Exemplos de escada por nicho".
-- `/anuncios` → seção "Métricas essenciais" para dimensionar o orçamento de teste por faixa.
+- `/mapear` → seção "Métricas essenciais" para dimensionar o orçamento de teste de tráfego por faixa.

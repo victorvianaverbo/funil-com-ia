@@ -42,12 +42,14 @@ Quebre a entrega da promessa em **3 a 5 passos/módulos**, numa jornada lógica.
 
 ---
 
-## 4. A estrutura do funil
+## 4. Os elementos de funil
 
-Esta é a espinha dorsal do framework: **venda direta**, em qualquer faixa de preço.
+O **modelo** de funil (lançamento pago ou perpétuo) é escolhido no `/mapear` — ver a skill `ref-funis`. Aqui definimos os elementos que entram **dentro** de qualquer um dos dois, e que existem para aumentar o ticket médio sem aumentar o tráfego.
+
+Em qualquer modelo, a venda termina no mesmo lugar:
 
 ```
-Anúncio/Tráfego → Landing Page → Checkout (com Order Bump) → Upsell → (Downsell) → Pós-venda
+... → Checkout (com Order Bump) → Upsell → (Downsell) → Pós-venda
 ```
 
 ### Order bump
@@ -56,7 +58,7 @@ Oferta complementar, adicionada com **um clique no checkout**. Tipicamente 10–
 ### Upsell
 Oferta de **maior valor** logo após a compra. É o próximo passo lógico de quem comprou o produto de entrada (ex.: curso completo, mentoria inicial). É onde mora o lucro de verdade.
 
-> No iafunil, o **webinário (Perfect Webinar)** é um exemplo de upsell pós-compra. O webinário/lançamento é um caminho **opcional** — o caminho principal deste framework é a venda direta.
+> Atenção: upsell é um degrau da escada, não o modelo de funil. Não confunda com a escolha entre lançamento pago e perpétuo, que acontece no `/mapear`.
 
 ### Downsell
 Alternativa mais barata para quem **recusou o upsell** (ex.: versão reduzida, parcelamento, só um módulo). Recupera parte das vendas perdidas.
@@ -76,26 +78,19 @@ Alternativa mais barata para quem **recusou o upsell** (ex.: versão reduzida, p
 - **CTA forte e claro** ("QUERO ACESSO IMEDIATO").
 - **O comprimento da página acompanha o preço:** quanto maior o ticket, mais prova, mais quebra de objeção e mais garantia a página precisa — ver `ref-precificacao`.
 
-> A construção da página é feita pelos workflows `/gerar-copy → /gerar-design → /desenvolver → /publicar`. Aqui definimos só o **conteúdo estratégico** da oferta.
+> A construção da página é feita pelos workflows `/escrever → /design → /construir → /publicar`. Aqui definimos só o **conteúdo estratégico** da oferta.
 
 ---
 
-## 6. Planejamento de lançamento (opcional)
+## 6. O modelo de funil não se decide aqui
 
-Se o aluno optar por um evento de lançamento além da venda direta contínua:
+Como o produto vai ser vendido — numa aula ao vivo com ingresso pago, ou por anúncio direto para a página — é decisão do workflow `/mapear`, que roda no fim da estratégia. Ver a skill `ref-funis`.
 
-- **Pré-lançamento (3–5 dias):** gerar expectativa com conteúdo e lives.
-- **Lançamento (5–7 dias):** carrinho aberto, e-mails e anúncios.
-- **Pós-lançamento:** analisar métricas, colher feedback, iniciar relacionamento e reoferta.
-
-### Sequência de e-mails (base)
-1. Boas-vindas + autoridade.
-2. Conteúdo de valor (dica gratuita do tema).
-3. Oferta com CTA forte.
-4. Urgência (fechamento/escassez).
+Se o aluno perguntar sobre isso durante o `/oferta`, diga que essa etapa existe e siga em frente. Aqui a gente define **o que** se vende; lá se define **como**.
 
 ---
 
 ## Como usar esta referência
 - `/oferta` → conduzir promessa → formato → estrutura → order bump/upsell/downsell, e salvar `produto/oferta.md`.
-- Cruza com `ref-precificacao` (faixas de preço, escada de valor, métricas) e `ref-persona` (a promessa fala com a dor).
+- `/checkout` → consome o order bump, o upsell e o downsell definidos aqui, para conferir se foram configurados na plataforma.
+- Cruza com `ref-precificacao` (faixas de preço, escada de valor, métricas), `ref-persona` (a promessa fala com a dor) e `ref-funis` (o modelo de funil que embala tudo isso).

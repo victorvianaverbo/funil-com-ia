@@ -40,7 +40,7 @@ Framework para construir o retrato do cliente ideal. Consultada pelo workflow `/
 
 ## Perfil de compra por faixa de preço
 
-Modele os blocos 2 e 5 da persona de acordo com a faixa de preço escolhida em `/descoberta` (ver `ref-precificacao`):
+Modele os blocos 2 e 5 da persona de acordo com a faixa de preço escolhida em `/bussola` (ver `ref-precificacao`):
 
 - **Comprador de low ticket:** decide por impulso, risco percebido baixo, movido por curiosidade e promessa de resultado rápido.
 - **Comprador de ticket médio:** compara alternativas antes de comprar, precisa de prova social e garantia, pondera custo-benefício.
@@ -82,4 +82,4 @@ Este perfil é o comprador típico de cursos de marketing digital de entrada (pe
 
 ## Como usar esta referência
 - `/persona` → conduzir o aluno pelos 5 blocos, um de cada vez, e salvar `produto/persona.md`.
-- A persona alimenta `/oferta` (promessa fala com as dores) e `/anuncios` (gancho usa a linguagem do público).
+- A persona alimenta `/oferta` (promessa fala com as dores) e `/escrever` (a copy usa a linguagem do público).

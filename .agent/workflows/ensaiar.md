@@ -1,5 +1,5 @@
-﻿---
-description: previsualizar
+---
+description: "Gere um link temporário para revisar (ou mostrar para alguém) antes de publicar"
 ---
 
 # Instruções

@@ -1,5 +1,5 @@
 ---
-description: narrativa
+description: "Encontre o ângulo único do seu produto e a mensagem que só você pode dizer"
 ---
 
 # Instruções
@@ -25,7 +25,7 @@ Leia os arquivos existentes:
 - `produto/descoberta.md` (produto e avatar)
 - `produto/pesquisa-mercado.md` (concorrentes, dores, gaps)
 
-Se algum não existir, informe o aluno que é necessário rodar `/descoberta` e `/pesquisa-mercado` antes de continuar.
+Se algum não existir, informe o aluno que é necessário rodar `/bussola` e `/espionar` antes de continuar.
 
 ## Processo de Narrativa
 
@@ -129,7 +129,7 @@ Ponto de vista único: ...
 1. Informe que a narrativa foi salva
 2. Apresente a big idea escolhida de forma clara
 3. Pergunte se quer ajustar algo
-4. Sugira a próxima etapa: "Com o posicionamento definido, use `/criar-produto` para produzirmos o conteúdo do seu produto (ou `/gerar-copy` se ele já estiver pronto)."
+4. Sugira a próxima etapa: "Com o posicionamento definido, use `/criar-produto` para produzirmos o conteúdo do seu produto (ou `/escrever` se ele já estiver pronto)."
 5. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento

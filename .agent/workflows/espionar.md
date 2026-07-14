@@ -1,5 +1,5 @@
 ---
-description: pesquisa-mercado
+description: "Analise os concorrentes, os preços do mercado e o que o seu público realmente quer"
 ---
 
 # Instruções

@@ -1,10 +1,18 @@
 ---
-description: configurar-tracking
+description: "Instale o rastreamento (Meta Pixel / GTM) para saber de onde vem cada venda"
 ---
 
 # Instrucoes
 
 O usuario quer configurar tracking (GTM e/ou Meta Pixel) na landing page. Use a skill `tracking` como referencia tecnica.
+
+---
+
+## Pre-requisito: /checkout
+
+Este workflow roda DEPOIS do `/checkout`. Rastrear clique em botao que nao leva a lugar nenhum nao mede nada.
+
+Antes de comecar, confira se existe `produto/checkout.md` e se os CTAs da pagina ja apontam para o link de pagamento real. Se nao apontarem, avise o usuario e sugira rodar `/checkout` primeiro.
 
 ---
 

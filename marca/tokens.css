@@ -1,0 +1,126 @@
+/* ==========================================================================
+   OPERAÇÃO ESTRUTURA NO AR — TOKENS DA MARCA
+   Fonte única de verdade do visual. Toda página do funil importa este arquivo
+   ANTES do seu próprio style.css e usa só estas variáveis.
+   Direção: dossiê de guerra desclassificado (manual de campo, anos 60).
+   ========================================================================== */
+
+:root {
+  /* ---------- Paleta ---------- */
+  --papel:            #e6e1d3;  /* fundo padrão — papel envelhecido */
+  --papel-sombra:     #ded8c6;  /* papel um tom abaixo — hover, destaques */
+  --papel-linha:      #c4bda8;  /* divisórias e bordas leves sobre papel */
+  --tinta:            #1c1a15;  /* preto de máquina de escrever — texto e blocos */
+  --tinta-suave:      #3a362c;  /* corpo de texto secundário */
+  --tinta-linha:      #4a4536;  /* bordas sobre fundo escuro */
+  --carimbo:          #a83226;  /* vermelho de carimbo — alerta, urgência, ênfase */
+  --carimbo-claro:    #c94436;  /* o mesmo vermelho, SOBRE FUNDO ESCURO — o #A83226 ali dá só 2.6:1 */
+  --oliva:            #4a5d3a;  /* verde militar */
+  --oliva-escuro:     #3d5230;  /* verde de aprovação — preço, garantia, links */
+  --oliva-claro:      #7ea86a;  /* verde sobre fundo escuro — "COMPRA APROVADA" */
+  --grafite:          #6b6552;  /* legendas sobre papel */
+  --grafite-papel:    #5f5a48;  /* metadados SOBRE PAPEL — 5.3:1, passa no WCAG AA */
+  --grafite-claro:    #8f8871;  /* metadados SOBRE FUNDO ESCURO — 4.8:1 ali, mas só 2.7:1 sobre papel */
+
+  /* ---------- Tipografia ---------- */
+  --font-display: 'Saira Stencil One', 'Arial Black', sans-serif;  /* logo e títulos */
+  --font-maquina: 'Special Elite', 'Courier New', monospace;       /* corpo com voz */
+  --font-ficha:   'IBM Plex Mono', 'Courier New', monospace;       /* dados e badges */
+  --font-corpo:   'Saira', system-ui, -apple-system, sans-serif;   /* leitura corrida */
+
+  /* Escala fluida: encolhe no celular sem media query */
+  --t-hero:    clamp(2rem, 7.2vw, 3.375rem);   /* h1 — 32px a 54px */
+  --t-secao:   clamp(1.75rem, 5.4vw, 2.375rem); /* h2 — 28px a 38px */
+  --t-bloco:   clamp(1.375rem, 4vw, 1.625rem);  /* h3 — 22px a 26px */
+  --t-preco:   clamp(3rem, 11vw, 4rem);         /* preço grande — 48px a 64px */
+  --t-corpo:   clamp(1rem, 2.4vw, 1.0625rem);   /* 16px a 17px */
+  --t-voz:     clamp(1rem, 2.6vw, 1.1875rem);   /* Special Elite — 16px a 19px */
+  --t-ficha:   0.6875rem;                        /* 11px — códigos de ficha */
+  --t-meta:    0.625rem;                         /* 10px — metadados */
+
+  /* ---------- Ritmo ---------- */
+  --gap-secao:  clamp(3.5rem, 9vw, 4.5rem);  /* respiro vertical entre seções */
+  --gap-bloco:  1rem;
+  --largura-texto: 680px;   /* leitura confortável */
+  --largura-larga: 860px;   /* grids e provas */
+
+  /* ---------- Traço ---------- */
+  --borda:       1px solid var(--tinta);
+  --borda-leve:  1px solid var(--papel-linha);
+  --borda-forte: 2px solid var(--tinta);
+}
+
+/* ==========================================================================
+   ELEMENTOS DE MARCA — reutilizáveis em qualquer página do funil
+   ========================================================================== */
+
+/* Carimbo CONFIDENCIAL, torto, como se batido à mão */
+.carimbo {
+  display: inline-block;
+  border: 2px solid var(--carimbo);
+  color: var(--carimbo);
+  font-family: var(--font-maquina);
+  font-size: var(--t-ficha);
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  transform: rotate(6deg);
+}
+.carimbo--oliva { border-color: var(--oliva-escuro); color: var(--oliva-escuro); }
+.carimbo--torto-esq { transform: rotate(-4deg); }
+
+/* Código de ficha: "FICHA 01 — SITUAÇÃO ATUAL" */
+.ficha {
+  font-family: var(--font-ficha);
+  font-size: var(--t-ficha);
+  letter-spacing: 3px;
+  color: var(--grafite-papel);
+  text-transform: uppercase;
+}
+
+/* Etiqueta com contorno: "AULA AO VIVO · PRIMEIRA TURMA" */
+.etiqueta {
+  display: inline-block;
+  border: var(--borda);
+  font-family: var(--font-ficha);
+  font-size: var(--t-ficha);
+  letter-spacing: 3px;
+  padding: 6px 16px;
+  color: var(--tinta);
+}
+
+/* Botão de ação — o bloco preto de tinta */
+.botao {
+  display: inline-block;
+  background: var(--tinta);
+  color: var(--papel);
+  font-family: var(--font-display);
+  font-size: clamp(1.0625rem, 3.4vw, 1.375rem);
+  letter-spacing: 1px;
+  padding: 18px 40px;
+  text-decoration: none;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.botao:hover  { background: var(--oliva-escuro); color: var(--papel); transform: translateY(-2px); }
+.botao:active { transform: translateY(0); }
+
+.botao--claro { background: var(--papel); color: var(--tinta); }
+.botao--claro:hover { background: #fff; color: var(--tinta); }
+
+.botao--carimbo { background: var(--carimbo); color: var(--papel); }
+.botao--carimbo:hover { background: var(--tinta); color: var(--papel); }
+
+/* Selos de garantia que acompanham todo CTA */
+.selos {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 12px;
+  font-family: var(--font-ficha);
+  font-size: var(--t-ficha);
+  color: var(--oliva-escuro);
+}
+.selos--escuro { color: var(--oliva-claro); }

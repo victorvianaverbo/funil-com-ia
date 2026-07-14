@@ -1,5 +1,5 @@
 ---
-description: otimizar
+description: "Deixe a página rápida: nota 90+ de velocidade no celular e no computador"
 ---
 
 # Workflow: Otimizar Performance

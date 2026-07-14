@@ -1,5 +1,5 @@
 ---
-description: desenvolver
+description: "Monte a página completa, do topo ao rodapé, seguindo o que foi planejado"
 ---
 
 # Instruções
@@ -10,7 +10,7 @@ Você vai construir a página completa seguindo a especificação do `layout.md`
 
 ### Identificar a Pasta da Pagina
 
-Identifique em qual pasta da pagina voce esta trabalhando. Os arquivos devem estar dentro da pasta criada pelo `/gerar-copy` (ex: `pagina-vendas/`).
+Identifique em qual pasta da pagina voce esta trabalhando. Os arquivos devem estar dentro da pasta criada pelo `/escrever` (ex: `pagina-vendas/`).
 
 **IMPORTANTE:** Pastas com prefixo `_backup_` sao versoes antigas - IGNORE-AS.
 
@@ -19,7 +19,7 @@ Identifique em qual pasta da pagina voce esta trabalhando. Os arquivos devem est
 1. Leia o arquivo `layout.md` na pasta da pagina
 2. Leia o `index.html` e `style.css` atuais (que já têm o hero + primeira seção aprovados)
 
-Se o `layout.md` não existir, informe ao usuário que ele precisa rodar `/gerar-layout` primeiro.
+Se o `layout.md` não existir, informe ao usuário que ele precisa rodar `/layout` primeiro.
 
 ## Etapa 2: Planejar a Execução
 
@@ -119,6 +119,10 @@ Se alguma especificação estiver ambígua:
 - [ ] Transições suaves em todos os estados
 - [ ] Feedback visual em interações
 
+### CTAs
+- [ ] Todos os botões de compra existem e estão visíveis
+- [ ] Nenhum `href` inventado — os destinos reais são ligados no `/checkout`
+
 ### Validação Final
 Antes de informar que está pronto:
 1. **Abra o DevTools** (F12)
@@ -183,14 +187,16 @@ Após construir todas as seções:
 2. Liste as seções construídas
 3. Forneça o link (use a skill `local-server` para obter a URL correta)
 4. Pergunte se quer ajustar algo
-5. Sugira o próximo passo: "Quando estiver satisfeito com a página, use `/configurar-tracking` para instalar o rastreamento (Meta Pixel / GTM) e depois `/publicar` para colocar no ar. Se quiser melhorar a performance antes, use `/otimizar`."
-6. **PARE COMPLETAMENTE E AGUARDE**
+5. Avise que os botões da página **ainda não levam a lugar nenhum** — eles só ganham destino no `/checkout`
+6. Sugira o próximo passo: "Quando estiver satisfeito com a página, use `/checkout` para ligar os botões ao seu link de pagamento. Depois vêm `/rastrear` (rastreamento) e `/publicar` (colocar no ar). Se quiser melhorar a performance antes, use `/otimizar`."
+7. **PARE COMPLETAMENTE E AGUARDE**
 
 ## IMPORTANTE: Regras de Comportamento
 
 - NUNCA faça deploy automaticamente
-- NUNCA rode `/publicar`, `/previsualizar` ou `/otimizar` automaticamente
-- Se o usuário aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/configurar-tracking`
+- NUNCA rode `/publicar`, `/ensaiar` ou `/otimizar` automaticamente
+- NUNCA invente um link de checkout nos botões. Deixe o `href` como placeholder — quem resolve isso é o `/checkout`
+- Se o usuário aprovar ("ok", "aprovado", etc.), apenas confirme e sugira `/checkout`
 - AGUARDE o usuário digitar o próximo comando explicitamente
 
 ## Lembrete Final

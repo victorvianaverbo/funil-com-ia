@@ -1,5 +1,5 @@
-﻿---
-description: debug
+---
+description: "Algo quebrou ou não funciona? Descreva o problema que eu investigo e resolvo"
 ---
 
 # Instruções

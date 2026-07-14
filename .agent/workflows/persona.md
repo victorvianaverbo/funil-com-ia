@@ -1,5 +1,5 @@
 ---
-description: persona
+description: "Monte o retrato do seu cliente ideal: dores, desejos, objeções e linguagem"
 ---
 
 # Instruções
