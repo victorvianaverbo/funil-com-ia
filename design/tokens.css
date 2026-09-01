@@ -1,0 +1,268 @@
+/* ============================================================================
+   IDENTIDADE VISUAL — Operação Estrutura no Ar
+   FONTE ÚNICA. Nenhuma cor de marca pode ser hardcoded fora deste arquivo.
+
+   Dossiê militar anos 60, em papel. Regra de cor (e proporção de área):
+     papel    70%  fundo de tudo
+     tinta    22%  títulos, texto, botão principal, blocos de inversão
+     oliva     5%  confirmação, preço, links, dado positivo
+     carimbo   3%  urgência, escassez, classificação. NUNCA em bloco grande
+     poeira        labels, metadados. Decorativo: dá 2,7:1 sobre papel,
+                   então texto que precisa ser lido vai em --fg-body
+
+   Proibido: gradiente, canto arredondado, sombra, emoji, ícone de biblioteca.
+   Os três layouts (híbrida, dossiê escuro, dossiê claro) consomem daqui.
+   ============================================================================ */
+
+:root {
+    /* --- Marca: absolutos, nunca reatribuídos ------------------------------ */
+    --paper: #E6E1D3;
+    --ink: #1C1A15;
+    --olive: #3D5230;
+    --stamp: #A83226;
+    --dust: #8F8871;
+
+    --ink-body: #2B2820;       /* corpo de texto sobre papel; superfície 2 do escuro */
+    --rule: #C4BDA8;           /* réguas e bordas sobre papel */
+    --paper-on-ink: #D8D2C2;   /* corpo de texto sobre tinta */
+    --olive-on-ink: #7EA86A;   /* "aprovado": o positivo sobre tinta (oliva dá 2,0:1 lá) */
+    --dust-deep: #6B6552;      /* labels legíveis sobre papel (4,45:1) */
+    --rule-on-ink: #3A362C;    /* réguas sobre tinta */
+    --canvas: #D8D2C0;         /* segunda dobra: o papel "fora da folha" */
+
+    /* --- Apelidos que os layouts já consomem (mesmos nomes, valores novos) -- */
+    --surface-light: var(--paper);
+    --surface-2-light: var(--canvas);
+    --surface-dark: var(--ink);
+    --surface-dark-2: var(--ink-body);
+    --line-light: var(--rule);
+    --line-dark: var(--rule-on-ink);
+
+    --fg-light: var(--ink);
+    --fg-muted-light: var(--dust-deep);
+    --fg-body-light: var(--ink-body);
+    --fg-on-dark: var(--paper);
+    --fg-on-dark-muted: var(--dust);        /* 4,9:1 sobre tinta */
+    --fg-on-dark-body: var(--paper-on-ink);
+
+    --accent: var(--olive);          /* era o indigo do "mecanismo": vira confirmação */
+    --accent-light: var(--olive-on-ink);
+    --accent-on-dark: var(--olive-on-ink);
+    --action: var(--ink);            /* botão principal */
+    --action-hover: var(--olive);
+    --danger: var(--stamp);
+    --gold: var(--stamp);            /* selos viram carimbo */
+
+    /* --- Semânticos: o tema claro nasce aqui. dossie.css reatribui para o
+           escuro e dossie-light.css devolve, sempre via os aliases absolutos
+           acima (uma custom property não pode se auto-referenciar). --------- */
+    --surface: var(--surface-light);
+    --surface-2: var(--surface-2-light);
+    --line: var(--line-light);
+    --fg: var(--fg-light);
+    --fg-muted: var(--fg-muted-light);
+    --fg-body: var(--fg-body-light);
+    --fg-dust: var(--dust);
+
+    --accent-text: var(--olive);
+    --btn-bg: var(--ink);
+    --btn-fg: var(--paper);
+    --btn-bg-hover: var(--olive);
+    --card-line: var(--ink);
+    --numeral: var(--stamp);
+    --danger-text: var(--stamp);
+    --stamp-fg: var(--stamp);
+    --stamp-bg: transparent;
+    --link: var(--olive);
+    --link-hover: var(--stamp);
+
+    /* --- Tipografia -------------------------------------------------------- */
+    /* Fallback condensado: Inter/Arial são muito mais largas que a Anton e o
+       texto saltaria de tamanho enquanto a fonte carrega. */
+    --font-display: 'Anton', Impact, 'Arial Narrow Bold', sans-serif;
+    --font-heading: var(--font-display);
+    --font-body: 'Saira', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+    --font-stamp: 'Special Elite', 'Courier New', monospace;
+
+    --easing: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================================
+   Utilitários de marca, compartilhados pelos 3 layouts
+   ============================================================================ */
+
+/* Display: Anton, sempre caixa alta. Anton não tem bold: strong dentro de
+   título fica 400, e font-synthesis impede o navegador de inventar um. */
+.u-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: 0.4px;
+    font-synthesis: none;
+}
+
+.u-display strong {
+    font-weight: 400;
+}
+
+.u-mono {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Símbolos táticos: substituem emoji e ícone de biblioteca. */
+.u-sym {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-weight: 400;
+    color: var(--stamp-fg);
+}
+
+.u-sym-ok {
+    color: var(--accent-text);
+}
+
+.u-sym-live {
+    animation: sym-blink 1.6s steps(1) infinite;
+}
+
+@keyframes sym-blink {
+    50% {
+        opacity: 0.25;
+    }
+}
+
+.btn .u-sym {
+    color: currentColor;
+}
+
+/* Carimbo: Special Elite só aqui e no kicker de capa. Nunca em parágrafo. */
+.u-stamp {
+    display: inline-block;
+    font-family: var(--font-stamp);
+    font-size: 14px;
+    line-height: 1.3;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    color: var(--stamp-fg);
+    background: var(--stamp-bg);
+    border: 2px solid var(--stamp);
+    transform: rotate(6deg);
+}
+
+.u-stamp-l {
+    transform: rotate(-6deg);
+}
+
+.u-kicker-stamp {
+    font-family: var(--font-stamp);
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+/* Tag "● AO VIVO": carimbo preenchido. É pequeno, por isso pode. */
+.u-tag-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--stamp);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 8px;
+    white-space: nowrap;
+}
+
+.u-tag-live .u-sym {
+    color: inherit;
+}
+
+/* Marca de dossiê: metadado com borda tracejada. Máximo duas por tela. */
+.u-dossier-mark {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--fg-dust);
+    border: 1px dashed var(--rule);
+    padding: 6px 10px;
+}
+
+/* Bloco de destaque: borda oliva com etiqueta cavalgando a borda. */
+.u-highlight {
+    position: relative;
+    border: 2px solid var(--accent-text);
+}
+
+.u-tag-label {
+    position: absolute;
+    top: -11px;
+    left: 20px;
+    padding: 0 8px;
+    background: var(--surface);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 1.6;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-text);
+    white-space: nowrap;
+}
+
+/* Logo: "ESTRUTURA ▸ NO AR". Preto ou papel, nunca verde nem vermelho;
+   só o ▸ é carimbo. */
+.brand {
+    font-family: var(--font-display);
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: var(--fg);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.brand .u-sym {
+    color: var(--stamp);
+}
+
+/* Variantes de botão compartilhadas. .btn-urgent leva !important porque
+   .dark-section .btn-action e .offer-panel .btn-action (híbrido) têm
+   especificidade maior e inverteriam o carimbo. É a única exceção. */
+.btn-urgent {
+    background: var(--stamp) !important;
+    color: var(--paper) !important;
+    border-color: var(--stamp) !important;
+}
+
+.btn-urgent:hover {
+    background: var(--btn-bg-hover) !important;
+    border-color: var(--btn-bg-hover) !important;
+    color: var(--btn-fg) !important;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--btn-bg);
+    border: 2px solid var(--btn-bg);
+    font-size: 17px;
+    padding: 12px 28px;
+}
+
+.btn-secondary:hover {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+}

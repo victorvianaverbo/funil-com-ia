@@ -119,7 +119,7 @@ Sem oferta, sem empurrão. Coerente com o anti-guru: não vende pra quem não pr
 
 | O quê | Onde |
 |---|---|
-| Link do checkout | `CHECKOUT_URL` no topo de [script.js](script.js) |
+| Link do checkout | `CHECKOUT_URL` no topo de [script.js](script.js). **Ligado:** `https://pay.hotmart.com/X102170086S` |
 | Tempo até liberar a ação nos vídeos | `SEGUNDOS_LIBERAR` no topo de [script.js](script.js) |
 | Embeds de vídeo e provas | os `.player` de cada etapa de vídeo — o texto do slot diz o que entra em cada um |
 | Copy de qualquer etapa | o array `ETAPAS` no [script.js](script.js) |

@@ -139,7 +139,7 @@ garantia. O risco é meu. A decisão é sua. **Garantir minha vaga como fundador
 
 | O quê | Onde |
 |---|---|
-| Link do checkout | `CHECKOUT_URL` no topo de [script.js](script.js) — um lugar só, vale pra todos os botões |
+| Link do checkout | `CHECKOUT_URL` no topo de [script.js](script.js) — um lugar só, vale pra todos os botões. **Ligado:** `https://pay.hotmart.com/X102170086S` |
 | Embed da VSL | `<div class="player" id="vsl-player">` no [index.html](index.html) |
 | Takes da demonstração | os 5 `.player` da seção "A prova" |
 | Foto do Victor | `.player--retrato` na seção "Quem tá falando" |

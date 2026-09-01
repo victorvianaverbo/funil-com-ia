@@ -1,0 +1,1179 @@
+/*
+   LAYOUT HÍBRIDO — Operação Estrutura no Ar
+
+   A identidade (cor, fonte) NÃO mora aqui: mora em design/tokens.css, que é
+   carregado antes deste arquivo e é compartilhado pelos 3 layouts. Este
+   arquivo só desenha o layout híbrido por cima dela.
+
+   Regras que este arquivo obedece: zero hex, zero canto arredondado, zero
+   sombra, zero gradiente. Cor nova? Vai em tokens.css, nunca aqui.
+
+   O :root abaixo só mantém os nomes ANTIGOS de variável como apelidos dos
+   tokens, para o CSS já escrito continuar funcionando.
+*/
+
+:root {
+    --bg-white: var(--surface);
+    --bg-slate: var(--surface-dark);
+    --text-main: var(--fg);
+    --text-muted: var(--fg-muted);
+    --border: var(--line);
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    background-color: var(--bg-white);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.75;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    color: var(--link);
+}
+
+a:hover {
+    color: var(--link-hover);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.container-narrow {
+    max-width: 800px;
+    text-align: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.text-white {
+    color: var(--fg-on-dark);
+}
+
+/* ==========================================================================
+   Tipografia
+   ========================================================================== */
+
+/* Display: Anton 400, sempre caixa alta. Anton não tem bold, então strong
+   dentro de título fica 400 e font-synthesis impede o navegador de inventar. */
+.headline,
+.section-title-serif,
+.comp-title,
+.new-price {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: 0.4px;
+    font-synthesis: none;
+    text-wrap: balance;
+}
+
+.headline strong,
+.section-title-serif strong,
+.comp-title strong {
+    font-weight: 400;
+}
+
+.headline {
+    font-size: clamp(2.25rem, 5vw, 4.25rem);
+    margin-bottom: 2rem;
+}
+
+.section-title-serif {
+    font-size: clamp(2rem, 4vw, 3.4rem);
+    margin-bottom: 3rem;
+}
+
+.comp-title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+}
+
+/* Era o itálico da Fraunces. A classe fica (é usada em 12 pontos do HTML):
+   o destaque agora é só a cor, como manda a identidade. */
+.serif-accent {
+    font-style: normal;
+    font-weight: 400;
+    color: var(--accent-text);
+}
+
+.subheadline {
+    font-size: 1.125rem;
+    color: var(--fg-body);
+    max-width: 500px;
+    margin-bottom: 3rem;
+}
+
+.section-desc {
+    font-size: 1.125rem;
+    color: var(--fg-body);
+    margin-bottom: 4rem;
+}
+
+/* A dor: carimbo, sublinhado. Nunca itálico. */
+.text-danger {
+    color: var(--danger-text);
+    font-style: normal;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--stamp);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+}
+
+/* ==========================================================================
+   Botões: Anton 19px, cantos retos, sem sombra
+   ========================================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 15px 32px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 1.15;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-synthesis: none;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-action {
+    background: var(--action);
+    color: var(--paper);
+    border-color: var(--action);
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    min-height: 56px;
+}
+
+.btn-action:hover,
+.btn-action:focus-visible {
+    background: var(--action-hover);
+    border-color: var(--action-hover);
+    color: var(--paper);
+}
+
+.price-pill {
+    border: 1px solid currentColor;
+    padding: 2px 8px;
+    font-size: 0.9em;
+    white-space: nowrap;
+}
+
+/* Nas seções tinta o botão inverte: papel com texto tinta. */
+.dark-section .btn-action {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+}
+
+.dark-section .btn-action:hover,
+.dark-section .btn-action:focus-visible {
+    background: var(--accent-on-dark);
+    border-color: var(--accent-on-dark);
+    color: var(--ink);
+}
+
+/* ==========================================================================
+   CTA (nota e escassez)
+   ========================================================================== */
+.cta-block {
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.cta-note {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+.cta-note span::before {
+    content: "✔ ";
+    color: var(--accent-text);
+}
+
+.dark-section .cta-note {
+    color: var(--fg-on-dark-muted);
+}
+
+.dark-section .cta-note span::before {
+    color: var(--accent-on-dark);
+}
+
+/* Escassez é o uso legítimo do carimbo. */
+.cta-scarcity {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--stamp);
+}
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero-engineering {
+    padding: 3rem 0 2rem 0;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* Filho de grid nasce com min-width:auto e estoura com linha longa do terminal. */
+.hero-grid > * {
+    min-width: 0;
+}
+
+/* Marca de dossiê: metadado tracejado. */
+.badge-tech {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--fg-dust);
+    margin-bottom: 2rem;
+}
+
+.badge-tech .u-sym {
+    color: var(--stamp);
+}
+
+.hero-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Player da VSL (reservado; remover o hidden quando o embed chegar) */
+#player-vsl {
+    width: 100%;
+    max-width: 720px;
+    aspect-ratio: 16 / 9;
+    margin: 0 0 2.5rem;
+    border: 1px solid var(--ink);
+    background: var(--surface-dark);
+}
+
+#player-vsl[hidden] {
+    display: none;
+}
+
+/* --- Terminal: o bloco de inversão da marca (tinta, texto papel) ---------- */
+.hero-visual-tech {
+    position: relative;
+}
+
+.terminal-frame {
+    background: var(--surface-dark);
+    color: var(--fg-on-dark-body);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+}
+
+.terminal-header {
+    background: var(--surface-dark-2);
+    border-bottom: 1px solid var(--line-dark);
+    padding: 0.6rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.terminal-title {
+    color: var(--fg-on-dark-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.terminal-title .u-sym {
+    color: var(--accent-on-dark);
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    min-height: 250px;
+    color: var(--fg-on-dark-body);
+}
+
+.log-line {
+    margin-bottom: 0.5rem;
+    overflow-wrap: anywhere;
+}
+
+.text-blue {
+    color: var(--fg-on-dark);
+}
+
+.text-green {
+    color: var(--accent-on-dark);
+}
+
+/* A cinza dos logs é a cinza de fundo escuro, não a do corpo claro. */
+.terminal-body .text-muted {
+    color: var(--fg-on-dark-muted);
+}
+
+.cursor-line {
+    display: inline-block;
+    color: var(--fg-on-dark);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* --- Ficha de métrica sobre o terminal ------------------------------------ */
+.metric-card {
+    position: absolute;
+    background: var(--surface);
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--ink);
+    width: 180px;
+}
+
+.card-a {
+    bottom: -20px;
+    left: -40px;
+}
+
+.metric-label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+/* Dado positivo: oliva. */
+.metric-value {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    color: var(--olive);
+    margin: 0.25rem 0;
+    font-synthesis: none;
+}
+
+.metric-trend {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--olive);
+}
+
+.metric-trend .u-sym {
+    color: inherit;
+}
+
+/* ==========================================================================
+   Seções e superfícies
+   ========================================================================== */
+.section {
+    padding: 8rem 0;
+}
+
+/* Bloco de inversão: tinta, texto papel. */
+.dark-section {
+    background: var(--bg-slate);
+    color: var(--fg-on-dark-body);
+}
+
+.dark-section .section-title-serif,
+.dark-section .comp-title,
+.dark-section strong {
+    color: var(--fg-on-dark);
+}
+
+.dark-section .section-desc {
+    color: var(--fg-on-dark-body);
+}
+
+.dark-section .serif-accent {
+    color: var(--accent-on-dark);
+}
+
+/* O ritmo das dobras: papel, canvas, tinta. */
+.segment-comparison {
+    background: var(--surface-2);
+}
+
+.surface-2 {
+    background: var(--surface-2);
+}
+
+/* ==========================================================================
+   Comparação (fichas)
+   ========================================================================== */
+.comparison-grid {
+    display: flex;
+    align-items: stretch;
+    gap: 2rem;
+}
+
+/* Ficha: papel com borda tinta. */
+.comp-box {
+    flex: 1;
+    padding: 20px 24px 24px;
+    background: var(--surface);
+    color: var(--fg);
+    border: 1px solid var(--card-line);
+    display: flex;
+    flex-direction: column;
+}
+
+.comp-box p {
+    color: var(--fg-body);
+}
+
+.comp-box strong {
+    color: var(--fg);
+    font-weight: 700;
+}
+
+.comp-box .label {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+/* O caminho certo é bloco de destaque: borda oliva. */
+.comp-box.new-way {
+    border: 2px solid var(--accent-text);
+}
+
+.comp-box.new-way .label {
+    color: var(--accent-text);
+}
+
+.comp-icon {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    color: var(--stamp);
+    flex: 0 0 auto;
+    align-self: center;
+}
+
+/* ==========================================================================
+   Bloco de destaque (veredito e garantia): borda oliva, etiqueta na borda
+   ========================================================================== */
+.guarantee-frame {
+    position: relative;
+    border: 2px solid var(--accent-text);
+    background: var(--surface);
+    padding: 3rem 2.5rem 2.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.guarantee-icon {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    line-height: 1;
+    color: var(--accent-text);
+    margin-bottom: 1.5rem;
+}
+
+.guarantee-icon .u-sym {
+    color: inherit;
+}
+
+.stamp-row {
+    margin: 0.5rem 0 2rem;
+}
+
+/* ==========================================================================
+   Lista "você vai ver"
+   ========================================================================== */
+.target-list {
+    list-style: none;
+    margin-top: 2rem;
+}
+
+.target-list li {
+    display: flex;
+    gap: 1rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    color: var(--fg-body);
+}
+
+.target-list li i {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--accent-text);
+    font-size: 1.25rem;
+    flex: 0 0 auto;
+}
+
+.dark-section .target-list li {
+    color: var(--fg-on-dark-body);
+}
+
+.dark-section .target-list li strong {
+    color: var(--fg-on-dark);
+}
+
+.dark-section .target-list li i {
+    color: var(--accent-on-dark);
+}
+
+/* ==========================================================================
+   Prova (molduras escuras)
+   ========================================================================== */
+.badge-glow {
+    background: transparent;
+    border-color: var(--line-dark);
+    color: var(--fg-on-dark-muted);
+    display: inline-block;
+}
+
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin: 3rem 0;
+}
+
+.proof-shot {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line-dark);
+    background: var(--surface-dark-2);
+}
+
+.proof-shot img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder: some sozinho quando a <img> real entrar */
+.proof-shot:has(img) .proof-placeholder {
+    display: none;
+}
+
+.proof-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 16 / 10;
+    color: var(--fg-on-dark-muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 2;
+    text-align: center;
+    padding: 1rem;
+    outline: 1px dashed var(--line-dark);
+    outline-offset: -8px;
+}
+
+.proof-shot figcaption {
+    padding: 10px 12px;
+    border-top: 1px solid var(--line-dark);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--fg-on-dark-muted);
+}
+
+/* ==========================================================================
+   Autoridade
+   ========================================================================== */
+.segment-authority {
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.authority-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+}
+
+.authority-gallery {
+    position: relative;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+}
+
+.img-wrapper {
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid var(--ink);
+    background: var(--surface-dark);
+}
+
+.img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.main-img {
+    width: 320px;
+    height: 420px;
+    top: 0;
+    left: 10%;
+    z-index: 2;
+}
+
+.secondary-img {
+    width: 250px;
+    height: 250px;
+    bottom: 20px;
+    right: 0;
+    z-index: 3;
+}
+
+.authority-text-content {
+    text-align: left;
+}
+
+.authority-text {
+    position: relative;
+    padding-left: 2rem;
+    border-left: 2px solid var(--ink);
+}
+
+.authority-text p {
+    color: var(--fg-body);
+}
+
+.meta-data {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   Oferta: a folha de papel sobre a mesa escura
+   ========================================================================== */
+.segment-offer {
+    background: var(--bg-slate);
+}
+
+.offer-panel {
+    position: relative;
+    background: var(--surface);
+    color: var(--fg);
+    border: 1px solid var(--ink);
+    padding: 4rem;
+    text-align: center;
+}
+
+/* Desfaz a cascata de .dark-section dentro da folha. */
+.offer-panel .section-title-serif,
+.offer-panel .comp-title,
+.offer-panel strong {
+    color: var(--fg);
+}
+
+.offer-panel .section-desc {
+    color: var(--fg-body);
+}
+
+.offer-panel .serif-accent {
+    color: var(--accent-text);
+}
+
+.offer-panel .btn-action {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+}
+
+.offer-panel .btn-action:hover,
+.offer-panel .btn-action:focus-visible {
+    background: var(--action-hover);
+    border-color: var(--action-hover);
+    color: var(--paper);
+}
+
+.offer-panel .cta-note {
+    color: var(--fg-muted);
+}
+
+.offer-panel .cta-note span::before {
+    color: var(--accent-text);
+}
+
+.offer-stamp-row {
+    text-align: right;
+    margin: -1.5rem 0 1rem;
+}
+
+.offer-deliverables {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: left;
+    margin: 2.5rem 0;
+}
+
+/* Ficha numerada: borda tinta, numeral Anton em carimbo. */
+.agent-card {
+    position: relative;
+    padding: 20px 20px 20px 80px;
+    border: 1px solid var(--card-line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.agent-card.highlight-card {
+    border: 2px solid var(--accent-text);
+}
+
+.agent-number {
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1;
+    color: var(--numeral);
+    pointer-events: none;
+}
+
+.agent-content h3 {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--fg);
+    margin-bottom: 0.15rem;
+}
+
+.agent-content p {
+    color: var(--fg-body);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.offer-features {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2.5rem 0;
+}
+
+.offer-feature {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--fg-muted);
+}
+
+.offer-feature i {
+    font-family: var(--font-mono);
+    font-style: normal;
+    color: var(--stamp);
+}
+
+.offer-price-box {
+    margin-bottom: 3rem;
+}
+
+.old-price {
+    font-size: 1rem;
+    color: var(--fg-muted);
+}
+
+/* Preço riscado: o risco é carimbo. */
+.old-price s {
+    text-decoration-color: var(--stamp);
+    text-decoration-thickness: 2px;
+}
+
+/* O preço é oliva: dado positivo. */
+.new-price {
+    font-size: clamp(3rem, 10vw, 4.5rem);
+    line-height: 1;
+    color: var(--olive);
+    margin: 0.25rem 0 0.75rem;
+}
+
+.price-info {
+    color: var(--fg-body);
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+.faq-accordion {
+    text-align: left;
+    margin-top: 3rem;
+}
+
+.faq-item {
+    border-bottom: 1px solid var(--border);
+}
+
+.faq-question {
+    padding: 1.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: color 0.3s;
+}
+
+.faq-question:hover {
+    color: var(--olive);
+}
+
+.faq-question i {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 1.4rem;
+    line-height: 1;
+    color: var(--fg-muted);
+    flex: 0 0 auto;
+}
+
+.faq-sign::before {
+    content: "+";
+}
+
+.faq-item.active .faq-sign::before {
+    content: "−";
+}
+
+.faq-item.active .faq-sign {
+    color: var(--accent-text);
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s var(--easing);
+    color: var(--fg-body);
+}
+
+.faq-answer p {
+    padding-bottom: 1.5rem;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+}
+
+/* ==========================================================================
+   PS final
+   ========================================================================== */
+.ps-box {
+    position: relative;
+    max-width: 800px;
+    margin: 4rem auto 0;
+    padding: 2.5rem;
+    background: var(--surface);
+    border: 2px solid var(--accent-text);
+    text-align: left;
+}
+
+.ps-box p {
+    color: var(--fg-body);
+}
+
+.ps-box p+p {
+    margin-top: 1rem;
+}
+
+.meta-proof {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--border);
+    font-size: 0.95rem;
+    color: var(--fg-body);
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.footer-minimal {
+    padding: 4rem 0;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: var(--link);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--link-hover);
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+@media (min-width: 769px) and (max-width: 992px) {
+    .authority-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .authority-text {
+        padding-left: 0;
+        border-left: 0;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+    }
+
+    .hero-text {
+        order: 1;
+    }
+
+    .hero-visual-tech {
+        order: 2;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .subheadline {
+        margin: 0 auto 2.5rem auto;
+    }
+
+    .hero-actions-group {
+        align-items: center;
+    }
+
+    .metric-card {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        top: auto;
+        right: auto;
+        margin: 1rem auto;
+        width: 100%;
+        max-width: 250px;
+        text-align: left;
+    }
+
+    .comparison-grid {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .comp-icon {
+        transform: rotate(90deg);
+    }
+
+    .offer-features {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .offer-panel {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .offer-stamp-row {
+        margin-top: -1rem;
+    }
+
+    .agent-card {
+        padding-left: 68px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-brand {
+        align-items: center;
+    }
+
+    .authority-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .authority-gallery {
+        min-height: 440px;
+    }
+
+    .main-img {
+        width: 260px;
+        height: 340px;
+        left: 0;
+    }
+
+    .secondary-img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .authority-text {
+        padding-left: 0;
+        border-left: 0;
+        text-align: center;
+    }
+
+    .section {
+        padding: 4rem 0;
+    }
+
+    .headline {
+        font-size: 2.25rem;
+        letter-spacing: 0.3px;
+    }
+
+    .section-title-serif {
+        font-size: 2rem;
+    }
+
+    .btn-action {
+        width: 100%;
+        max-width: 420px;
+        padding: 14px 20px;
+        font-size: 17px;
+    }
+
+    .cta-note {
+        gap: 0.35rem 1rem;
+        font-size: 10px;
+    }
+
+    .guarantee-frame {
+        padding: 2.5rem 1.25rem 2rem;
+    }
+
+    .ps-box {
+        padding: 1.75rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

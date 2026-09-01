@@ -1,0 +1,121 @@
+/* ============================================================================
+   MOVIMENTO — camada compartilhada pelos 3 layouts. Substitui o AOS.
+
+   REGRA DE OURO: o estado padrão de tudo aqui é VISÍVEL.
+   O JS adiciona .motion-on no <html> e é ISSO que autoriza esconder.
+   Se o script falhar, a página aparece inteira em vez de aparecer em branco.
+   ============================================================================ */
+
+/* Só anima transform e opacity — as duas coisas que a GPU faz sem repintar. */
+
+.motion-on [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+        opacity 0.7s var(--easing),
+        transform 0.7s var(--easing);
+    will-change: opacity, transform;
+}
+
+.motion-on [data-reveal="scale"] {
+    transform: translateY(24px) scale(0.96);
+}
+
+.motion-on [data-reveal="left"] {
+    transform: translateX(-28px);
+}
+
+.motion-on [data-reveal="right"] {
+    transform: translateX(28px);
+}
+
+.motion-on [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+    will-change: auto;
+}
+
+/* --- Fio de progresso de leitura ----------------------------------------- */
+.progress-rail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 100;
+    pointer-events: none;
+    background: transparent;
+}
+
+.progress-rail span {
+    display: block;
+    height: 100%;
+    width: 0%;
+    background: var(--stamp);
+    transition: width 0.1s linear;
+}
+
+/* --- Terminal que digita -------------------------------------------------- */
+/* As linhas nascem visíveis (ver regra de ouro). O JS esconde e revela uma a uma. */
+.motion-on .terminal-body .log-line {
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.motion-on .terminal-body .log-line.is-typed {
+    opacity: 1;
+    transform: none;
+}
+
+.caret {
+    display: inline-block;
+    width: 8px;
+    animation: caret-blink 1s step-end infinite;
+}
+
+@keyframes caret-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* O pulso do ponto de status saiu com a identidade nova: o "● AO VIVO" pisca
+   via .u-sym-live (tokens.css). Sem círculo, sem sombra. */
+
+/* --- Reação de card ------------------------------------------------------- */
+/* Sem elevação: a identidade não tem sombra. O card só escurece a borda. */
+[data-lift] {
+    transition: border-color 0.4s var(--easing);
+}
+
+[data-lift]:hover {
+    border-color: var(--accent-text);
+}
+
+/* --- Micro-reação de botão ------------------------------------------------ */
+.btn:active,
+[data-cta]:active {
+    transform: translateY(1px) scale(0.99);
+}
+
+/* ==========================================================================
+   Quem pediu menos movimento, recebe menos movimento. Sem exceção.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+    .motion-on [data-reveal],
+    .motion-on [data-reveal].is-in,
+    .motion-on .terminal-body .log-line {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    .caret,
+    .u-sym-live,
+    .progress-rail span {
+        animation: none !important;
+        transition: none !important;
+    }
+}

@@ -30,8 +30,10 @@ h1, h2 {
 h2 { font-size: clamp(1.5rem, 5.6vw, 1.75rem); line-height: 1.25; margin: 0 0 24px; }
 p  { margin: 0 0 16px; }
 
+/* Special Elite fica só nos carimbos: em parágrafo, o manual proíbe. */
 .voz {
-  font-family: var(--font-maquina);
+  font-family: var(--font-corpo);
+  font-weight: 500;
   font-size: 1rem;
   line-height: 1.7;
   color: var(--tinta-suave);
@@ -61,7 +63,7 @@ p  { margin: 0 0 16px; }
   color: var(--grafite-papel);
   white-space: nowrap;
 }
-.barra__trilho { flex: 1; height: 4px; background: #d5cfbd; }
+.barra__trilho { flex: 1; height: 4px; background: var(--papel-linha); }
 .barra__preenche {
   height: 100%;
   width: 0;
@@ -144,7 +146,8 @@ p  { margin: 0 0 16px; }
   border: 1px dashed var(--oliva-escuro);
   padding: 16px 20px;
   margin: 24px 0 0;
-  font-family: var(--font-maquina);
+  font-family: var(--font-corpo);
+  font-weight: 500;
   font-size: 0.9375rem;
   line-height: 1.6;
   color: var(--oliva-escuro);
@@ -174,12 +177,13 @@ p  { margin: 0 0 16px; }
 }
 .opcao:hover  { background: var(--tinta); color: var(--papel); }
 .opcao:active { transform: scale(0.99); }
-.opcao__icone { font-size: 1.25rem; line-height: 1.2; flex-shrink: 0; }
+.opcao__icone { font-family: var(--font-ficha); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; color: var(--carimbo); }
+.opcao:hover .opcao__icone { color: var(--oliva-claro); }
 
 /* ==========================================================================
    TELA "LIGUE O SOM"
    ========================================================================== */
-.icone-som { font-size: 3rem; margin: 8px 0 16px; }
+.icone-som { font-family: var(--font-ficha); font-size: 3rem; line-height: 1; color: var(--oliva-escuro); margin: 8px 0 16px; }
 .etapa--centro .botao { margin-top: 24px; width: 100%; }
 
 /* ==========================================================================
@@ -277,7 +281,8 @@ p  { margin: 0 0 16px; }
   background: var(--papel-sombra);
   padding: 12px 16px;
   margin: 0;
-  font-family: var(--font-maquina);
+  font-family: var(--font-corpo);
+  font-weight: 500;
   font-size: 1.0625rem;
   line-height: 1.5;
 }

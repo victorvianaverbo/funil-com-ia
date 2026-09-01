@@ -41,7 +41,7 @@ perde a função.
 
 ## Tipografia
 
-- **Saira Stencil One** — logo e títulos. É o estêncil pintado na caixa de suprimento.
+- **Anton** — logo, títulos, botões e preços, sempre em caixa alta (entrelinha 1.08 a 1.15). É o estêncil pesado do manual de campo. Nunca em texto corrido. (Substituiu a Saira Stencil One na versão final do manual.)
 - **Special Elite** — corpo com voz. É a máquina de escrever: fala com o leitor, conta a história.
 - **IBM Plex Mono** — dados frios. Códigos de ficha, badges, metadados, selos.
 - **Saira** — leitura corrida. Onde o texto precisa sumir e só ser lido.
@@ -51,7 +51,7 @@ A regra de uso é essa divisão de papéis. Special Elite é a voz do autor; IBM
 
 ## Logo
 
-- **Principal:** `ESTRUTURA NO AR` em Saira Stencil One, duas linhas, centralizado
+- **Principal:** `ESTRUTURA NO AR` em Anton, duas linhas, centralizado
 - **Monograma:** `E.N.A.`
 - **Carimbo / avatar:** `EA` em círculo de traço, rotacionado -6°
 - **Horizontal:** `ESTRUTURA NO AR ●` (ponto vermelho ao fim)

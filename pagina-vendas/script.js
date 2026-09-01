@@ -3,12 +3,11 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
-   LINK DO CHECKOUT — o único lugar pra mexer quando o pagamento estiver pronto.
-   Deixe vazio e os botões rolam até o bloco de oferta (comportamento atual).
-   Preencha com a URL do checkout e TODOS os botões passam a apontar pra lá.
-   Ex.: var CHECKOUT_URL = 'https://pay.kiwify.com.br/xxxxx';
+   LINK DO CHECKOUT — o único lugar pra mexer se o pagamento mudar.
+   Todos os 6 botões da página apontam pra cá. Deixe vazio e eles voltam a
+   rolar até o bloco de oferta.
    -------------------------------------------------------------------------- */
-var CHECKOUT_URL = '';
+var CHECKOUT_URL = 'https://pay.hotmart.com/X102170086S';
 
 (function () {
   'use strict';

@@ -8,8 +8,8 @@
    CONFIGURAÇÃO — o que você mexe
    -------------------------------------------------------------------------- */
 
-/* Link do checkout. Vazio = o botão final não leva a lugar nenhum ainda. */
-var CHECKOUT_URL = '';
+/* Link do checkout, no fim do funil. Vazio = o botão final não leva a lugar nenhum. */
+var CHECKOUT_URL = 'https://pay.hotmart.com/X102170086S';
 
 /* Segundos que o vídeo roda antes de liberar a ação da tela.
    O doc pede isso pra incentivar assistir. Suba se os cortes ficarem longos. */
@@ -27,17 +27,17 @@ var SEGUNDOS_LIBERAR = 8;
     { tipo: 'pergunta', chave: 'situacao', ficha: 'ETAPA 1 · SITUAÇÃO',
       titulo: 'Você já tentou colocar a sua estrutura de vendas no ar?',
       opcoes: [
-        ['😓', 'Já tentei de tudo, mas sempre trava em alguma parte.'],
-        ['😤', 'Já coloquei, mas foi um sofrimento e não quero repetir.'],
-        ['📦', 'Ainda não. Meu produto tá parado, esperando.']
+        ['✖', 'Já tentei de tudo, mas sempre trava em alguma parte.'],
+        ['↺', 'Já coloquei, mas foi um sofrimento e não quero repetir.'],
+        ['■', 'Ainda não. Meu produto tá parado, esperando.']
       ] },
 
     { tipo: 'pergunta', chave: 'tempo', ficha: 'ETAPA 1.5 · CONTEXTO',
       titulo: 'Há quanto tempo você tem esse produto ou essa ideia esperando pra sair do papel?',
       opcoes: [
-        ['💡', 'Tá na minha cabeça, pronto. Só falta tirar do papel e colocar pra vender.'],
-        ['📅', 'Já terminei há meses, mas ele segue parado.'],
-        ['😩', 'Mais de um ano nisso. Me incomoda todo dia.']
+        ['◇', 'Tá na minha cabeça, pronto. Só falta tirar do papel e colocar pra vender.'],
+        ['▦', 'Já terminei há meses, mas ele segue parado.'],
+        ['▼', 'Mais de um ano nisso. Me incomoda todo dia.']
       ] },
 
     { tipo: 'som' },
@@ -45,67 +45,67 @@ var SEGUNDOS_LIBERAR = 8;
     { tipo: 'video', ficha: 'ETAPA 2 · O PROBLEMA',
       titulo: 'Antes de mais nada, olha isso:',
       provaAcima: true,
-      prova: 'PROVA — take rápido (5-8s) de um agente montando algo na tela',
-      video: 'VÍDEO 1 — corte da VSL: mecanismo do problema (5 competências + cilada), 40-60s',
+      prova: 'PROVA · take rápido (5-8s) de um agente montando algo na tela',
+      video: 'VÍDEO 1 · corte da VSL: mecanismo do problema (5 competências + cilada), 40-60s',
       legenda: 'Sair dessa cilada de vez mudaria o seu jogo?',
       opcoes: [
-        ['🔥', 'Mudaria tudo. É exatamente isso que me trava.'],
-        ['🤔', 'Talvez, mas já tentei muita coisa e não creio fácil.']
+        ['▲', 'Mudaria tudo. É exatamente isso que me trava.'],
+        ['◎', 'Talvez, mas já tentei muita coisa e não creio fácil.']
       ] },
 
     { tipo: 'pergunta', chave: 'dor', ficha: 'ETAPA 3 · A TRAVA',
       titulo: 'O que mais te trava hoje?',
       opcoes: [
-        ['🔧', 'A parte técnica: página, funil, checkout que não integra.'],
-        ['💸', 'Já gastei com ferramenta, agência ou curso, e não saiu do papel.'],
-        ['🧠', 'Tenho o conhecimento, mas não dou conta de fazer tudo sozinho.'],
-        ['😌', 'Na verdade a minha estrutura já tá no ar e vendendo bem.']
+        ['⚙', 'A parte técnica: página, funil, checkout que não integra.'],
+        ['✖', 'Já gastei com ferramenta, agência ou curso, e não saiu do papel.'],
+        ['●', 'Tenho o conhecimento, mas não dou conta de fazer tudo sozinho.'],
+        ['✔', 'Na verdade a minha estrutura já tá no ar e vendendo bem.']
       ],
       saidaEm: 3 },
 
     { tipo: 'pergunta', chave: 'crenca', ficha: 'ETAPA 3.5 · SINCERIDADE',
       titulo: 'Sendo bem sincero: você ainda acredita que consegue colocar isso no ar?',
       opcoes: [
-        ['😔', 'Sinceramente? Já quase desisti dessa parte.'],
-        ['🤔', 'Acredito, mas não sei mais por onde começar.'],
-        ['🔥', 'Acredito, só me falta a ferramenta certa.']
+        ['▽', 'Sinceramente? Já quase desisti dessa parte.'],
+        ['◎', 'Acredito, mas não sei mais por onde começar.'],
+        ['▲', 'Acredito, só me falta a ferramenta certa.']
       ] },
 
     { tipo: 'video', ficha: 'ETAPA 4 · A SOLUÇÃO',
       titulo: 'Seja qual for a sua trava, ela tem o mesmo motivo. E tem solução.',
-      video: 'VÍDEO 2 — corte da VSL: mecanismo da solução (exército + tráfego com Victor), 40-60s',
-      prova: 'PROVA — takes dos agentes: comando WhatsApp, copy, página, checkout',
+      video: 'VÍDEO 2 · corte da VSL: mecanismo da solução (exército + tráfego com Victor), 40-60s',
+      prova: 'PROVA · takes dos agentes: comando WhatsApp, copy, página, checkout',
       legenda: 'Isso é diferente de tudo que você já tentou. E você acabou de ver funcionando.',
       continuar: true },
 
     { tipo: 'pergunta', chave: 'sonho', ficha: 'ETAPA 5 · O SONHO',
       titulo: 'Se a sua estrutura estivesse no ar hoje, funcionando, o que mudava pra você?',
       opcoes: [
-        ['🚀', 'Eu finalmente venderia o que já sei que é bom.'],
-        ['🙌', 'Eu pararia de me sentir travado e incapaz.'],
-        ['⏳', 'Eu recuperaria o tempo e o dinheiro que já joguei fora.']
+        ['►', 'Eu finalmente venderia o que já sei que é bom.'],
+        ['✚', 'Eu pararia de me sentir travado e incapaz.'],
+        ['↺', 'Eu recuperaria o tempo e o dinheiro que já joguei fora.']
       ] },
 
     { tipo: 'pergunta', chave: 'urgencia', ficha: 'ETAPA 5.5 · URGÊNCIA',
       titulo: 'Se existisse um jeito de fazer isso ainda esse mês, você ia querer começar quando?',
       opcoes: [
-        ['🚀', 'Agora. Já perdi tempo demais.'],
-        ['📆', 'Essa semana, se fizer sentido pra mim.'],
-        ['🤞', 'Depende de ver funcionando primeiro.']
+        ['►', 'Agora. Já perdi tempo demais.'],
+        ['▦', 'Essa semana, se fizer sentido pra mim.'],
+        ['◎', 'Depende de ver funcionando primeiro.']
       ] },
 
     { tipo: 'video', ficha: 'ETAPA 6 · A OFERTA',
       titulo: 'É isso que você vai fazer na aula, com a minha ajuda, ao vivo.',
-      video: 'VÍDEO 3 — corte da VSL: oferta + entregáveis + garantia, 40-60s',
-      prova: 'PROVA — tela verde de COMPRA APROVADA',
+      video: 'VÍDEO 3 · corte da VSL: oferta + entregáveis + garantia, 40-60s',
+      prova: 'PROVA · tela verde de COMPRA APROVADA',
       legenda: 'A estrutura no ar, funcionando. É o que você monta na aula.',
       continuar: true },
 
     { tipo: 'pergunta', chave: 'decisao', ficha: 'ETAPA 7 · DECISÃO',
       titulo: 'Você tá pronto pra parar de travar e colocar o seu produto no ar de uma vez?',
       opcoes: [
-        ['🤩', 'Tô pronto. Quero fazer isso acontecer.'],
-        ['🙅', 'Ainda tenho dúvida.']
+        ['★', 'Tô pronto. Quero fazer isso acontecer.'],
+        ['✖', 'Ainda tenho dúvida.']
       ] },
 
     { tipo: 'loading' },
@@ -189,7 +189,7 @@ var SEGUNDOS_LIBERAR = 8;
     var saiu = (n === -1);
     barra.hidden = false;
     preenche.style.width = saiu ? '100%' : Math.round((n / ultima) * 100) + '%';
-    conta.textContent = saiu ? '—' : n + '/' + ultima;
+    conta.textContent = saiu ? '·' : n + '/' + ultima;
   }
 
   /* ======================================================================
@@ -252,10 +252,10 @@ var SEGUNDOS_LIBERAR = 8;
     secao.className = 'etapa etapa--centro';
     secao.innerHTML =
       '<p class="ficha">ANTES DE COMEÇAR</p>' +
-      '<p class="icone-som">🔊</p>' +
+      '<p class="icone-som">◎</p>' +
       '<h2>Ligue o som do seu celular.</h2>' +
       '<p class="voz">O que vem agora é em vídeo. Sem áudio, não faz sentido.</p>' +
-      '<button class="botao" type="button">ESTOU PRONTO →</button>';
+      '<button class="botao" type="button">ESTOU PRONTO ►</button>';
     secao.querySelector('button').addEventListener('click', proxima);
   }
 
@@ -270,13 +270,13 @@ var SEGUNDOS_LIBERAR = 8;
       '<h2>' + etapa.titulo + '</h2>' +
       (etapa.provaAcima ? provaHTML : '') +
       '<div class="vsl">' +
-        '<span class="vsl__som">🔊 LIGUE O SOM</span>' +
+        '<span class="vsl__som">◎ LIGUE O SOM</span>' +
         '<div class="player"><span class="player__aviso">' + etapa.video + '</span></div>' +
       '</div>' +
       (etapa.provaAcima ? '' : provaHTML) +
       '<p class="voz legenda">' + etapa.legenda + '</p>' +
       '<div class="acao" hidden></div>' +
-      '<p class="espera"><span class="espera__num">' + SEGUNDOS_LIBERAR + '</span>s — assista antes de seguir</p>';
+      '<p class="espera"><span class="espera__num">' + SEGUNDOS_LIBERAR + '</span>s · assista antes de seguir</p>';
 
     var acao  = secao.querySelector('.acao');
     var aviso = secao.querySelector('.espera');
@@ -286,7 +286,7 @@ var SEGUNDOS_LIBERAR = 8;
       var seguir = document.createElement('button');
       seguir.type = 'button';
       seguir.className = 'botao';
-      seguir.textContent = 'CONTINUAR →';
+      seguir.textContent = 'CONTINUAR ►';
       seguir.addEventListener('click', proxima);
       acao.appendChild(seguir);
     } else {
@@ -343,19 +343,19 @@ var SEGUNDOS_LIBERAR = 8;
     ];
 
     secao.innerHTML =
-      '<p class="liberado">✅ ACESSO LIBERADO</p>' +
+      '<p class="liberado">✔ ACESSO LIBERADO</p>' +
       '<p class="ficha">O SEU DIAGNÓSTICO, COM BASE NO QUE VOCÊ RESPONDEU:</p>' +
       '<div class="diagnostico">' +
         linhas.map(function (l) { return '<p class="diagnostico__linha">' + l + '</p>'; }).join('') +
       '</div>' +
       '<p><strong>A boa notícia:</strong> tudo isso se resolve em uma aula ao vivo de 2 horas. Você resolve o que tenta há meses (ou anos). Nessas 2 horas, você vai:</p>' +
       '<p class="voz">' +
-        '→ Ver o exército montar AO VIVO uma estrutura completa, do zero ao ar.<br>' +
-        '→ Receber o mapa da Operação (o passo a passo).<br>' +
-        '→ Ganhar a aula de tráfego comigo, inclusa.<br>' +
-        '→ Sair comandando o seu primeiro agente, ao vivo.' +
+        '► Ver o exército montar AO VIVO uma estrutura completa, do zero ao ar.<br>' +
+        '► Receber o mapa da Operação (o passo a passo).<br>' +
+        '► Ganhar a aula de tráfego comigo, inclusa.<br>' +
+        '► Sair comandando o seu primeiro agente, ao vivo.' +
       '</p>' +
-      '<div class="acao"><button class="botao" type="button">VER A CONDIÇÃO DE FUNDADOR →</button></div>';
+      '<div class="acao"><button class="botao" type="button">VER A CONDIÇÃO DE FUNDADOR ►</button></div>';
 
     secao.querySelector('button').addEventListener('click', proxima);
   }
@@ -364,19 +364,19 @@ var SEGUNDOS_LIBERAR = 8;
   function montarOferta(secao) {
     secao.className = 'etapa etapa--centro';
     secao.innerHTML =
-      '<p class="ficha">ETAPA FINAL — SUA VAGA</p>' +
+      '<p class="ficha">ETAPA FINAL · SUA VAGA</p>' +
       '<div class="recap">' +
-        '<div>→ Demonstração<br>ao vivo</div>' +
-        '<div>→ Mapa da<br>Operação</div>' +
-        '<div>→ Aula de<br>tráfego</div>' +
-        '<div>→ Agente<br>liberado</div>' +
+        '<div>► Demonstração<br>ao vivo</div>' +
+        '<div>► Mapa da<br>Operação</div>' +
+        '<div>► Aula de<br>tráfego</div>' +
+        '<div>► Agente<br>liberado</div>' +
       '</div>' +
       '<p class="voz de-por">Valor normal da aula: <s>R$ 99</s></p>' +
       '<p class="ficha ficha--carimbo">O SEU PREÇO DE FUNDADOR</p>' +
       '<p class="preco">R$ 19</p>' +
       '<p class="preco__nota">Uma estrutura dessas, montada por agência, custa por volta de <strong>R$ 5.000</strong>. Aqui você aprende a fazer sozinho por R$ 19.</p>' +
       '<p class="voz escassez">Turma limitada. Preço de fundador dessa primeira turma. 7 dias de garantia total.</p>' +
-      '<a class="botao botao--carimbo" id="checkout">GARANTIR MINHA VAGA COMO FUNDADOR →</a>';
+      '<a class="botao botao--carimbo" id="checkout">GARANTIR MINHA VAGA COMO FUNDADOR ►</a>';
 
     var botao = secao.querySelector('#checkout');
 
@@ -387,7 +387,7 @@ var SEGUNDOS_LIBERAR = 8;
     } else {
       var nota = document.createElement('p');
       nota.className = 'micro';
-      nota.textContent = '[LINK DO CHECKOUT — configurar CHECKOUT_URL no script.js]';
+      nota.textContent = '[LINK DO CHECKOUT · configurar CHECKOUT_URL no script.js]';
       secao.appendChild(nota);
     }
 

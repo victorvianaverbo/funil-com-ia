@@ -10,15 +10,16 @@
 
 # --------------------------------------------------------------------------
 # ROTAS PÚBLICAS
-#   /       → página de vendas
+#   /       → página de vendas (index.html na raiz, layout híbrido)
 #   /quiz   → quiz
 #   /mapa   → mapa da jornada
+#   /pagina-vendas → era a página antiga; hoje manda pra raiz
 # --------------------------------------------------------------------------
 
 [[redirects]]
-  from = "/"
-  to = "/pagina-vendas/index.html"
-  status = 200
+  from = "/pagina-vendas/*"
+  to = "/"
+  status = 301
 
 [[redirects]]
   from = "/quiz"
