@@ -1,18 +1,22 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    QUIZ — Operação Estrutura no Ar
    Cores, fontes e componentes vêm de /marca/tokens.css.
    Funil fechado: uma etapa por tela, sem menu, sem rodapé, sem saída.
+
+   Cena: a mesa de guerra à noite. O fundo é a foto da mesa (escurecida);
+   cada etapa é uma FICHA de papel puxada do arquivo, com sombra dura.
+   Nascido para 390px; desktop é adaptação.
    ========================================================================== */
 
 *, *::before, *::after { box-sizing: border-box; }
 
 /* O display do autor vence o do navegador, então [hidden] precisa ser explícito.
-   Sem isto, a barra apareceria na capa e as opções do vídeo não esperariam. */
+   Sem isto, as opções do vídeo não esperariam a contagem. */
 [hidden] { display: none !important; }
 
 body {
   margin: 0;
-  background: var(--papel);
+  background: var(--tinta);
   color: var(--tinta);
   font-family: var(--font-corpo);
   font-size: var(--t-corpo);
@@ -20,12 +24,92 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* O fundo é o papel de trabalho da operação, desenhado em CSS: grid tático
+   de mapa (linha forte a cada 5 células) sumindo nas bordas. Na oferta o
+   body ganha .mesa-clara e o grid "acende". */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--tinta-linha) 65%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--tinta-linha) 65%, transparent) 1px, transparent 1px),
+    linear-gradient(to right, var(--tinta-linha) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--tinta-linha) 1px, transparent 1px);
+  background-size: 44px 44px, 44px 44px, 220px 220px, 220px 220px;
+  -webkit-mask-image: radial-gradient(ellipse 110% 85% at 50% 38%, #000 35%, transparent 100%);
+          mask-image: radial-gradient(ellipse 110% 85% at 50% 38%, #000 35%, transparent 100%);
+  opacity: 0.75;
+  transition: opacity 0.8s ease;
+}
+
+body.mesa-clara::before {
+  opacity: 1;
+}
+
+/* Varredura lentíssima de luz sobre o grid (morre em reduced-motion) */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 44%, rgba(230, 225, 211, 0.05) 50%, transparent 56%);
+  background-size: 260% 100%;
+  animation: varrer 9s linear infinite;
+}
+
+@keyframes varrer {
+  from { background-position: 130% 0; }
+  to   { background-position: -130% 0; }
+}
+
+/* Palavra fantasma: Anton vazada atrás da ficha. */
+.fundo-palavra {
+  position: fixed;
+  z-index: -1;
+  left: 50%;
+  bottom: -0.12em;
+  transform: translateX(-50%) rotate(-2deg);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(7rem, 34vw, 16rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--papel) 8%, transparent);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  transition: -webkit-text-stroke-color 0.8s ease;
+}
+
+body.mesa-clara .fundo-palavra {
+  -webkit-text-stroke-color: color-mix(in srgb, var(--oliva-claro) 16%, transparent);
+}
+
+/* No desktop a palavra sobe pela lateral direita */
+@media (min-width: 769px) {
+  .fundo-palavra {
+    writing-mode: vertical-rl;
+    left: auto;
+    right: 4px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%) rotate(180deg);
+    font-size: clamp(8rem, 18vh, 13rem);
+  }
+}
 
 h1, h2 {
   font-family: var(--font-display);
   font-weight: 400;
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
+  line-height: 1.1;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 h2 { font-size: clamp(1.5rem, 5.6vw, 1.75rem); line-height: 1.25; margin: 0 0 24px; }
 p  { margin: 0 0 16px; }
@@ -46,45 +130,90 @@ p  { margin: 0 0 16px; }
   min-height: 100dvh;   /* conta a barra do navegador no celular */
   max-width: 640px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 16px;
 }
 
-/* ---------- Barra de progresso ---------- */
-.barra {
+/* ---------- Tira de topo: a única âncora de marca ---------- */
+.topo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
   display: flex;
   align-items: center;
-  gap: 14px;
-  padding: 20px 0 16px;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(28, 26, 21, 0.88);
 }
-.barra__marca, .barra__conta {
+
+.topo__marca {
   font-family: var(--font-ficha);
   font-size: var(--t-meta);
   letter-spacing: 2px;
-  color: var(--grafite-papel);
+  color: var(--papel);
   white-space: nowrap;
 }
-.barra__trilho { flex: 1; height: 4px; background: var(--papel-linha); }
-.barra__preenche {
-  height: 100%;
-  width: 0;
-  background: var(--oliva-escuro);
-  transition: width 0.35s ease;
+
+.topo__dot {
+  font-family: var(--font-ficha);
+  font-style: normal;
+  font-size: 9px;
+  color: var(--carimbo-claro);
+  animation: piscar 1.6s steps(1) infinite;
 }
 
-/* ---------- Palco: uma etapa por vez, centralizada ---------- */
+/* Hachura "classificado" pendurada na tira de topo */
+.topo::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: repeating-linear-gradient(45deg,
+      color-mix(in srgb, var(--carimbo) 45%, transparent) 0 8px,
+      transparent 8px 16px);
+}
+
+@keyframes piscar {
+  50% { opacity: 0.25; }
+}
+
+/* ---------- Palco: uma ficha por vez, centralizada ---------- */
 .palco {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 16px 0 48px;
+  padding: 56px 0 40px;
 }
 
+/* A ficha de papel sobre a mesa */
 .etapa {
+  position: relative;
   display: flex;
   flex-direction: column;
+  background: var(--papel);
+  border: var(--borda-forte);
+  box-shadow: var(--sombra-papel);
+  padding: 28px 20px;
   animation: entrar 0.35s ease-out both;
 }
+
+/* Textura de papel na ficha (decorativa: se não carregar, nada quebra) */
+.etapa::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: url('/.netlify/images?url=/images/textura-papel.png&w=480&q=60') repeat;
+  background-size: 480px;
+  mix-blend-mode: multiply;
+  opacity: 0.06;
+}
+
 .etapa--centro { align-items: center; text-align: center; }
 
 /* A capa é o hero: pinta de primeira, sem fade, sem deslocamento. */
@@ -94,26 +223,18 @@ p  { margin: 0 0 16px; }
   text-align: center;
 }
 
-/* O quadriculado, só na capa. Fixed pra vazar do container de 640px e cobrir a
-   tela. Some sozinho quando o quiz começa (a capa sai do DOM), deixando as
-   perguntas num fundo limpo. CSS puro: nenhuma imagem, nenhum request. */
-.etapa--capa::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  background-image:
-    linear-gradient(to right,  rgba(28, 26, 21, .10) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(28, 26, 21, .10) 1px, transparent 1px);
-  background-size: 44px 44px;
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 30%, transparent 100%);
-          mask-image: radial-gradient(ellipse 75% 65% at 50% 40%, #000 30%, transparent 100%);
-  pointer-events: none;
+/* A ficha nova entra por baixo, a antiga é puxada para cima */
+@keyframes entrar {
+  from { opacity: 0; transform: translateY(18px) rotate(0.5deg); }
+  to   { opacity: 1; transform: none; }
 }
 
-@keyframes entrar {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: none; }
+.etapa--sair {
+  animation: sair 0.2s ease-in both;
+}
+
+@keyframes sair {
+  to { opacity: 0; transform: translateY(-14px) rotate(-0.5deg); }
 }
 
 .ficha {
@@ -133,6 +254,22 @@ p  { margin: 0 0 16px; }
   margin: 14px 0 0;
 }
 
+/* ---------- Carimbo que bate ---------- */
+/* O rotate fixo do .carimbo (tokens) vira variável para o keyframe girar até ela */
+.carimbo { --rot: 6deg; transform: rotate(var(--rot)); }
+.carimbo--torto-esq { --rot: -4deg; transform: rotate(var(--rot)); }
+
+.bate {
+  opacity: 0;
+  animation: bater 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes bater {
+  0%   { opacity: 0; transform: scale(2.2) rotate(calc(var(--rot, 6deg) - 8deg)); }
+  70%  { opacity: 1; transform: scale(0.96) rotate(var(--rot, 6deg)); }
+  100% { opacity: 1; transform: scale(1) rotate(var(--rot, 6deg)); }
+}
+
 /* ==========================================================================
    ETAPA 0 — CAPA
    ========================================================================== */
@@ -140,7 +277,7 @@ p  { margin: 0 0 16px; }
 .etapa--capa h1 {
   font-size: clamp(1.625rem, 6.4vw, 2rem);
   line-height: 1.2;
-  margin: 24px 0 0;
+  margin: 8px 0 0;
 }
 .incentivo {
   border: 1px dashed var(--oliva-escuro);
@@ -179,6 +316,14 @@ p  { margin: 0 0 16px; }
 .opcao:active { transform: scale(0.99); }
 .opcao__icone { font-family: var(--font-ficha); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; color: var(--carimbo); }
 .opcao:hover .opcao__icone { color: var(--oliva-claro); }
+
+/* A resposta é "anotada no dossiê" antes da ficha virar */
+.opcao--marcada,
+.opcao--marcada:hover {
+  background: var(--tinta);
+  color: var(--papel);
+}
+.opcao--marcada .opcao__icone { color: var(--oliva-claro); }
 
 /* ==========================================================================
    TELA "LIGUE O SOM"
@@ -244,27 +389,45 @@ p  { margin: 0 0 16px; }
 .espera__num { color: var(--carimbo); font-weight: 600; }
 
 /* ==========================================================================
-   LOADING
+   LOADING — a única ficha em tinta: o processamento interno
    ========================================================================== */
+.etapa--loading {
+  background: var(--tinta);
+  border-color: var(--tinta-linha);
+  color: var(--papel);
+  min-height: 340px;
+  justify-content: center;
+}
+.etapa--loading::after { opacity: 0.1; }
+
+.carga__foto {
+  width: 180px;
+  height: auto;
+  border: 1px solid var(--tinta-linha);
+  margin-bottom: 22px;
+}
+
 .carga {
   width: 100%;
   max-width: 420px;
-  height: 10px;
-  border: var(--borda);
+  height: 8px;
+  border: 1px solid var(--tinta-linha);
   margin-bottom: 24px;
 }
 .carga__preenche {
   height: 100%;
   width: 0;
-  background: var(--oliva-escuro);
-  transition: width 0.3s linear;
+  background: var(--oliva-claro);
 }
 .carga__msg {
   font-size: 1.125rem;
-  color: var(--tinta);
-  min-height: 56px;   /* trava a altura: a frase troca sem empurrar a tela */
+  color: var(--papel);
+  min-height: 68px;   /* trava a altura: a frase troca sem empurrar a tela */
   margin: 0;
+  max-width: 420px;
 }
+.carga__fim { margin: 18px 0 0; }
+.carga__fim .carimbo--oliva { border-color: var(--oliva-claro); color: var(--oliva-claro); }
 
 /* ==========================================================================
    DIAGNÓSTICO
@@ -272,6 +435,8 @@ p  { margin: 0 0 16px; }
 .liberado {
   font-family: var(--font-display);
   font-size: 1.5rem;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
   color: var(--oliva-escuro);
   margin: 0 0 18px;
 }
@@ -285,7 +450,10 @@ p  { margin: 0 0 16px; }
   font-weight: 500;
   font-size: 1.0625rem;
   line-height: 1.5;
+  animation: entrar 0.4s ease-out both;
 }
+.diagnostico__linha:nth-child(2) { animation-delay: 0.15s; }
+.diagnostico__linha:nth-child(3) { animation-delay: 0.3s; }
 
 /* ==========================================================================
    OFERTA
@@ -303,7 +471,11 @@ p  { margin: 0 0 16px; }
   font-family: var(--font-ficha);
   font-size: 0.75rem;
   line-height: 1.4;
+  animation: entrar 0.35s ease-out both;
 }
+.recap div:nth-child(2) { animation-delay: 0.08s; }
+.recap div:nth-child(3) { animation-delay: 0.16s; }
+.recap div:nth-child(4) { animation-delay: 0.24s; }
 
 .de-por { font-size: 0.9375rem; color: var(--grafite-papel); margin: 0; }
 .de-por s { color: var(--grafite-papel); }
@@ -315,6 +487,14 @@ p  { margin: 0 0 16px; }
   line-height: 1;
   margin: 0;
 }
+
+/* O preço "aterrissa" quando a contagem 99→19 termina */
+.preco.pulso { animation: pulso 0.3s ease-out both; }
+@keyframes pulso {
+  0%   { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 .preco__nota {
   font-size: 0.875rem;
   line-height: 1.6;
@@ -325,6 +505,12 @@ p  { margin: 0 0 16px; }
 .escassez { font-size: 0.8125rem; color: var(--carimbo); margin: 14px 0 0; }
 
 .etapa--centro .botao--carimbo { margin-top: 24px; }
+
+/* Respiração lenta do CTA final (desligada em reduced-motion) */
+.respira { animation: respirar 2.4s ease-in-out infinite alternate; }
+@keyframes respirar {
+  to { transform: scale(1.015); }
+}
 
 /* ==========================================================================
    ACESSIBILIDADE

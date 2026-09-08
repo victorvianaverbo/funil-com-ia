@@ -51,7 +51,7 @@
     <!-- Ordem importa: a identidade e o movimento vêm antes do layout. -->
     <link rel="stylesheet" href="/design/tokens.css?v=2">
     <link rel="stylesheet" href="/design/motion.css?v=2">
-    <link rel="stylesheet" href="/style.css?v=2">
+    <link rel="stylesheet" href="/style.css?v=3">
 
     <script src="/design/motion.js?v=2" defer></script>
     <script src="/script.js" defer></script>
@@ -67,12 +67,18 @@
          SEÇÃO 1 · TOPO
          ============================================================ -->
     <section class="hero-engineering">
+        <i class="mira mira--esq" aria-hidden="true">+</i>
+        <i class="mira mira--dir" aria-hidden="true">+</i>
         <div class="container hero-grid">
             <div class="hero-text">
-                <div class="badge-tech">
-                    <i class="u-sym u-sym-live" aria-hidden="true">●</i>
-                    Ao vivo · primeira turma · Vagas limitadas
-                </div>
+                <p class="selo-hero">
+                    Para quem já tem o produto pronto e trava na hora de colocar no ar:
+                    eu monto uma estrutura completa ao vivo, uma única vez, e não fica disponível depois.
+                </p>
+                <p class="selo-hero-tag">
+                    <span class="u-tag-live selo-tag"><i class="u-sym u-sym-live" aria-hidden="true">●</i> Aula ao
+                        vivo · primeira turma · Vagas limitadas</span>
+                </p>
 
                 <h1 class="headline">
                     Seu produto tá pronto há meses. <br />
@@ -160,7 +166,19 @@
                 </div>
             </div>
 
-            <div class="guarantee-frame text-center" data-reveal="scale" style="margin-top: 4rem;">
+            <!-- O barbante da investigação liga as três tentativas ao veredito -->
+            <svg class="fio-barbante" data-reveal viewBox="0 0 420 120" fill="none" aria-hidden="true"
+                style="--fio-len: 640; margin-top: 2rem;">
+                <path d="M24 12 C 140 96, 280 -28, 396 104" stroke="var(--stamp)" stroke-width="2" />
+                <circle cx="24" cy="12" r="5" fill="var(--ink)" />
+                <circle cx="396" cy="104" r="5" fill="var(--ink)" />
+            </svg>
+
+            <figure class="faixa-ambiente" data-reveal aria-hidden="true">
+                <img src="/.netlify/images?url=/images/maos-maquina.png&w=800&q=65" alt="" loading="lazy">
+            </figure>
+
+            <div class="guarantee-frame text-center" data-reveal="scale" style="margin-top: 2rem;">
                 <span class="u-tag-label">Veredito</span>
                 <h3 class="comp-title">O problema nunca foi você.</h3>
                 <p class="section-desc" style="margin-bottom: 1.5rem;">
@@ -191,9 +209,9 @@
          SEÇÃO 3 · A PROVA (o bloco que mais converte)
          ============================================================ -->
     <section class="section dark-section" id="prova">
+        <span class="fundo-palavra" aria-hidden="true">Prova</span>
         <div class="container">
             <div class="text-center">
-                <span class="badge-tech badge-glow">A demonstração</span>
                 <h2 class="section-title-serif" data-reveal>
                     Não é promessa. <br> <span class="serif-accent">É pra você VER funcionando.</span>
                 </h2>
@@ -278,8 +296,6 @@
                 </div>
 
                 <div class="authority-text-content">
-                    <div class="badge-tech" data-reveal="right">Quem tá te mostrando isso</div>
-
                     <div class="authority-text" data-reveal="right">
                         <span class="meta-data">// VICTOR_VIANA</span>
                         <h2 class="comp-title">Eu sou o Victor.</h2>
@@ -312,11 +328,13 @@
          SEÇÃO 4 · A OFERTA
          ============================================================ -->
     <section id="oferta" class="section segment-offer dark-section">
+        <span class="fundo-palavra fundo-palavra--baixo" aria-hidden="true">Operação</span>
         <div class="container">
             <div class="offer-panel" data-reveal="scale">
-                <p class="offer-stamp-row"><span class="u-stamp">Confidencial</span></p>
+                <p class="offer-stamp-row"><span class="u-stamp" data-stamp>Confidencial</span></p>
+                <img class="objeto-dossie" src="/.netlify/images?url=/images/exercito-agentes.png&w=480&q=75"
+                    alt="Ilustração do exército de agentes em formação" width="240" height="160" loading="lazy">
                 <div class="offer-header">
-                    <span class="badge-tech">Dossiê Nº 001 · A Operação</span>
                     <h2 class="section-title-serif">
                         Uma aula ao vivo de 2 horas. <br>
                         <span class="serif-accent">Quatro entregas.</span>
@@ -403,7 +421,8 @@
                 </p>
 
                 <p class="stamp-row">
-                    <span class="u-stamp u-stamp-l"><i class="u-sym" aria-hidden="true">★</i> Você entra como fundador</span>
+                    <span class="u-stamp u-stamp-l" data-stamp><i class="u-sym" aria-hidden="true">★</i> Você entra
+                        como fundador</span>
                 </p>
 
                 <p class="section-desc" style="margin-bottom: 0;">

@@ -86,6 +86,14 @@
     --font-stamp: 'Special Elite', 'Courier New', monospace;
 
     --easing: cubic-bezier(0.16, 1, 0.3, 1);
+
+    /* --- Camada "mesa de guerra" ------------------------------------------ */
+    /* Sombra DURA de papel sobre papel (deslocamento, sem blur). A difusa
+       "material design" continua proibida. */
+    --sombra-papel: 4px 4px 0 rgba(28, 26, 21, 0.16);
+    /* Tinta sobre foto de ambientação: mínimo .82 para o contraste passar. */
+    --overlay-foto: rgba(28, 26, 21, 0.82);
+    --texture-url: url('/.netlify/images?url=/images/textura-papel.png&w=480&q=60');
 }
 
 /* ============================================================================

@@ -48,6 +48,10 @@
   --borda:       1px solid var(--tinta);
   --borda-leve:  1px solid var(--papel-linha);
   --borda-forte: 2px solid var(--tinta);
+
+  /* ---------- Camada "mesa de guerra" ---------- */
+  --sombra-papel: 4px 4px 0 rgba(28, 26, 21, 0.16);  /* sombra DURA, papel sobre papel */
+  --overlay-foto: rgba(28, 26, 21, 0.82);            /* tinta sobre foto de ambientação */
 }
 
 /* ==========================================================================

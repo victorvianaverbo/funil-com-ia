@@ -18,6 +18,9 @@ var SEGUNDOS_LIBERAR = 8;
 (function () {
   'use strict';
 
+  /* Quem pediu menos movimento recebe troca instantânea e frases sem datilografia */
+  var REDUZIDO = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   /* ======================================================================
      AS ETAPAS, NA ORDEM
      ====================================================================== */
@@ -146,10 +149,6 @@ var SEGUNDOS_LIBERAR = 8;
 
   var palco    = document.getElementById('palco');
   var capa     = document.getElementById('capa');
-  var barra    = document.getElementById('barra');
-  var preenche = document.getElementById('barra-preenche');
-  var conta    = document.getElementById('barra-conta');
-  var ultima   = ETAPAS.length - 1;
 
   function rastrear(evento, dados) {
     window.dataLayer = window.dataLayer || [];
@@ -170,27 +169,30 @@ var SEGUNDOS_LIBERAR = 8;
     limparTimers();
     etapaAtual = n;
 
-    if (capa) { capa.remove(); capa = null; }
+    var trocar = function () {
+      if (capa) { capa.remove(); capa = null; }
 
-    var etapa = (n === -1) ? { tipo: 'saida' } : ETAPAS[n];
-    palco.innerHTML = '';
-    palco.appendChild(montar(etapa));
+      var etapa = (n === -1) ? { tipo: 'saida' } : ETAPAS[n];
+      palco.innerHTML = '';
+      palco.appendChild(montar(etapa));
 
-    atualizarBarra(n);
-    window.scrollTo(0, 0);
+      window.scrollTo(0, 0);
 
-    if (etapa.tipo === 'loading') rodarLoading();
-    rastrear('quiz_etapa', { etapa: n, tipo: etapa.tipo });
+      if (etapa.tipo === 'loading') rodarLoading();
+      rastrear('quiz_etapa', { etapa: n, tipo: etapa.tipo });
+    };
+
+    /* A ficha atual é puxada para cima antes da próxima entrar por baixo */
+    var atual = capa || palco.firstElementChild;
+    if (atual && !REDUZIDO) {
+      atual.classList.add('etapa--sair');
+      timers.push(setTimeout(trocar, 200));
+    } else {
+      trocar();
+    }
   }
 
   function proxima() { irPara(etapaAtual + 1); }
-
-  function atualizarBarra(n) {
-    var saiu = (n === -1);
-    barra.hidden = false;
-    preenche.style.width = saiu ? '100%' : Math.round((n / ultima) * 100) + '%';
-    conta.textContent = saiu ? '·' : n + '/' + ultima;
-  }
 
   /* ======================================================================
      MONTAGEM DAS TELAS
@@ -214,7 +216,6 @@ var SEGUNDOS_LIBERAR = 8;
   /* ---------- Pergunta: toca na opção e avança sozinho ---------- */
   function montarPergunta(secao, etapa) {
     secao.innerHTML =
-      '<p class="ficha">' + etapa.ficha + '</p>' +
       '<h2>' + etapa.titulo + '</h2>' +
       '<div class="opcoes"></div>';
     secao.querySelector('.opcoes').appendChild(montarOpcoes(etapa));
@@ -234,11 +235,21 @@ var SEGUNDOS_LIBERAR = 8;
       botao.addEventListener('click', function () {
         rastrear('quiz_resposta', { chave: etapa.chave || etapa.ficha, escolha: i });
 
-        /* A opção de saída: quem já tem estrutura no ar não é o nosso avatar */
-        if (etapa.saidaEm === i) { irPara(-1); return; }
+        /* Feedback: a resposta é "anotada no dossiê" antes da ficha virar */
+        if (botao.parentElement) botao.parentElement.style.pointerEvents = 'none';
+        botao.classList.add('opcao--marcada');
+        var icone = botao.querySelector('.opcao__icone');
+        if (icone) icone.textContent = '✔';
+        if (navigator.vibrate) navigator.vibrate(8);
 
-        if (etapa.chave) respostas[etapa.chave] = i;
-        proxima();
+        var seguir = function () {
+          /* A opção de saída: quem já tem estrutura no ar não é o nosso avatar */
+          if (etapa.saidaEm === i) { irPara(-1); return; }
+
+          if (etapa.chave) respostas[etapa.chave] = i;
+          proxima();
+        };
+        timers.push(setTimeout(seguir, REDUZIDO ? 0 : 300));
       });
 
       frag.appendChild(botao);
@@ -251,7 +262,6 @@ var SEGUNDOS_LIBERAR = 8;
   function montarSom(secao) {
     secao.className = 'etapa etapa--centro';
     secao.innerHTML =
-      '<p class="ficha">ANTES DE COMEÇAR</p>' +
       '<p class="icone-som">◎</p>' +
       '<h2>Ligue o som do seu celular.</h2>' +
       '<p class="voz">O que vem agora é em vídeo. Sem áudio, não faz sentido.</p>' +
@@ -266,7 +276,6 @@ var SEGUNDOS_LIBERAR = 8;
       : '';
 
     secao.innerHTML =
-      '<p class="ficha">' + etapa.ficha + '</p>' +
       '<h2>' + etapa.titulo + '</h2>' +
       (etapa.provaAcima ? provaHTML : '') +
       '<div class="vsl">' +
@@ -309,29 +318,56 @@ var SEGUNDOS_LIBERAR = 8;
     timers.push(tique);
   }
 
-  /* ---------- Loading: barra curta e honesta, 4 frases ---------- */
+  /* ---------- Loading: o dossiê sendo montado, frase a frase ---------- */
+  /* A única ficha em tinta. Cada frase é datilografada e ganha um respiro de
+     leitura; a barra enche linear no tempo real (nada de barra falsa). */
   function montarLoading(secao) {
-    secao.className = 'etapa etapa--centro';
+    secao.className = 'etapa etapa--centro etapa--loading';
     secao.innerHTML =
-      '<p class="ficha">PROCESSANDO RESPOSTAS</p>' +
+      '<img class="carga__foto" src="/.netlify/images?url=/images/exercito-agentes.png&w=360&q=75" width="180" height="120" alt="Ilustração do exército de agentes em formação">' +
       '<div class="carga"><div class="carga__preenche" id="carga-preenche"></div></div>' +
-      '<p class="voz carga__msg" id="carga-msg">' + MENSAGENS_LOADING[0] + '</p>';
+      '<p class="voz carga__msg" id="carga-msg"></p>' +
+      '<p class="carga__fim" id="carga-fim" hidden><span class="carimbo carimbo--oliva bate">✔ ACESSO LIBERADO</span></p>';
   }
 
   function rodarLoading() {
     var barraCarga = document.getElementById('carga-preenche');
     var msg = document.getElementById('carga-msg');
-    var decorrido = 0;
-    var TOTAL = 4500;
+    var TOTAL = 8000;
 
-    var tique = setInterval(function () {
-      decorrido += 300;
-      barraCarga.style.width = Math.min(100, Math.round((decorrido / TOTAL) * 100)) + '%';
-      msg.textContent = MENSAGENS_LOADING[Math.min(3, Math.floor(decorrido / 1200))];
+    barraCarga.style.transition = 'width ' + (TOTAL / 1000) + 's linear';
+    timers.push(setTimeout(function () { barraCarga.style.width = '100%'; }, 50));
 
-      if (decorrido >= TOTAL) { clearInterval(tique); proxima(); }
-    }, 300);
-    timers.push(tique);
+    var idx = 0;
+    var proximaFrase = function () {
+      if (idx >= MENSAGENS_LOADING.length) {
+        var fim = document.getElementById('carga-fim');
+        if (fim) fim.hidden = false;
+        timers.push(setTimeout(proxima, 900));
+        return;
+      }
+      var texto = MENSAGENS_LOADING[idx];
+      idx += 1;
+
+      if (REDUZIDO) {
+        msg.textContent = texto;
+        timers.push(setTimeout(proximaFrase, 2000));
+        return;
+      }
+
+      /* Datilografia: ~22ms por caractere + respiro para ler */
+      var pos = 0;
+      var digita = setInterval(function () {
+        pos += 1;
+        msg.textContent = texto.slice(0, pos) + (pos < texto.length ? '▌' : '');
+        if (pos >= texto.length) {
+          clearInterval(digita);
+          timers.push(setTimeout(proximaFrase, 850));
+        }
+      }, 22);
+      timers.push(digita);
+    };
+    proximaFrase();
   }
 
   /* ---------- Diagnóstico: as 3 linhas montadas com as respostas ---------- */
@@ -364,7 +400,6 @@ var SEGUNDOS_LIBERAR = 8;
   function montarOferta(secao) {
     secao.className = 'etapa etapa--centro';
     secao.innerHTML =
-      '<p class="ficha">ETAPA FINAL · SUA VAGA</p>' +
       '<div class="recap">' +
         '<div>► Demonstração<br>ao vivo</div>' +
         '<div>► Mapa da<br>Operação</div>' +
@@ -395,6 +430,26 @@ var SEGUNDOS_LIBERAR = 8;
       rastrear('checkout_clicado', { origem: 'quiz-oferta' });
     });
 
+    /* A sala acende no momento da decisão */
+    document.body.classList.add('mesa-clara');
+
+    /* O CTA respira; o preço conta de 99 a 19 e aterrissa (ancoragem real) */
+    if (!REDUZIDO) {
+      botao.classList.add('respira');
+      var precoEl = secao.querySelector('.preco');
+      if (precoEl) {
+        var inicio = performance.now();
+        var passo = function (agora) {
+          var p = Math.min((agora - inicio) / 900, 1);
+          var suave = 1 - Math.pow(1 - p, 3);
+          precoEl.textContent = 'R$ ' + Math.round(99 - 80 * suave);
+          if (p < 1) requestAnimationFrame(passo);
+          else precoEl.classList.add('pulso');
+        };
+        requestAnimationFrame(passo);
+      }
+    }
+
     rastrear('quiz_oferta_vista', respostas);
   }
 
@@ -415,6 +470,14 @@ var SEGUNDOS_LIBERAR = 8;
   document.getElementById('comecar').addEventListener('click', function () {
     irPara(1);
   });
+
+  /* Primeiro sinal de vida: o CONFIDENCIAL bate meio segundo depois do load */
+  if (!REDUZIDO) {
+    timers.push(setTimeout(function () {
+      var c = document.querySelector('.etapa--capa .carimbo');
+      if (c) c.classList.add('bate');
+    }, 400));
+  }
 
   rastrear('quiz_capa_vista', {});
 })();

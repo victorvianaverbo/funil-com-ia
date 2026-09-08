@@ -22,19 +22,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=Saira:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/marca/tokens.css?v=2">
-    <link rel="stylesheet" href="/quiz/style.css?v=2">
+    <link rel="stylesheet" href="/marca/tokens.css?v=3">
+    <link rel="stylesheet" href="/quiz/style.css?v=3">
 </head>
 <body>
 
-    <div class="quiz">
+    <!-- Única âncora de marca: tira fina no topo -->
+    <header class="topo">
+        <span class="topo__marca">OPERAÇÃO ESTRUTURA NO AR</span>
+        <i class="topo__dot" aria-hidden="true">●</i>
+    </header>
 
-        <!-- Barra de progresso: enche a cada etapa -->
-        <div class="barra" id="barra" hidden>
-            <span class="barra__marca">OPERAÇÃO ESTRUTURA NO AR</span>
-            <div class="barra__trilho"><div class="barra__preenche" id="barra-preenche"></div></div>
-            <span class="barra__conta" id="barra-conta">0/14</span>
-        </div>
+    <span class="fundo-palavra" aria-hidden="true">Dossiê</span>
+
+    <div class="quiz">
 
         <main class="palco" id="palco">
 
@@ -43,19 +44,18 @@
                  Da etapa 1 em diante, quem monta a tela é o script.js -->
             <section class="etapa etapa--capa" id="capa">
                 <span class="carimbo carimbo--torto-esq">CONFIDENCIAL</span>
-                <span class="etiqueta">OPERAÇÃO ESTRUTURA NO AR</span>
 
                 <h1>Enquanto todo mundo trava na parte técnica, tem especialista colocando a estrutura de vendas no ar sem montar uma única peça.</h1>
 
-                <p class="incentivo">Quem responder até o final vê a demonstração completa do <strong>EXÉRCITO DE AGENTES</strong> montando uma estrutura do zero ao ar.</p>
+                <p class="incentivo">Responda até o final para ver a demonstração completa do <strong>EXÉRCITO DE AGENTES</strong> montando uma estrutura do zero ao ar.</p>
 
                 <button class="botao" id="comecar" type="button">QUERO ENTENDER EM 3 MINUTOS ►</button>
-                <p class="micro">A demonstração está a poucas perguntas de distância.</p>
+                <p class="micro">A demonstração está a 3 perguntas de distância.</p>
             </section>
 
         </main>
     </div>
 
-    <script src="/quiz/script.js?v=2" defer></script>
+    <script src="/quiz/script.js?v=3" defer></script>
 </body>
 </html>

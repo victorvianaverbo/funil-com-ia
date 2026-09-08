@@ -83,6 +83,67 @@
 /* O pulso do ponto de status saiu com a identidade nova: o "● AO VIVO" pisca
    via .u-sym-live (tokens.css). Sem círculo, sem sombra. */
 
+/* --- Carimbo que bate ------------------------------------------------------ */
+/* O rotate fixo do .u-stamp (tokens.css) é substituído aqui: a rotação final
+   sai de --stamp-rot, para o keyframe poder cair girando até ela. */
+[data-stamp] {
+    --stamp-rot: 6deg;
+    transform: rotate(var(--stamp-rot));
+}
+
+.u-stamp-l[data-stamp] {
+    --stamp-rot: -6deg;
+}
+
+.motion-on [data-stamp] {
+    opacity: 0;
+}
+
+.motion-on [data-stamp].is-in {
+    animation: stamp-in 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes stamp-in {
+    0% {
+        opacity: 0;
+        transform: scale(2.2) rotate(calc(var(--stamp-rot, 6deg) - 8deg));
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(0.96) rotate(var(--stamp-rot, 6deg));
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1) rotate(var(--stamp-rot, 6deg));
+    }
+}
+
+/* --- Fio de barbante: o traço se desenha quando entra em cena ------------- */
+.fio-barbante {
+    display: block;
+    width: min(100%, 420px);
+    height: auto;
+    margin: 0 auto;
+    pointer-events: none;
+}
+
+.fio-barbante path {
+    stroke-dasharray: var(--fio-len, 640);
+}
+
+.motion-on .fio-barbante path {
+    stroke-dashoffset: var(--fio-len, 640);
+    transition: stroke-dashoffset 1.4s var(--easing) 0.2s;
+}
+
+.motion-on .fio-barbante.is-in path {
+    stroke-dashoffset: 0;
+}
+
+/* (O vídeo ambiente da iteração 1 saiu: os fundos agora são gráficos.) */
+
 /* --- Reação de card ------------------------------------------------------- */
 /* Sem elevação: a identidade não tem sombra. O card só escurece a borda. */
 [data-lift] {
@@ -116,6 +177,16 @@
     .u-sym-live,
     .progress-rail span {
         animation: none !important;
+        transition: none !important;
+    }
+
+    .motion-on [data-stamp] {
+        opacity: 1 !important;
+        animation: none !important;
+    }
+
+    .motion-on .fio-barbante path {
+        stroke-dashoffset: 0 !important;
         transition: none !important;
     }
 }

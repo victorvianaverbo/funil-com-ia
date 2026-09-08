@@ -31,7 +31,7 @@
             });
         }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
 
-        document.querySelectorAll('[data-reveal]').forEach((el, i) => {
+        document.querySelectorAll('[data-reveal], [data-stamp]').forEach((el, i) => {
             if (!el.dataset.revealDelay) {
                 // escalona só entre irmãos diretos, não a página toda
                 const siblings = [...el.parentElement.children].filter((s) => s.hasAttribute('data-reveal'));
