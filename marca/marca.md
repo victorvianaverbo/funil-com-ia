@@ -98,3 +98,44 @@ Já estão em `tokens.css`, é só usar a classe:
 
 O estudo original de marca (as três direções, antes da escolha) está preservado em
 [_design-original.dc.html](_design-original.dc.html), exportado do Claude Design.
+
+---
+
+## Os Agentes (mascotes ilustrados)
+
+Os "bonequinhos": o exército de agentes desenhado como gravura de manual
+militar dos anos 60. São a materialização visual do mecanismo da oferta e o
+único elemento figurativo da marca. Original em
+[images/exercito-agentes.png](../images/exercito-agentes.png) (2048×1360).
+
+**Como são:** robôs retrô de proporção atarracada (cabeça grande, corpo de
+lata rebitada), antenas finas, olhos redondos amigáveis, peito com círculo
+oliva. Cada um carrega uma ferramenta de trabalho (lápis, chave inglesa,
+bandeira) — nunca arma. Formação de tropa amistosa, prontos para o serviço.
+
+**Técnica:** traço de gravura a tinta preta impressa em papel manilha
+envelhecido, meio-tom de impressão antiga, acentos em oliva e vermelho de
+carimbo (raios de fundo, bandeira, detalhes). Nada de 3D, nada de cartoon
+moderno, nada de neon.
+
+**Onde usar:** prancha na folha da oferta (página), loading do quiz,
+criativos de anúncio, capa Hotmart, e-mails. Máximo de uma prancha por tela.
+
+**Como gerar novas poses (CLI Higgsfield):** sempre com a prancha original
+como referência, para manter o personagem:
+
+```
+higgsfield generate create nano_banana_pro \
+  --prompt "<a cena desejada, em inglês>, same retro robot character design as the reference, vintage 1960s military field-manual illustration, engraved ink linework printed on aged manila paper, limited palette of typewriter black ink with olive green and stamp red accents, worn halftone print texture, no text, no letters" \
+  --image-references images/exercito-agentes.png \
+  --aspect_ratio 3:2 --wait
+```
+
+Prompt-mãe da prancha original (gpt_image_2, 3:2): "vintage 1960s military
+field-manual illustration of an army of small friendly robot agents standing
+in neat formation like soldiers ready for deployment, each robot slightly
+different (one holding a pencil, one a wrench, one a flag), engraved ink
+linework printed on aged manila paper, limited palette of typewriter black
+ink with olive green and stamp red accents, propaganda poster composition
+with strong diagonal, slightly worn halftone print texture, no text, no
+letters, no labels".
