@@ -9,7 +9,7 @@
    -------------------------------------------------------------------------- */
 
 /* Link do checkout, no fim do funil. Vazio = o botão final não leva a lugar nenhum. */
-var CHECKOUT_URL = 'https://pay.hotmart.com/X102170086S';
+var CHECKOUT_URL = 'https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=quiz';
 
 /* Segundos que o vídeo roda antes de liberar a ação da tela.
    O doc pede isso pra incentivar assistir. Suba se os cortes ficarem longos. */
