@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<!--
+    VSL ISOLADA · teste A/B do VTurb (player ab-6aa14af10efafe813b577ba8)
+    Rota: /vsl  (noindex). Não passa pelo build.ps1: não tem placeholder.
+    Headline, subheadline e aviso da data visíveis desde o início. Só o botão
+    de compra fica oculto (.esconder) até o momento do pitch, que o VTurb revela.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Operação Estrutura no Ar</title>
+
+    <!-- VTurb: marca o início do carregamento e aquece as conexões (vem antes de tudo) -->
+    <script>!function(i,n){i._plt=i._plt||(n&&n.timeOrigin?n.timeOrigin+n.now():Date.now())}(window,performance);</script>
+    <link rel="preload" href="https://scripts.converteai.net/927617eb-9845-4e00-a7b2-72c63a904180/ab-test/6aa14af10efafe813b577ba8/player.js" as="script">
+    <link rel="preload" href="https://scripts.converteai.net/lib/js/smartplayer-wc/v4/smartplayer.js" as="script">
+    <link rel="dns-prefetch" href="https://cdn.converteai.net">
+    <link rel="dns-prefetch" href="https://scripts.converteai.net">
+    <link rel="dns-prefetch" href="https://images.converteai.net">
+    <link rel="dns-prefetch" href="https://m3u8.vturb.net">
+    <link rel="dns-prefetch" href="https://license.vturb.com">
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '3220708284790428');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+
+    <!-- Favicon: o carimbo "EA" da marca (papel, círculo carimbo, -6°) -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' fill='%23E6E1D3'/><g transform='rotate(-6 32 32)'><circle cx='32' cy='32' r='25' fill='none' stroke='%23A83226' stroke-width='3.5'/><text x='32' y='41' text-anchor='middle' font-family='Anton,Impact,Arial Black,sans-serif' font-size='26' fill='%23A83226'>EA</text></g></svg>">
+
+    <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500&family=Saira:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Só a identidade. O style.css da página de vendas não entra: ele estiliza o body inteiro. -->
+    <link rel="stylesheet" href="/design/tokens.css?v=2">
+
+    <style>
+        html,
+        body {
+            min-height: 100%;
+            margin: 0;
+            background: var(--ink);
+        }
+
+        body {
+            padding: 1.25rem 1rem 3rem;
+            box-sizing: border-box;
+            font-family: var(--font-body);
+            color: var(--paper-on-ink);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- Copy visível desde o início ---------------------------------- */
+        .copy-wrap {
+            width: 100%;
+            max-width: 640px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .kicker {
+            margin: 0 0 1.25rem;
+        }
+
+        /* Mesma receita do .headline do style.css, sobre tinta. */
+        .headline {
+            font-family: var(--font-display);
+            font-weight: 400;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: 0.4px;
+            font-synthesis: none;
+            text-wrap: balance;
+            font-size: clamp(1.75rem, 5vw, 2.75rem);
+            color: var(--paper);
+            margin: 0 0 1rem;
+        }
+
+        /* O "aprovado" sobre tinta: equivalente do .serif-accent nas seções escuras. */
+        .headline .accent {
+            color: var(--olive-on-ink);
+        }
+
+        .subheadline {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: var(--paper-on-ink);
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        /* --- Player: vídeo vertical (9:16), coluna limitada pela ALTURA ---- */
+        .vsl-wrap {
+            width: 100%;
+            max-width: min(480px, calc((100vh - 2rem) * 9 / 16));
+        }
+
+        /* Reserva o espaço antes do player carregar: sem salto de layout.
+           Raio mínimo a pedido do Victor (só tira a quina); exceção à regra
+           "sem canto arredondado" da identidade, restrita ao vídeo. */
+        vturb-smartplayer {
+            display: block;
+            width: 100%;
+            aspect-ratio: 9 / 16;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        /* --- Bloco que o VTurb revela no momento configurado no painel ------ */
+        .esconder {
+            display: none;
+        }
+
+        .cta-vsl {
+            margin-top: 1.5rem;
+        }
+
+        /* Botão: mesma receita do .btn/.btn-action do style.css, na versão
+           invertida das seções tinta (papel sobre tinta). */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            min-height: 56px;
+            padding: 15px 32px;
+            box-sizing: border-box;
+            font-family: var(--font-display);
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 1.15;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+            text-decoration: none;
+            text-align: center;
+            white-space: normal;
+            font-synthesis: none;
+            cursor: pointer;
+            background: var(--paper);
+            color: var(--ink);
+            border: 2px solid var(--paper);
+            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .btn:hover,
+        .btn:focus-visible {
+            background: var(--olive);
+            border-color: var(--olive);
+            color: var(--paper);
+        }
+
+        .price-pill {
+            border: 1px solid currentColor;
+            padding: 2px 8px;
+            font-size: 0.9em;
+            white-space: nowrap;
+        }
+
+        /* Aviso da data: borda carimbo, sem raio, glifo no lugar de emoji. */
+        .aviso {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin: 1.5rem 0 0;
+            padding: 14px 16px;
+            border: 2px solid var(--stamp);
+            font-size: 15px;
+            line-height: 1.55;
+            color: var(--paper-on-ink);
+        }
+
+        .aviso .u-sym {
+            flex: 0 0 auto;
+            color: var(--stamp);
+            line-height: 1.55;
+        }
+
+        .aviso strong {
+            color: var(--paper);
+            font-weight: 600;
+        }
+
+        @media (min-width: 700px) {
+            body {
+                padding: 2.5rem 1rem 4rem;
+            }
+
+            .copy-wrap {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=3220708284790428&ev=PageView&noscript=1" /></noscript>
+
+    <main class="page">
+
+        <div class="copy-wrap">
+            <p class="kicker">
+                <span class="u-tag-live"><i class="u-sym u-sym-live" aria-hidden="true">●</i> Aula ao vivo</span>
+            </p>
+            <h1 class="headline">
+                Prometer dinheiro rápido devia dar cadeia.
+                <span class="accent">Eu prefiro te mostrar a tela.</span>
+            </h1>
+            <p class="subheadline">
+                Não vou te prometer nada. Vou colocar uma estrutura de vendas inteira no ar, ao vivo, em até duas horas.
+            </p>
+        </div>
+
+        <div class="vsl-wrap">
+            <vturb-smartplayer id="ab-6aa14af10efafe813b577ba8" style="display: block; margin: 0 auto; width: 100%; "></vturb-smartplayer>
+            <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/927617eb-9845-4e00-a7b2-72c63a904180/ab-test/6aa14af10efafe813b577ba8/player.js", s.async=!0,document.head.appendChild(s); </script>
+
+            <!--
+                BOTÃO DE COMPRA · começa oculto (.esconder) e o VTurb revela.
+                O MOMENTO é configurado no painel do VTurb, por vídeo do teste A/B:
+                  editar o vídeo → "Botões de Ação (CTA)" → tipo "Mostrar Conteúdo Oculto"
+                  → classe: esconder → tempo em segundos (min × 60 + s).
+                Cada variante pode ter o seu tempo; a página não muda.
+
+                Fallback só se o painel não oferecer a opção (troque SEGUNDOS):
+                <script>
+                  document.querySelector('vturb-smartplayer').addEventListener('player:ready', function () {
+                    this.displayHiddenElements(SEGUNDOS, ['.esconder'], { persist: true });
+                  });
+                </script>
+            -->
+            <div class="esconder cta-vsl">
+                <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=vsl&sck=oea_vsl_p19"
+                    class="btn" data-cta="vsl">
+                    QUERO MINHA VAGA POR <span class="price-pill">R$ 19</span>
+                    <i class="u-sym" aria-hidden="true">►</i>
+                </a>
+            </div>
+
+            <!-- Aviso da data: visível desde o início, abaixo do vídeo (e do botão, quando ele aparece). -->
+            <p class="aviso">
+                <i class="u-sym" aria-hidden="true">▲</i>
+                <span>Ao vivo, <strong>segunda-feira, 28 de setembro, às 20h</strong>. As inscrições fecham quando a
+                    aula começa. Não vai ter reprise aberta.</span>
+            </p>
+        </div>
+
+    </main>
+</body>
+
+</html>
