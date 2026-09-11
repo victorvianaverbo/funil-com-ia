@@ -143,39 +143,57 @@
             margin-top: 1.5rem;
         }
 
-        /* Botão: mesma receita do .btn/.btn-action do style.css, na versão
-           invertida das seções tinta (papel sobre tinta). */
+        /* Botão: mesma receita do .btn/.btn-action do style.css, em verde neon
+           a pedido do Victor (cor fora da paleta, só aqui). Texto tinta, borda
+           reta, sombra DURA de papel (a difusa continua proibida) e um pulso
+           leve de escala para chamar o olho sem virar banner. */
         .btn {
+            --neon: #36F27A;
+            --neon-hover: #5CF792;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
             width: 100%;
-            min-height: 56px;
-            padding: 15px 32px;
+            min-height: 60px;
+            padding: 16px 32px;
             box-sizing: border-box;
             font-family: var(--font-display);
             font-weight: 400;
-            font-size: 19px;
+            font-size: 20px;
             line-height: 1.15;
-            letter-spacing: 0.4px;
+            letter-spacing: 0.6px;
             text-transform: uppercase;
             text-decoration: none;
             text-align: center;
             white-space: normal;
             font-synthesis: none;
             cursor: pointer;
-            background: var(--paper);
+            background: var(--neon);
             color: var(--ink);
-            border: 2px solid var(--paper);
-            transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+            border: 2px solid var(--neon);
+            box-shadow: 4px 4px 0 var(--paper);
+            animation: btn-pulse 2.4s ease-in-out infinite;
+            transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .btn:hover,
         .btn:focus-visible {
-            background: var(--olive);
-            border-color: var(--olive);
-            color: var(--paper);
+            background: var(--neon-hover);
+            border-color: var(--neon-hover);
+            color: var(--ink);
+            animation: none;
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 var(--paper);
+        }
+
+        @keyframes btn-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .btn { animation: none; }
         }
 
         .price-pill {
