@@ -50,6 +50,12 @@
   force = true
 
 [[redirects]]
+  from = "/criativos/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
   from = "/produto/*"
   to = "/404.html"
   status = 404
@@ -107,3 +113,6 @@
   for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[functions]
+  directory = "netlify/functions"

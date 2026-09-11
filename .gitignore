@@ -1,2 +1,10 @@
 # Local Netlify folder
 .netlify
+
+# Criativos: fundos gerados e PNGs exportados ficam fora do git (manifest.json versiona as URLs)
+criativos/fundos/
+criativos/saida/
+criativos/fotos/
+
+# Segredos locais (o token da CAPI vive nas variaveis de ambiente do Netlify)
+.env

@@ -24,23 +24,12 @@
     <link rel="dns-prefetch" href="https://m3u8.vturb.net">
     <link rel="dns-prefetch" href="https://license.vturb.com">
 
-    <!-- Meta Pixel Code -->
+    <!-- Config da variação: o tracking.js lê daqui -->
     <script>
-        !function (f, b, e, v, n, t, s) {
-            if (f.fbq) return; n = f.fbq = function () {
-                n.callMethod ?
-                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-            };
-            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
-            n.queue = []; t = b.createElement(e); t.async = !0;
-            t.src = v; s = b.getElementsByTagName(e)[0];
-            s.parentNode.insertBefore(t, s)
-        }(window, document, 'script',
-            'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '3220708284790428');
-        fbq('track', 'PageView');
+        window.PAGE = { variant: "vsl", price: 19, checkout: "https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=vsl&sck=oea_vsl_p19" };
     </script>
-    <!-- End Meta Pixel Code -->
+    <!-- Meta Pixel + Conversions API: um único arquivo para o site inteiro -->
+    <script src="/tracking.js" async></script>
 
     <!-- Favicon: o carimbo "EA" da marca (papel, círculo carimbo, -6°) -->
     <link rel="icon" type="image/svg+xml"
@@ -241,7 +230,7 @@
 
 <body>
     <noscript><img height="1" width="1" style="display:none"
-            src="https://www.facebook.com/tr?id=3220708284790428&ev=PageView&noscript=1" /></noscript>
+            src="https://www.facebook.com/tr?id=38347741264870182&ev=PageView&noscript=1" /></noscript>
 
     <main class="page">
 
