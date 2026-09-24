@@ -3,65 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operação Estrutura no Ar: entenda em 3 minutos</title>
-    <meta name="description" content="Responda até o final e veja a demonstração completa do exército de agentes montando uma estrutura de vendas do zero ao ar.">
+    <title>Qual das 5 peças tá travando o seu produto?</title>
+    <meta name="description" content="Descubra qual das 5 peças tá travando o seu produto. E veja um exército de IA montar as 5, ao vivo.">
     <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#0E1420">
 
-    <script>window.PAGE = { variant: "quiz" };</script>
+    <script>
+        window.PAGE = { variant: "quiz", price: 19 };
+        /* Capa A (?angulo=aovivo, padrão) ou B (?angulo=erro). Roda antes de pintar: sem piscar. */
+        (function () {
+            var a = new URLSearchParams(location.search).get('angulo') === 'erro' ? 'erro' : 'aovivo';
+            document.documentElement.classList.add('angulo-' + a);
+            window.PAGE.angulo = a;
+        })();
+    </script>
     <!-- Meta Pixel + Conversions API: um único arquivo para o site inteiro -->
     <script src="/tracking.js" async></script>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
     <!-- Preview do link (WhatsApp, Instagram, Facebook) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Enquanto todo mundo trava na parte técnica, tem especialista colocando a estrutura de vendas no ar sem montar uma única peça.">
-    <meta property="og:description" content="Responda até o final e veja a demonstração completa do exército de agentes montando uma estrutura do zero ao ar.">
-    <meta property="og:image" content="/.netlify/images?url=/images/mesa-de-guerra.png&w=1200&h=630&fit=cover&q=80&fm=jpg">
+    <meta property="og:title" content="Qual das 5 peças tá travando o seu produto?">
+    <meta property="og:description" content="No fim, você vê um exército de IA montar as 5. Ao vivo.">
+    <meta property="og:image" content="/.netlify/images?url=/images/exercito-agentes.png&w=1200&h=630&fit=cover&q=80&fm=jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Mesa de guerra com dossiês, mapa tático e carimbos CONFIDENCIAL">
+    <meta property="og:image:alt" content="Ilustração do exército de agentes de IA">
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=Saira:wght@400;500;600;700&family=Special+Elite&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/marca/tokens.css?v=3">
-    <link rel="stylesheet" href="/quiz/style.css?v=3">
+    <link rel="stylesheet" href="/quiz/style.css?v=4">
 </head>
 <body>
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=38347741264870182&ev=PageView&noscript=1" /></noscript>
 
-    <!-- Única âncora de marca: tira fina no topo -->
-    <header class="topo">
-        <span class="topo__marca">OPERAÇÃO ESTRUTURA NO AR</span>
-        <i class="topo__dot" aria-hidden="true">●</i>
-    </header>
+    <div class="progresso" aria-hidden="true"><div class="progresso__barra" id="progresso-barra"></div></div>
 
-    <span class="fundo-palavra" aria-hidden="true">Dossiê</span>
+    <main class="palco" id="palco">
 
-    <div class="quiz">
+        <!-- CAPA A · ?angulo=aovivo (padrão, vem do c08) -->
+        <section class="etapa etapa--capa" id="capa-a">
+            <span class="selo">Pra quem já tem o que vender</span>
+            <h1>Qual das 5 peças tá travando o seu produto?</h1>
+            <p class="sub">No fim, você vê um exército de IA montar as 5. Ao vivo.</p>
+            <button class="botao comecar" type="button">DESCOBRIR MINHA TRAVA →</button>
+            <p class="micro">6 perguntas · 3 minutos</p>
+        </section>
 
-        <main class="palco" id="palco">
+        <!-- CAPA B · ?angulo=erro (vem do c01) -->
+        <section class="etapa etapa--capa" id="capa-b">
+            <span class="selo">Pra quem já tem o que vender</span>
+            <h1>Subiu o produto e não vendeu nada?</h1>
+            <p class="sub">O problema quase nunca é o produto.</p>
+            <button class="botao comecar" type="button">DESCOBRIR O QUE FALTA →</button>
+            <p class="micro">6 perguntas · 3 minutos</p>
+        </section>
 
-            <!-- ETAPA 0 — CAPA
-                 Estática no HTML: é o hero do quiz, tem que pintar de primeira.
-                 Da etapa 1 em diante, quem monta a tela é o script.js -->
-            <section class="etapa etapa--capa" id="capa">
-                <span class="carimbo carimbo--torto-esq">CONFIDENCIAL</span>
+    </main>
 
-                <h1>Enquanto todo mundo trava na parte técnica, tem especialista colocando a estrutura de vendas no ar sem montar uma única peça.</h1>
-
-                <p class="incentivo">Responda até o final para ver a demonstração completa do <strong>EXÉRCITO DE AGENTES</strong> montando uma estrutura do zero ao ar.</p>
-
-                <button class="botao" id="comecar" type="button">QUERO ENTENDER EM 3 MINUTOS ►</button>
-                <p class="micro">A demonstração está a 3 perguntas de distância.</p>
-            </section>
-
-        </main>
-    </div>
-
-    <script src="/quiz/script.js?v=3" defer></script>
+    <script src="/quiz/script.js?v=4" defer></script>
 </body>
 </html>

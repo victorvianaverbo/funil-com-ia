@@ -4,16 +4,18 @@
 <!--
     FONTE ÚNICA DA COPY. Não edite os index.html gerados: eles são sobrescritos.
     Edite este arquivo e rode: ./build.ps1
-    Tokens: 19 R$ 19 https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19 index,follow primeira turma
+    Tokens: 19 R$ 19 https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19 index,follow segunda, 28/09 20h
+    Copy: aba "9) Página ~ FINAL" do doc "1) OPERAÇÃO - Greyk e Vitão".
+    Topo A (padrão, anúncio c08) e topo B (?angulo=erro, anúncio c01).
 -->
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index,follow">
-    <title>Operação Estrutura no Ar | Aula ao vivo com Victor Viana</title>
+    <title>Operação Estrutura no Ar | Aula ao vivo, segunda, 28/09, 20h</title>
     <meta name="description"
-        content="Uma aula ao vivo de 2h. Um exército de agentes de IA constrói e publica a sua estrutura de vendas. Você só dá o comando.">
+        content="Eu abro a minha tela e solto um exército de agentes de IA na sua frente. Copy, página, funil e checkout. Do zero até a compra aprovada. Ao vivo, sem corte.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +26,12 @@
     <!-- Config da variação: preço, link e evento do pixel saem daqui -->
     <script>
         window.PAGE = { variant: "P19", price: 19, checkout: "https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" };
+        /* Topo A (padrão) ou B (?angulo=erro). Roda antes de pintar: sem piscar. */
+        (function () {
+            var a = new URLSearchParams(location.search).get('angulo') === 'erro' ? 'erro' : 'aovivo';
+            document.documentElement.classList.add('angulo-' + a);
+            window.PAGE.angulo = a;
+        })();
     </script>
 
     <!-- Meta Pixel + Conversions API: um único arquivo para o site inteiro -->
@@ -35,530 +43,574 @@
 
     <link rel="dns-prefetch" href="https://connect.facebook.net">
 
+    <!-- Preview do link (WhatsApp, Instagram, Facebook) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Eu abro a minha tela e solto um exército de agentes de IA na sua frente.">
+    <meta property="og:description" content="Copy, página, funil e checkout. Do zero até a compra aprovada. Ao vivo. Sem corte.">
+    <meta property="og:image" content="/.netlify/images?url=/images/exercito-agentes.png&w=1200&h=630&fit=cover&q=80&fm=jpg">
+
     <!-- Ordem importa: a identidade e o movimento vêm antes do layout. -->
     <link rel="stylesheet" href="/design/tokens.css?v=2">
     <link rel="stylesheet" href="/design/motion.css?v=2">
-    <link rel="stylesheet" href="/style.css?v=3">
+    <link rel="stylesheet" href="/style.css?v=4">
 
     <script src="/design/motion.js?v=2" defer></script>
     <script src="/script.js" defer></script>
 </head>
 
-<body>
+<body class="pagina-crua">
     <noscript><img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=38347741264870182&ev=PageView&noscript=1" /></noscript>
 
     <div class="progress-rail"><span></span></div>
 
     <!-- ============================================================
-         SEÇÃO 1 · TOPO
+         DOBRA 1 · TOPO (A = padrão · B = ?angulo=erro)
          ============================================================ -->
-    <section class="hero-engineering">
-        <i class="mira mira--esq" aria-hidden="true">+</i>
-        <i class="mira mira--dir" aria-hidden="true">+</i>
-        <div class="container hero-grid">
-            <div class="hero-text">
-                <p class="selo-hero">
-                    Para quem já tem o produto pronto e trava na hora de colocar no ar:
-                    eu monto uma estrutura completa ao vivo, uma única vez, e não fica disponível depois.
-                </p>
-                <p class="selo-hero-tag">
-                    <span class="u-tag-live selo-tag"><i class="u-sym u-sym-live" aria-hidden="true">●</i> Aula ao
-                        vivo · primeira turma · Vagas limitadas</span>
-                </p>
-
-                <h1 class="headline">
-                    Seu produto tá pronto há meses. <br />
-                    <span class="serif-accent">Sua estrutura de vendas, não.</span>
-                </h1>
-
-                <p class="subheadline">
-                    <strong>Página, funil e checkout prontos e funcionando.</strong> Sem você montar uma única peça.
-                    É igual mandar uma mensagem no WhatsApp.
-                </p>
-
-                <!-- VSL: cole o embed VTurb aqui dentro e remova o atributo hidden -->
-                <div id="player-vsl" hidden></div>
-
-                <div class="hero-actions-group">
-                    <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="hero">
-                        QUERO MINHA VAGA POR <span class="price-pill">R$ 19</span>
-                        <i class="u-sym" aria-hidden="true">►</i>
-                    </a>
-                    <div class="cta-note">
-                        <span>Aula ao vivo de 2h</span>
-                        <span>7 dias de garantia</span>
-                        <span>Preço de fundador</span>
-                    </div>
-                    <p class="cta-scarcity">Turma limitada. Quando fecha, encerra.</p>
-                </div>
-            </div>
-
-            <div class="hero-visual-tech">
-                <div class="terminal-frame">
-                    <div class="terminal-header">
-                        <div class="terminal-title"><i class="u-sym" aria-hidden="true">▦</i> log · estrutura --no-ar</div>
-                        <span class="u-tag-live"><i class="u-sym u-sym-live" aria-hidden="true">●</i> AO VIVO</span>
-                    </div>
-                    <div class="terminal-body">
-                        <div class="log-line text-muted">// você digita, em português normal:</div>
-                        <div class="log-line text-blue">&gt; "monta minha página de vendas e o checkout"</div>
-                        <div class="log-line text-green">[OK] Agente de copy: página escrita.</div>
-                        <div class="log-line text-green">[OK] Agente de design: layout montado.</div>
-                        <div class="log-line text-green">[OK] Funil organizado. Checkout integrado.</div>
-                        <div class="log-line text-green">[SUCESSO] COMPRA APROVADA.</div>
-                        <div class="cursor-line">_</div>
-                    </div>
-                </div>
-
-                <div class="metric-card card-a">
-                    <div class="metric-label">Vendas Geradas</div>
-                    <div class="metric-value" data-count="10" data-count-prefix="+R$ " data-count-suffix="MM">+R$ 10MM</div>
-                    <div class="metric-trend"><i class="u-sym u-sym-ok" aria-hidden="true">▲</i> High Performance</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         SEÇÃO 2 · A DOR
-         ============================================================ -->
-    <section class="section segment-comparison">
-        <div class="container">
-            <h2 class="section-title-serif text-center" data-reveal>
-                Deixa eu adivinhar <br> <span class="serif-accent">por que você tá aqui.</span>
-            </h2>
-
-            <p class="section-desc text-center" data-reveal style="max-width: 700px; margin: 0 auto 4rem;">
-                Você tem um produto pronto. O conhecimento tá na sua cabeça.
-                <strong>Mas a estrutura de vendas nunca sai do papel.</strong>
-                E não é por falta de tentativa:
+    <section class="hero-engineering hero-solo">
+        <div class="container container-texto">
+            <p class="selo-hero-tag">
+                <span class="u-tag-live selo-tag"><i class="u-sym u-sym-live" aria-hidden="true">●</i> Pra quem já
+                    tem o que vender · Aula ao vivo · segunda, 28/09 · 20h</span>
             </p>
 
-            <div class="comparison-grid">
-                <div class="comp-box" data-reveal data-lift>
-                    <span class="label">Tentativa 1</span>
-                    <h3 class="comp-title">A ferramenta</h3>
-                    <p>Assinou a que prometia página em minutos. <strong>Travou no primeiro ajuste.</strong></p>
-                </div>
-                <div class="comp-box" data-reveal data-lift>
-                    <span class="label">Tentativa 2</span>
-                    <h3 class="comp-title">A agência</h3>
-                    <p>Pagou caro. <strong>Viu o dinheiro sumir, sem uma venda.</strong></p>
-                </div>
-                <div class="comp-box" data-reveal data-lift>
-                    <span class="label">Tentativa 3</span>
-                    <h3 class="comp-title">O curso</h3>
-                    <p>Comprou, assistiu tudo. <strong>E empacou na hora de fazer.</strong></p>
-                </div>
-            </div>
-
-            <!-- O barbante da investigação liga as três tentativas ao veredito -->
-            <svg class="fio-barbante" data-reveal viewBox="0 0 420 120" fill="none" aria-hidden="true"
-                style="--fio-len: 640; margin-top: 2rem;">
-                <path d="M24 12 C 140 96, 280 -28, 396 104" stroke="var(--stamp)" stroke-width="2" />
-                <circle cx="24" cy="12" r="5" fill="var(--ink)" />
-                <circle cx="396" cy="104" r="5" fill="var(--ink)" />
-            </svg>
-
-            <figure class="faixa-ambiente" data-reveal aria-hidden="true">
-                <img src="/.netlify/images?url=/images/maos-maquina.png&w=800&q=65" alt="" loading="lazy">
-            </figure>
-
-            <div class="guarantee-frame text-center" data-reveal="scale" style="margin-top: 2rem;">
-                <span class="u-tag-label">Veredito</span>
-                <h3 class="comp-title">O problema nunca foi você.</h3>
-                <p class="section-desc" style="margin-bottom: 1.5rem;">
-                    Colocar uma estrutura no ar exige <strong>5 competências ao mesmo tempo</strong>: copy, design,
-                    funil, checkout e tráfego. Quase ninguém dá conta das cinco sozinho.
+            <div class="hero-copy hero-copy--a">
+                <h1 class="headline">Eu abro a minha tela e solto um exército de agentes de IA na sua frente.</h1>
+                <p class="subheadline">
+                    Copy, página, funil e checkout.<br>
+                    Do zero até a compra aprovada.<br>
+                    <strong>Ao vivo. Sem corte. Com o cronômetro ligado.</strong>
                 </p>
-                <p class="section-desc" style="margin-bottom: 0;">
-                    Isso tem um nome: <strong class="text-danger">a cilada do faça você mesmo.</strong>
-                    E eu vou te mostrar como sair dela.
+                <p class="subheadline">
+                    Você não trava por ser ruim com tecnologia.<br>
+                    <strong>Trava porque te largaram na parte difícil.</strong>
                 </p>
             </div>
 
-            <div class="cta-block">
-                <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="dor">
-                    QUERO SAIR DA CILADA POR <span class="price-pill">R$ 19</span>
+            <div class="hero-copy hero-copy--b">
+                <h1 class="headline">Você subiu o produto e não vendeu nada?<br>
+                    <span class="serif-accent">O problema não é o produto.</span></h1>
+                <p class="subheadline">
+                    É o que falta em volta dele.<br>
+                    Copy, página, funil, checkout e tráfego.<br>
+                    <strong>Falta uma peça, as outras não vendem.</strong>
+                </p>
+                <p class="subheadline">
+                    Não é falta de capacidade.<br>
+                    Te largaram na parte difícil.
+                </p>
+                <p class="subheadline">
+                    Na aula, eu solto um exército de agentes de IA que monta as peças na sua frente.<br>
+                    <strong>Ao vivo. Sem corte. Com o cronômetro ligado.</strong>
+                </p>
+            </div>
+
+            <div class="hero-actions-group">
+                <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="hero">
+                    QUERO VER AO VIVO POR R$ 19
                     <i class="u-sym" aria-hidden="true">►</i>
                 </a>
                 <div class="cta-note">
-                    <span>Aula ao vivo de 2h</span>
-                    <span>7 dias de garantia</span>
-                    <span>Preço de fundador</span>
+                    <span>2 horas</span>
+                    <span>ao vivo</span>
+                    <span>7 dias pra pedir o dinheiro de volta</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         SEÇÃO 3 · A PROVA (o bloco que mais converte)
+         DOBRA 2 · DEIXA EU ADIVINHAR
          ============================================================ -->
-    <section class="section dark-section" id="prova">
-        <span class="fundo-palavra" aria-hidden="true">Prova</span>
-        <div class="container">
-            <div class="text-center">
-                <h2 class="section-title-serif" data-reveal>
-                    Não é promessa. <br> <span class="serif-accent">É pra você VER funcionando.</span>
-                </h2>
-                <p class="section-desc" style="max-width: 700px; margin: 0 auto;">
-                    Na aula, eu abro a minha tela e <strong>solto o exército na sua frente.</strong>
-                    Ao vivo. Sem corte. Sem edição.
-                </p>
-            </div>
+    <section class="section segment-comparison">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>Deixa eu adivinhar</h2>
 
-            <!--
-                TROCAR OS PLACEHOLDERS: coloque as imagens em /images/prova/ (largura 1200, <2MB)
-                e substitua cada <span class="proof-placeholder"> por:
-                <img src="/.netlify/images?url=/images/prova/passo-1.png&w=800&q=80" alt="..." width="800" height="500" loading="lazy">
-            -->
-            <div class="proof-grid" data-reveal>
-                <figure class="proof-shot" data-reveal="scale">
-                    <span class="proof-placeholder">[ prova 01 ]<br>o comando no estilo WhatsApp</span>
-                    <figcaption>O comando, em português normal</figcaption>
-                </figure>
-                <figure class="proof-shot" data-reveal="scale">
-                    <span class="proof-placeholder">[ prova 02 ]<br>a página sendo montada</span>
-                    <figcaption>A página montando sozinha</figcaption>
-                </figure>
-                <figure class="proof-shot" data-reveal="scale">
-                    <span class="proof-placeholder">[ prova 03 ]<br>a tela de COMPRA APROVADA</span>
-                    <figcaption>Compra aprovada</figcaption>
-                </figure>
-            </div>
+            <p class="texto-curto">
+                Você tem o produto. Ou o conhecimento na cabeça.<br>
+                Sabe que é bom.
+            </p>
+            <p class="texto-curto">
+                Subiu na plataforma.<br>
+                Pôs o link na bio.<br>
+                Mandou no story.
+            </p>
+            <p class="texto-curto"><strong>E o painel continua zerado.</strong></p>
 
-            <div class="container-narrow" style="margin: 0 auto;">
-                <h3 class="comp-title text-center">Você vai ver, em tempo real:</h3>
-                <ul class="target-list" style="text-align: left;">
-                    <li><i class="u-sym" aria-hidden="true">✔</i> Você digita o comando, <strong>em português
-                            normal.</strong></li>
-                    <li><i class="u-sym" aria-hidden="true">✔</i> O agente de copy <strong>escreve a sua página do
-                            zero.</strong></li>
-                    <li><i class="u-sym" aria-hidden="true">✔</i> O de design monta ela, <strong>com cara de profissional
-                            caro.</strong></li>
-                    <li><i class="u-sym" aria-hidden="true">✔</i> O funil se organiza. <strong>O checkout se integra
-                            sozinho.</strong></li>
-                    <li><i class="u-sym" aria-hidden="true">✔</i> E aparece a tela verde: <strong>COMPRA
-                            APROVADA.</strong></li>
-                </ul>
+            <blockquote class="citacao" data-reveal>
+                "Fiquei horas construindo meu site, mas não tenho resultado."
+                <span class="citacao__fonte">Frase real, de um fórum de marketing digital. Podia ser sua.</span>
+            </blockquote>
 
-                <p class="section-desc text-center" style="margin-top: 2rem;">
-                    <strong>Estrutura no ar. Pronta pra vender.</strong><br>
-                    Sem código. Sem design. Sem integrar nada na mão.<br>
-                    Você comanda. O exército executa.
-                </p>
+            <p class="texto-curto">E não foi por falta de tentativa:</p>
+            <ul class="lista lista--check">
+                <li><i class="u-sym" aria-hidden="true">☑</i><span>Assinou a ferramenta que montava página em minutos. <strong>Travou no primeiro ajuste.</strong></span></li>
+                <li><i class="u-sym" aria-hidden="true">☑</i><span>Comprou o curso e assistiu tudo. <strong>Empacou na hora de fazer.</strong></span></li>
+                <li><i class="u-sym" aria-hidden="true">☑</i><span>Pagou alguém pra montar. <strong>Viu o dinheiro sair e a venda não entrar.</strong></span></li>
+            </ul>
+
+            <div class="guarantee-frame" data-reveal="scale">
+                <span class="u-tag-label">Veredito</span>
+                <p class="texto-curto">Aí vem a pergunta: o que eu fiz de errado?</p>
+                <p class="texto-curto">Nada.<br><strong class="text-danger">Faltou peça!</strong></p>
             </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 3 · A CONTA QUE NINGUÉM TE MOSTROU
+         ============================================================ -->
+    <section class="section">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>A conta que ninguém te mostrou</h2>
+
+            <p class="texto-curto">Colocar um produto pra vender parece uma tarefa.<br><strong>São <span class="num">5</span>:</strong></p>
+
+            <div class="tabela-wrap">
+                <table class="tabela tabela--3">
+                    <thead><tr><th>Peça</th><th>O que faz</th><th>Quando falta, soa assim</th></tr></thead>
+                    <tbody>
+                        <tr><td>Copy</td><td>Faz a pessoa querer</td><td><em>"Tive que fazer muitos ajustes e no final não gerou nenhum resultado."</em></td></tr>
+                        <tr><td>Página</td><td>Passa confiança</td><td><em>"Na hora de montar o design, fica tudo torto."</em></td></tr>
+                        <tr><td>Funil</td><td>Leva na ordem até a compra</td><td><em>"Fiquei horas construindo, mas não tenho resultado."</em></td></tr>
+                        <tr><td>Checkout</td><td>Recebe o pagamento</td><td><em>"Na prática, eu travo na hora de integrar o checkout com a página."</em></td></tr>
+                        <tr><td>Tráfego</td><td>Traz quem não te conhece</td><td><em>"Uma loja no meio do mato que ninguém vai ter acesso."</em></td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="tabela-dica">Deslize a tabela para o lado ►</p>
+
+            <p class="texto-curto"><strong><span class="num">5 peças</span>. 5 profissões.</strong></p>
+            <p class="texto-curto">Se falta uma, as outras quatro não vendem!</p>
+            <p class="texto-curto">E quando não vende, você nem sabe qual falhou.</p>
+            <p class="texto-curto">Foi o anúncio?<br>A página?<br>A copy?</p>
+            <p class="texto-curto">Cada profissão dessas leva anos pra dominar.<br>Te pediram as 5. Sozinho. Antes da primeira venda.</p>
+            <p class="texto-curto"><strong>Não é falta de capacidade. É matemática.</strong></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 4 · OS 4 CAMINHOS QUE TE VENDERAM
+         ============================================================ -->
+    <section class="section segment-comparison">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>Os 4 caminhos que te venderam</h2>
+
+            <div class="tabela-wrap">
+                <table class="tabela tabela--4 tabela--destaque-3">
+                    <thead><tr><th>Caminho</th><th>O que te entrega</th><th>Quem faz as 5 peças</th><th>Quanto custa</th></tr></thead>
+                    <tbody>
+                        <tr><td>Ferramenta de página</td><td>Uma tela em branco</td><td><strong>Você</strong></td><td>Mensalidade, todo mês</td></tr>
+                        <tr><td>Curso de funil</td><td>A teoria das 5</td><td><strong>Você</strong></td><td>O curso. E depois o próximo</td></tr>
+                        <tr><td>IA genérica</td><td>Um texto</td><td><strong>Você monta o resto</strong></td><td>Mensalidade da IA = Barato. O resto sai caro</td></tr>
+                        <tr><td>Agência</td><td>As 5 feitas</td><td>Eles</td><td>De R$5 mil a R$15 mil</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="tabela-dica">Deslize a tabela para o lado ►</p>
+
+            <p class="texto-curto">E o que cada um deixou, na boca de quem viveu:</p>
+            <ul class="lista lista--seq">
+                <li><i class="u-sym" aria-hidden="true">→</i><span><strong>Ferramenta:</strong> <em>"Achei muito difícil."</em> <em>"Estou desistindo depois de 7 anos."</em></span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span><strong>Curso:</strong> <em>"Ficou bem incompleto."</em></span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span><strong>IA genérica:</strong> <em>"Criar um site continua sendo mais complicado do que deveria."</em></span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span><strong>Agência:</strong> mais de <span class="num">R$45 mil</span> investidos. <span class="num">R$3 mil</span> em vendas. Um carro vendido pra cobrir a conta. <strong><em>"Só gastando, só gastando."</em></strong></span></li>
+            </ul>
+
+            <p class="texto-curto">Olha a terceira coluna.<br>Nos três baratos, quem faz é você.<br>No que faz por você, o preço vai pra casa dos milhares.</p>
+
+            <p class="texto-curto">E repara em como cada um ganha:</p>
+            <ul class="lista lista--seq">
+                <li><i class="u-sym" aria-hidden="true">→</i><span>A ferramenta ganha mensalidade enquanto você trava.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>O curso ganha vendendo o próximo curso.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>A agência ganha a cada página nova.</span></li>
+            </ul>
+
+            <p class="texto-curto texto-forte"><strong>Nenhum deles ganha quando o seu problema acaba.</strong></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 5 · ISSO TEM NOME
+         ============================================================ -->
+    <section class="section">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>Isso tem nome</h2>
+
+            <blockquote class="citacao" data-reveal>
+                "Não caiam nessa cilada. Vocês serão deixados na mão."
+                <span class="citacao__fonte">Reclamação pública contra uma ferramenta de funil.</span>
+            </blockquote>
+
+            <p class="texto-curto">A gente chama de <strong class="text-danger">a cilada do faça você mesmo.</strong></p>
+
+            <p class="texto-curto">Funciona assim:</p>
+            <ul class="lista lista--seq">
+                <li><i class="u-sym" aria-hidden="true">→</i><span>Te vendem a solução.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>O trabalho pesado sobra pra você.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>Você trava na peça que não domina.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>Se culpa.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>Compra a próxima solução. E começa de novo.</span></li>
+            </ul>
+
+            <p class="texto-curto">Você trocou de ferramenta. De curso. De fornecedor.<br>
+                <strong>Não trocou de problema: as 5 peças continuavam com você.</strong></p>
+
+            <div class="guarantee-frame" data-reveal="scale">
+                <span class="u-tag-label">Se ninguém te disse ainda</span>
+                <p class="texto-curto">Então, se ninguém te disse ainda:<br><strong>o problema nunca foi você!</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 6 · QUEM TÁ FALANDO
+         ============================================================ -->
+    <section class="section segment-authority">
+        <div class="container container-texto">
+            <!-- TROCAR: foto do Victor e do Greyk juntos, com o Victor na frente -->
+            <figure class="foto-autor" data-reveal>
+                <img src="/.netlify/images?url=/images/victor-mastermind.png&w=800&q=80"
+                    alt="Victor Viana, o Vitão, sócio do Greyk" width="400" height="400" loading="lazy">
+            </figure>
+
+            <span class="meta-data">// QUEM TÁ FALANDO</span>
+            <h2 class="section-title-serif">Prazer, eu sou o Victor. O Vitão.</h2>
+
+            <p class="texto-curto">Faço marketing digital há mais de 6 anos, com o meu sócio, o Greyk.</p>
+            <p class="texto-curto">A gente saiu do corporativo pra apostar no digital.<br>
+                Botou mais de R$300 mil em curso, mentoria e imersão.<br>
+                No papel, a gente sabia montar as 5 peças.</p>
+            <p class="texto-curto"><strong>E caiu na cilada do mesmo jeito.</strong></p>
+            <p class="texto-curto">Deixa eu te contar uma noite.</p>
+            <p class="texto-curto">Lançamento de emagrecimento. Carrinho abrindo às 8h da manhã.<br>
+                Na noite anterior, a página não ficava certa. O checkout não integrava.</p>
+            <p class="texto-curto">A gente virou a madrugada refazendo tudo na mão.<br>
+                Olho ardendo. Café frio do lado.<br>
+                Ficou pronto minutos antes do e-mail de abertura.</p>
+            <p class="texto-curto">Deu certo. Mas ali eu pensei: não dá pra viver assim.</p>
+            <p class="texto-curto">Não faltava conhecimento.<br>
+                <strong>Faltava braço.</strong><br>
+                Era o trabalho de 5 pessoas, na mão, a cada produto novo.</p>
+            <p class="texto-curto">Fizemos múltiplos seis dígitos desse jeito. No suor.<br>
+                E nunca botamos um produto no milhão.<br>
+                A execução comia o tempo que era pra crescer.</p>
+            <p class="texto-curto">Agora pensa comigo.<br>
+                Se isso travava a gente, que vive disso,<br>
+                imagina você, tentando sozinho.<br>
+                <strong>Seja a primeira vez. Seja a quinta.</strong></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 7 · O EXÉRCITO DE AGENTES DE IA
+         ============================================================ -->
+    <section class="section segment-comparison">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>O exército de agentes de IA</h2>
+
+            <blockquote class="citacao" data-reveal>"Queria só dar o comando e aparecer pronto."</blockquote>
+
+            <p class="texto-curto">Foi o que a gente mais ouviu na pesquisa.<br>Foi o que a gente construiu.</p>
+            <p class="texto-curto">Um especialista pra cada peça:</p>
+
+            <div class="tabela-wrap">
+                <table class="tabela tabela--3">
+                    <thead><tr><th>Agente</th><th>O que faz</th><th>O que você faz</th></tr></thead>
+                    <tbody>
+                        <tr><td>Descoberta</td><td>Define nicho e avatar com dado de mercado</td><td>Responde</td></tr>
+                        <tr><td>Pesquisa</td><td>Acha o buraco da sua oferta</td><td>Dá o comando</td></tr>
+                        <tr><td>Narrativa</td><td>Cria a ideia que diferencia o seu produto</td><td>Dá o comando</td></tr>
+                        <tr><td>Copy</td><td>Escreve a página</td><td>Dá o comando</td></tr>
+                        <tr><td>Página</td><td>Monta com cara profissional</td><td>Dá o comando</td></tr>
+                        <tr><td>Funil</td><td>Organiza a ordem até a compra</td><td>Dá o comando</td></tr>
+                        <tr><td>Checkout</td><td>Integra o pagamento</td><td>Dá o comando</td></tr>
+                        <tr class="tabela__forte"><td>Tráfego</td><td>Fica com gente. Não com IA</td><td>Assiste e repete o passo a passo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="tabela-dica">Deslize a tabela para o lado ►</p>
+
+            <p class="texto-curto">Os três primeiros acertam o alvo.<br>Os quatro seguintes montam a estrutura pra gerar venda.</p>
+            <p class="texto-curto">Você fala em português normal.<br><strong>Igual mandar uma mensagem no WhatsApp.</strong></p>
+
+            <blockquote class="citacao">"Já testei IA e saiu tudo genérico."</blockquote>
+            <p class="texto-curto">Normal. IA genérica chuta.</p>
+            <p class="texto-curto">Esses agentes foram treinados com o padrão de centenas de lançamentos.<br>
+                Não montam no escuro. Montam em cima do que já vendeu.</p>
+
+            <h3 class="comp-title">E por que o tráfego não fica com a IA?</h3>
+            <p class="texto-curto">Porque tráfego mexe com o seu dinheiro. E ali a IA ainda erra.<br>
+                Então essa parte eu te ensino numa aula. Passo a passo.<br>
+                Você assiste, repete e sobe. Do jeito que eu faço há anos.</p>
+
+            <p class="texto-curto">Agora compara:</p>
+            <div class="tabela-wrap">
+                <table class="tabela tabela--2">
+                    <thead><tr><th>Caminho</th><th>Quem faz as 5 peças</th></tr></thead>
+                    <tbody>
+                        <tr><td>Ferramenta</td><td>Você</td></tr>
+                        <tr><td>Curso</td><td>Você</td></tr>
+                        <tr><td>IA genérica</td><td>Você</td></tr>
+                        <tr><td>Agência</td><td>Eles, por milhares</td></tr>
+                        <tr class="tabela__forte"><td>Exército</td><td>4 agentes executam. O tráfego é passo a passo. Você comanda</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         DOBRA 8 · VOCÊ NÃO PRECISA ACREDITAR EM MIM
+         ============================================================ -->
+    <section id="prova" class="section dark-section">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>Você não precisa acreditar em mim.</h2>
+            <p class="texto-curto"><strong>Precisa assistir.</strong></p>
+
+            <p class="texto-curto">Na aula, ao vivo, na sua frente:</p>
+            <ul class="lista lista--seq">
+                <li><i class="u-sym" aria-hidden="true">→</i><span>Eu digito o comando.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>O agente escreve a copy.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>A página monta.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>O funil se organiza.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>O checkout integra.</span></li>
+                <li><i class="u-sym" aria-hidden="true">→</i><span>Compra de teste: <strong>aprovada.</strong></span></li>
+            </ul>
+
+            <p class="texto-curto">Cronômetro ligado do primeiro comando até a compra aprovada.<br>Sem corte. Sem edição.</p>
+            <p class="texto-curto"><strong>Se travar, trava na sua frente.</strong></p>
 
             <div class="cta-block">
                 <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="prova">
-                    QUERO VER AO VIVO POR <span class="price-pill">R$ 19</span>
+                    QUERO VER AO VIVO POR R$ 19
                     <i class="u-sym" aria-hidden="true">►</i>
                 </a>
-                <div class="cta-note">
-                    <span>Aula ao vivo de 2h</span>
-                    <span>7 dias de garantia</span>
-                    <span>Preço de fundador</span>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         SEÇÃO 3.5 · QUEM TÁ FALANDO
+         DOBRAS 9 E 10 · A OPERAÇÃO + POR QUE CUSTA R$19
          ============================================================ -->
-    <section class="section segment-authority">
-        <div class="container container-medium">
-            <div class="authority-grid">
-                <div class="authority-gallery">
-                    <div class="img-wrapper main-img" data-reveal="left">
-                        <img src="/.netlify/images?url=/images/victor-hotmart.png&w=600&q=80"
-                            alt="Victor Viana recebendo o prêmio Hotmart" width="600" height="800" loading="lazy">
-                    </div>
-                    <div class="img-wrapper secondary-img" data-reveal>
-                        <img src="/.netlify/images?url=/images/victor-mastermind.png&w=400&q=80"
-                            alt="Victor Viana no maior mastermind de infoprodutos da América Latina" width="400"
-                            height="400" loading="lazy">
+    <section id="oferta" class="section">
+        <div class="container container-texto">
+            <h2 class="section-title-serif" data-reveal>A Operação Estrutura no Ar</h2>
+            <p class="texto-curto">Uma aula ao vivo de 2 horas. O que você leva:</p>
+
+            <div class="offer-deliverables">
+                <div class="agent-card" data-reveal>
+                    <div class="agent-number" aria-hidden="true">01</div>
+                    <div class="agent-content">
+                        <h3>A demonstração completa.</h3>
+                        <p>O exército do zero ao ar, na sua frente.</p>
                     </div>
                 </div>
-
-                <div class="authority-text-content">
-                    <div class="authority-text" data-reveal="right">
-                        <span class="meta-data">// VICTOR_VIANA</span>
-                        <h2 class="comp-title">Eu sou o Victor.</h2>
-                        <p style="margin-bottom: 1.25rem;">
-                            Vivo de marketing digital há mais de 6 anos. Já passei por centenas de lançamentos e
-                            <strong>os projetos que ajudei a colocar de pé já geraram mais de R$ 10 milhões em
-                                vendas.</strong>
-                        </p>
-                        <p style="margin-bottom: 1.25rem;">
-                            Mas também passei anos preso <strong>na mesma cilada que te trouxe aqui.</strong>
-                            Virando noite pra montar estrutura na mão, peça por peça.
-                        </p>
-                        <p>
-                            Foi resolvendo o meu próprio problema que eu montei esse exército.
-                            <strong>Não é teoria. É o que eu uso todo dia.</strong>
-                        </p>
-
-                        <!--
-                            AUTORIDADE EMPRESTADA + PROVA SOCIAL
-                            Coloque aqui os prints de resultado/conversa e as marcas/lançamentos.
-                            Sugestão: /images/prova-social/ e reusar a .proof-grid.
-                        -->
+                <div class="agent-card" data-reveal>
+                    <div class="agent-number" aria-hidden="true">02</div>
+                    <div class="agent-content">
+                        <h3>O mapa da Operação.</h3>
+                        <p>Cada etapa na ordem, de produto parado a estrutura no ar.</p>
+                    </div>
+                </div>
+                <div class="agent-card" data-reveal>
+                    <div class="agent-number" aria-hidden="true">03</div>
+                    <div class="agent-content">
+                        <h3>A aula de tráfego.</h3>
+                        <p>Passo a passo pra copiar. Fica com você pra sempre.</p>
+                    </div>
+                </div>
+                <div class="agent-card" data-reveal>
+                    <div class="agent-number" aria-hidden="true">04</div>
+                    <div class="agent-content">
+                        <h3>Um agente liberado na hora.</h3>
+                        <p>Você comanda e sai com a primeira peça no ar.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- ============================================================
-         SEÇÃO 4 · A OFERTA
-         ============================================================ -->
-    <section id="oferta" class="section segment-offer dark-section">
-        <span class="fundo-palavra fundo-palavra--baixo" aria-hidden="true">Operação</span>
-        <div class="container">
-            <div class="offer-panel" data-reveal="scale">
-                <p class="offer-stamp-row"><span class="u-stamp" data-stamp>Confidencial</span></p>
-                <img class="objeto-dossie" src="/.netlify/images?url=/images/exercito-agentes.png&w=480&q=75"
-                    alt="Ilustração do exército de agentes em formação" width="240" height="160" loading="lazy">
-                <div class="offer-header">
-                    <h2 class="section-title-serif">
-                        Uma aula ao vivo de 2 horas. <br>
-                        <span class="serif-accent">Quatro entregas.</span>
-                    </h2>
-                </div>
+            <h3 class="comp-title">O que ela não é:</h3>
+            <ul class="lista lista--nao">
+                <li><i class="u-sym" aria-hidden="true">✗</i><span><strong>Não é o exército inteiro.</strong> Você comanda 1 agente, não os 8.</span></li>
+                <li><i class="u-sym" aria-hidden="true">✗</i><span><strong>Não é promessa de dinheiro fácil.</strong> É o que faltou até hoje: as 5 peças no lugar, pro seu produto finalmente ter como vender.</span></li>
+                <li><i class="u-sym" aria-hidden="true">✗</i><span><strong>Não tem pegadinha no fim.</strong> No final eu abro o acesso ao exército inteiro, os 8 agentes na sua mão. E pra quem prefere não mexer em nada, tem um formulário: a gente escolhe uma pessoa por turma e entra como sócio, com a nossa equipe fazendo a operação inteira. Quem não quiser nenhum dos dois, sai com as 4 entregas garantidas.</span></li>
+            </ul>
 
-                <div class="offer-deliverables">
-                    <div class="agent-card" data-reveal data-lift>
-                        <div class="agent-number" aria-hidden="true">01</div>
-                        <div class="agent-content">
-                            <h3>A demonstração completa, ao vivo</h3>
-                            <p>O exército montando uma estrutura do zero ao ar, na sua frente.</p>
-                        </div>
-                    </div>
-                    <div class="agent-card" data-reveal data-lift>
-                        <div class="agent-number" aria-hidden="true">02</div>
-                        <div class="agent-content">
-                            <h3>O mapa da Operação</h3>
-                            <p>O passo a passo exato, de produto parado até estrutura vendendo.</p>
-                        </div>
-                    </div>
-                    <div class="agent-card highlight-card" data-reveal data-lift>
-                        <div class="agent-number" aria-hidden="true">03</div>
-                        <div class="agent-content">
-                            <h3>A aula de tráfego comigo. Inclusa.</h3>
-                            <p>Tráfego mexe com o seu dinheiro, então essa parte não fica na mão de robô. Sou eu que te
-                                ensino.</p>
-                        </div>
-                    </div>
-                    <div class="agent-card highlight-card" data-reveal data-lift>
-                        <div class="agent-number" aria-hidden="true">04</div>
-                        <div class="agent-content">
-                            <h3>Um agente liberado ao vivo</h3>
-                            <p>Você comanda e sai da aula com o primeiro pedaço da estrutura no ar.</p>
-                        </div>
-                    </div>
-                </div>
+            <hr class="divisor">
 
-                <!-- Ancoragem em escada: do que você já gastou até o preço de hoje -->
-                <div class="offer-features">
-                    <div class="offer-feature"><i class="u-sym" aria-hidden="true">✖</i> O curso que você não terminou: R$ 297
-                    </div>
-                    <div class="offer-feature"><i class="u-sym" aria-hidden="true">✖</i> A ferramenta que travou: R$ 97/mês</div>
-                    <div class="offer-feature"><i class="u-sym" aria-hidden="true">✖</i> A agência que sumiu com o dinheiro: R$
-                        5.000</div>
-                </div>
+            <h2 class="section-title-serif" data-reveal>Por que custa R$19</h2>
+            <p class="texto-curto">Não é promoção. É o papel da aula.</p>
+            <p class="texto-curto">Ela não existe pra dar lucro.<br>Existe pra você ver funcionando antes de decidir qualquer coisa.</p>
+            <p class="texto-curto">Quem já quebrou a cara não compra promessa.<br><strong>Compra o que viu.</strong></p>
 
-                <div class="offer-price-box">
-                    <div class="old-price">Uma estrutura dessas, por agência, custa por volta de <s>R$ 5.000</s></div>
-                    <div class="new-price">R$ 19</div>
-                    <p class="price-info">
-                        <strong>Não é desconto. É preço de fundador da primeira turma.</strong><br>
-                        E você sai sabendo comandar sozinho, quantas vezes quiser.
-                    </p>
-                </div>
+            <div class="tabela-wrap">
+                <table class="tabela tabela--3">
+                    <thead><tr><th>O que</th><th>Quanto custa</th><th>O que você vê antes de pagar</th></tr></thead>
+                    <tbody>
+                        <tr><td>Agência</td><td>De R$5 mil a R$15 mil</td><td>Um orçamento</td></tr>
+                        <tr class="tabela__forte"><td>Aula</td><td><span class="num">R$19</span></td><td>O exército montando, ao vivo</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="tabela-dica">Deslize a tabela para o lado ►</p>
 
+            <p class="pior-cenario"><strong>O pior cenário:</strong> você assiste, não gosta, manda uma mensagem em até 7 dias e recebe os R$19 de volta. Sem pergunta.</p>
+            <p class="texto-curto"><strong>O cenário esperado:</strong> você sai com a primeira peça da sua estrutura no ar.</p>
+            <p class="texto-curto">A aula se paga no que vem depois, pra quem quiser ir além. Por isso ela custa R$19 e não R$500.</p>
+
+            <div class="cta-block">
                 <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="oferta">
-                    GARANTIR MINHA VAGA POR <span class="price-pill">R$ 19</span>
+                    QUERO VER AO VIVO POR R$ 19
                     <i class="u-sym" aria-hidden="true">►</i>
                 </a>
                 <div class="cta-note">
-                    <span>Aula ao vivo de 2h</span>
-                    <span>7 dias de garantia</span>
-                    <span>Preço de fundador</span>
+                    <span>2 horas</span>
+                    <span>ao vivo</span>
+                    <span>7 dias pra pedir o dinheiro de volta</span>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         SEÇÃO 5 · GARANTIA + FUNDADOR
+         DOBRA 11 · POR QUE ENTRAR NESSA TURMA
          ============================================================ -->
     <section class="section surface-2">
-        <div class="container text-center">
+        <div class="container container-texto">
             <div class="guarantee-frame" data-reveal="scale">
-                <span class="u-tag-label">Garantia · 7 dias</span>
-                <div class="guarantee-icon">
-                    <i class="u-sym" aria-hidden="true">◎</i>
+                <span class="u-tag-label">Por que entrar nessa turma</span>
+                <p class="texto-curto">Aqui não tem vaga acabando. É online, cabe todo mundo.<br>Então vou te dar os motivos reais:</p>
+                <ul class="lista lista--seq">
+                    <li><i class="u-sym" aria-hidden="true">→</i><span><strong>A aula tem dia e hora.</strong> segunda, 28/09, às 20h. Ao vivo é uma vez.</span></li>
+                    <li><i class="u-sym" aria-hidden="true">→</i><span><strong>O agente só é liberado pra quem tá na sala.</strong> A gravação existe, vendida à parte, mas não libera agente e não responde pergunta.</span></li>
+                    <li><i class="u-sym" aria-hidden="true">→</i><span><strong>R$19 é o preço dessa primeira turma.</strong> Na próxima, sobe pra 49, depois 69!</span></li>
+                </ul>
+                <p class="texto-curto">E o motivo mais honesto de todos:<br>
+                    você já pagou mensalidade, curso e talvez agência.<br>
+                    <strong>R$19 é o único valor dessa história que volta se não servir.</strong></p>
+
+                <div class="cta-block">
+                    <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="turma">
+                        QUERO MINHA VAGA DE segunda, 28/09 POR R$ 19
+                        <i class="u-sym" aria-hidden="true">►</i>
+                    </a>
                 </div>
-                <h2 class="section-title-serif">O risco é <span class="serif-accent">todo meu.</span></h2>
-                <p class="section-desc">
-                    Entra na aula. Não gostou? <strong>Me manda uma mensagem em 7 dias.</strong>
-                    Devolvo cada centavo. Sem burocracia.
-                </p>
+            </div>
+        </div>
+    </section>
 
-                <p class="stamp-row">
-                    <span class="u-stamp u-stamp-l" data-stamp><i class="u-sym" aria-hidden="true">★</i> Você entra
-                        como fundador</span>
-                </p>
+    <!-- ============================================================
+         DOBRA 12 · DOIS CAMINHOS
+         ============================================================ -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title-serif text-center" data-reveal>Dois caminhos</h2>
 
-                <p class="section-desc" style="margin-bottom: 0;">
-                    Essa é a <strong>primeira turma</strong> da Operação. Turma pequena, comigo ao vivo,
-                    com uma condição que não vai se repetir. <strong>É a melhor hora pra entrar.</strong>
-                </p>
+            <div class="comparison-grid">
+                <div class="comp-box old-way" data-reveal="left">
+                    <span class="label">Caminho 1</span>
+                    <h3 class="comp-title">Fechar essa página.</h3>
+                    <p>Assinar a próxima ferramenta. Travar de novo. Pagar de novo.<br>Daqui a um ano, o produto no mesmo lugar.</p>
+                </div>
+                <div class="comp-icon" data-reveal="scale">
+                    <i class="u-sym" aria-hidden="true">►</i>
+                </div>
+                <div class="comp-box new-way" data-reveal="right">
+                    <span class="label">Caminho 2</span>
+                    <h3 class="comp-title">Ou assistir.</h3>
+                    <p>2 horas. R$19. Cronômetro ligado.<br>Ver as 5 peças saírem das suas costas, na sua frente.</p>
+                </div>
             </div>
 
             <div class="cta-block">
-                <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action btn-urgent" data-cta="garantia">
-                    ENTRAR COMO FUNDADOR POR <span class="price-pill">R$ 19</span>
+                <p class="section-desc">Um caminho você já conhece de cor e dói.<br><strong>O outro custa R$19 pra conhecer.</strong></p>
+                <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="caminhos">
+                    QUERO VER AO VIVO POR R$ 19
                     <i class="u-sym" aria-hidden="true">►</i>
                 </a>
-                <div class="cta-note">
-                    <span>Aula ao vivo de 2h</span>
-                    <span>7 dias de garantia</span>
-                    <span>Preço de fundador</span>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- ============================================================
-         SEÇÃO 6 · FAQ
+         FAQ
          ============================================================ -->
-    <section class="section">
+    <section class="section segment-comparison">
         <div class="container container-narrow">
             <h2 class="section-title-serif" data-reveal>Perguntas</h2>
 
             <div class="faq-accordion">
                 <div class="faq-item" data-reveal>
                     <div class="faq-question">
-                        <span>"Sou uma anta com tecnologia. Consigo?"</span>
+                        <span>Sou uma anta com tecnologia. Consigo?</span>
                         <i class="faq-sign u-sym" aria-hidden="true"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Consegue. É igual mandar mensagem. Você comanda, o exército faz o difícil. Não precisa saber
-                            nada técnico.</p>
+                        <p>Consegue. Você escreve o que quer, igual mandar uma mensagem no WhatsApp. Não precisa ser programador da NASA.</p>
                     </div>
                 </div>
 
                 <div class="faq-item" data-reveal>
                     <div class="faq-question">
-                        <span>"Não tenho tempo."</span>
+                        <span>É pra mim?</span>
                         <i class="faq-sign u-sym" aria-hidden="true"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>São 2 horas ao vivo. Menos do que você já perdeu travado numa ferramenta que não funcionou.
-                        </p>
+                        <p>Tem o produto pronto? É pra você.</p>
+                        <p>Tem o conhecimento na cabeça e ainda não virou produto? É pra você.</p>
+                        <p>Sabe que quer vender, mas não sabe o quê? O primeiro agente do exército, o de Descoberta, começa exatamente aí: define o nicho e o avatar com dado de mercado.</p>
+                        <p>Só não é pra você se procura renda fácil sem ter nada pra ensinar ou vender.</p>
                     </div>
                 </div>
 
                 <div class="faq-item" data-reveal>
                     <div class="faq-question">
-                        <span>"E se for furada? Já quebrei a cara."</span>
+                        <span>Vai ter venda no final?</span>
                         <i class="faq-sign u-sym" aria-hidden="true"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Por isso existe a garantia de 7 dias. Você entra, vê tudo, e só continua se fizer sentido. O
-                            risco é meu.</p>
+                        <p>Vai. No fim eu abro o acesso ao exército inteiro, pra quem quiser comandar os agentes no dia a dia. E, pra quem prefere não mexer em nada, abro um formulário: a gente lê, escolhe uma pessoa por turma e faz a operação inteira junto. As duas coisas são opcionais. A aula vale sem nenhuma delas.</p>
                     </div>
                 </div>
 
                 <div class="faq-item" data-reveal>
                     <div class="faq-question">
-                        <span>"Por que tá tão barato?"</span>
+                        <span>E se for furada? Já quebrei a cara.</span>
                         <i class="faq-sign u-sym" aria-hidden="true"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>Porque é a primeira turma, e quem entra agora entra como fundador. Esse preço é dessa turma.
-                            Nas próximas, ele sobe.</p>
+                        <p>Por isso é ao vivo, com cronômetro e sem corte. E se mesmo assim não servir, são 7 dias pra pedir o dinheiro de volta.</p>
                     </div>
                 </div>
 
                 <div class="faq-item" data-reveal>
                     <div class="faq-question">
-                        <span>"A aula fica gravada?"</span>
+                        <span>Não tenho tempo.</span>
                         <i class="faq-sign u-sym" aria-hidden="true"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>A gravação fica à parte, pra rever. Mas o ao vivo é onde eu te respondo e solto o agente pra
-                            você comandar. Isso a gravação não dá.</p>
+                        <p>São 2 horas. Provavelmente menos do que você já perdeu numa ferramenta que não saiu do lugar.</p>
+                        <p>E são essas 2 horas que decidem se os próximos meses vão ser de produto no ar ou de produto parado de novo. O agente só é liberado pra quem tá lá.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- ============================================================
-         SEÇÃO 7 · FECHAMENTO
-         ============================================================ -->
-    <section class="section segment-comparison">
-        <div class="container">
-            <h2 class="section-title-serif text-center" data-reveal>
-                No fundo, você só tem <span class="serif-accent">dois caminhos.</span>
-            </h2>
-
-            <div class="comparison-grid">
-                <div class="comp-box old-way" data-reveal="left" data-lift>
-                    <span class="label">Caminho 1</span>
-                    <h3 class="comp-title">Continuar na mesma</h3>
-                    <p>Fechar essa página. Travar de novo. Gastar de novo. Daqui a um ano, no mesmo lugar.
-                        <strong>Produto parado.</strong>
-                    </p>
-                </div>
-                <div class="comp-icon" data-reveal="scale">
-                    <i class="u-sym" aria-hidden="true">►</i>
-                </div>
-                <div class="comp-box new-way" data-reveal="right" data-lift>
-                    <span class="label">Caminho 2</span>
-                    <h3 class="comp-title">Entrar na Operação</h3>
-                    <p>E começar a <strong>tirar o produto do papel hoje.</strong> Um te deixa onde você está. O outro te
-                        tira de lá.</p>
-                </div>
-            </div>
-
-            <div class="cta-block">
-                <p class="section-desc" style="margin-bottom: 2rem;">
-                    Por <strong>R$ 19</strong>, com garantia total, a escolha é fácil.
-                </p>
-                <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="fechamento">
-                    EU ESCOLHO SAIR DO PAPEL, POR <span class="price-pill">R$ 19</span>
-                    <i class="u-sym" aria-hidden="true">►</i>
-                </a>
-                <div class="cta-note">
-                    <span>Aula ao vivo de 2h</span>
-                    <span>7 dias de garantia</span>
-                    <span>Preço de fundador</span>
+                <div class="faq-item" data-reveal>
+                    <div class="faq-question">
+                        <span>Fica gravada?</span>
+                        <i class="faq-sign u-sym" aria-hidden="true"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A gravação é vendida à parte. O agente liberado e as respostas no chat são só pra quem tá ao vivo.</p>
+                    </div>
                 </div>
             </div>
 
             <div class="ps-box" data-reveal>
                 <span class="u-tag-label">PS</span>
-                <p>
-                    <strong>PS:</strong> você entra numa aula ao vivo de 2h, vê um exército de agentes de IA montar uma
-                    estrutura de vendas completa do zero ao ar, recebe o mapa do processo, ganha a aula de tráfego comigo
-                    e ainda sai com um agente liberado pra comandar. Tudo por <strong>R$ 19</strong>, como
-                    fundador da primeira turma, com 7 dias de garantia.
-                </p>
-                <p><strong>O risco é meu. A decisão é sua.</strong></p>
-
-                <p class="meta-proof">
-                    E, a propósito: <strong>essa página que você acabou de ler foi montada pelo exército.</strong>
-                    A copy, o design, o checkout. Você tá olhando pro resultado agora.
-                </p>
-
-                <div style="margin-top: 2rem;">
+                <p><strong>P.S.</strong> Na aula eu solto o exército do zero até a compra aprovada, na sua frente, e libero um agente pra você comandar. Não é promessa de dinheiro fácil. É você ver se as 5 peças saem ou não das suas costas. R$19, com 7 dias pra pedir de volta.</p>
+                <div class="cta-block">
                     <a href="https://checkout.hyype.com.br/9c806c70-7cd9-4a75-b1b6-32cfc93e8c08?utm_source=iafunil&utm_medium=pagina&sck=oea_home_p19" class="btn btn-action" data-cta="ps">
-                        GARANTIR MINHA VAGA COMO FUNDADOR <span class="price-pill">R$ 19</span>
+                        QUERO VER AO VIVO POR R$ 19
                         <i class="u-sym" aria-hidden="true">►</i>
                     </a>
                 </div>
@@ -580,6 +632,23 @@
             </div>
         </div>
     </footer>
+
+    <!-- Repassa as UTMs do anúncio e o ângulo do topo para os botões do checkout -->
+    <script>
+        (function () {
+            var q = new URLSearchParams(location.search);
+            document.querySelectorAll('a[data-cta]').forEach(function (a) {
+                try {
+                    var u = new URL(a.href);
+                    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+                        if (q.get(k)) u.searchParams.set(k, q.get(k));
+                    });
+                    u.searchParams.set('src', 'pagina-' + (window.PAGE && window.PAGE.angulo || 'aovivo'));
+                    a.href = u.toString();
+                } catch (e) {}
+            });
+        })();
+    </script>
 
 </body>
 

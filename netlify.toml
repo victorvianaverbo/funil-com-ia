@@ -13,6 +13,7 @@
 #   /       → página de vendas (index.html na raiz, layout híbrido)
 #   /quiz   → quiz
 #   /mapa   → mapa da jornada
+#   /aula   → 302 para a sala da aula ao vivo (Zoom)
 #   /vsl    → VSL isolada (teste A/B do VTurb), noindex
 #   /pagina-vendas → era a página antiga; hoje manda pra raiz
 # --------------------------------------------------------------------------
@@ -32,6 +33,14 @@
   from = "/mapa"
   to = "/mapa/index.html"
   status = 200
+
+# /aula: link estável da aula ao vivo. Hoje aponta para o mapa;
+# trocar "to" pelo link do Zoom quando ele existir e dar push.
+[[redirects]]
+  from = "/aula"
+  to = "https://iafunil.com.br/mapa"
+  status = 302
+  force = true
 
 [[redirects]]
   from = "/vsl"

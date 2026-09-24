@@ -1379,3 +1379,161 @@ body::before {
         scroll-behavior: auto !important;
     }
 }
+
+/* ==========================================================================
+   PÁGINA CRUA · versão final (aba "9) Página ~ FINAL")
+   Texto escaneável, tabelas e frases do avatar no centro. Tudo sob
+   body.pagina-crua para não mexer nos layouts v3/v4.
+   ========================================================================== */
+.pagina-crua::before { content: none; }
+.pagina-crua .section { padding: 4.5rem 0; }
+.pagina-crua .section-title-serif { margin-bottom: 1.5rem; }
+
+.container-texto { max-width: 760px; }
+
+/* Topo em coluna única: sem terminal, sem miras */
+.hero-solo { min-height: 0; padding: 3.5rem 0 3rem; }
+.hero-solo::before { content: none; }
+.hero-solo .headline { margin-bottom: 1.25rem; }
+.hero-solo .subheadline { margin-bottom: 1rem; }
+.hero-solo .hero-actions-group { margin-top: 1.5rem; }
+
+/* Topos A e B: a classe entra no <html> antes da pintura */
+.hero-copy--b { display: none; }
+html.angulo-erro .hero-copy--a { display: none; }
+html.angulo-erro .hero-copy--b { display: block; }
+
+/* Frases de uma linha */
+.texto-curto { margin: 0 0 1.1rem; color: var(--fg-body); }
+.texto-curto strong { color: var(--fg); }
+.dark-section .texto-curto { color: var(--fg-on-dark-body); }
+.dark-section .texto-curto strong { color: var(--fg-on-dark); }
+
+/* Glifos de texto (☑ ✓ ✗ →) nunca viram emoji colorido no iPhone */
+.lista .u-sym, .num { font-variant-emoji: text; }
+
+/* Frase do avatar */
+.citacao {
+    margin: 1.75rem 0;
+    padding: 0.25rem 0 0.25rem 1.1rem;
+    border-left: 3px solid var(--stamp);
+    font-style: italic;
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--fg);
+}
+.citacao__fonte {
+    display: block;
+    margin-top: 0.5rem;
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+}
+
+/* Números em destaque dentro do texto */
+.num {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: 1.35em;
+    letter-spacing: 0.3px;
+    line-height: 1;
+    color: var(--fg);
+}
+
+/* Tabela: o coração da página. Rola por dentro no celular. */
+.tabela-wrap {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--ink);
+    background: var(--surface);
+    margin: 1.5rem 0 0.5rem;
+}
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.45;
+}
+.tabela--3 { min-width: 540px; }
+.tabela--4 { min-width: 680px; }
+.tabela th {
+    text-align: left;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    background: var(--canvas);
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--ink);
+}
+.tabela td {
+    padding: 11px 14px;
+    border-top: 1px solid var(--rule);
+    vertical-align: top;
+    color: var(--fg-body);
+}
+.tabela td:first-child { font-weight: 700; color: var(--fg); }
+/* A coluna que ele precisa ler: a última (ou a 3ª na tabela de 4) */
+.tabela--2 td:last-child,
+.tabela--3 td:last-child,
+.tabela--destaque-3 td:nth-child(3) {
+    background: var(--canvas);
+    font-weight: 600;
+    color: var(--fg);
+}
+.tabela--destaque-3 td:last-child { background: transparent; font-weight: 400; color: var(--fg-body); }
+/* Linha do Exército / Tráfego / Aula: destaque sem cor de vitória */
+.tabela tr.tabela__forte td {
+    border-top: 2px solid var(--ink);
+    font-weight: 700;
+    color: var(--fg);
+}
+.tabela-dica {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--fg-muted);
+    margin: 0 0 1.5rem;
+}
+@media (min-width: 769px) { .tabela-dica { display: none; } }
+
+/* Listas com símbolo de função fixa */
+.lista { list-style: none; margin: 1rem 0 1.5rem; padding: 0; display: grid; gap: 0.6rem; }
+.lista li { display: flex; gap: 0.75rem; color: var(--fg-body); }
+.lista li > .u-sym { flex: 0 0 auto; font-style: normal; font-weight: 700; }
+.lista--seq li > .u-sym { color: var(--stamp); }
+.lista--check li > .u-sym { color: var(--fg); }
+.lista--nao li > .u-sym { color: var(--stamp); }
+.lista--ok li > .u-sym { color: var(--accent-text); }
+.dark-section .lista li { color: var(--fg-on-dark-body); }
+.dark-section .lista--seq li > .u-sym { color: var(--olive-on-ink); }
+
+.guarantee-frame .texto-curto:last-child { margin-bottom: 0; }
+.guarantee-frame .cta-block { margin-top: 2rem; }
+
+.pior-cenario {
+    border: 1px dashed var(--accent-text);
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--fg-body);
+}
+
+.divisor { border: 0; border-top: 1px dashed var(--rule); margin: 4rem 0; }
+
+.foto-autor { margin: 0 0 2rem; max-width: 320px; }
+.foto-autor img { display: block; width: 100%; height: auto; border: 1px solid var(--ink); }
+
+#oferta .offer-deliverables { margin: 1.5rem 0 2.5rem; }
+
+@media (max-width: 768px) {
+    .pagina-crua .section { padding: 3.5rem 0; }
+    .tabela { font-size: 14px; }
+    .tabela td, .tabela th { padding: 9px 11px; }
+    .citacao { font-size: 1.1rem; }
+}

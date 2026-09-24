@@ -1,523 +1,353 @@
 /* ==========================================================================
-   QUIZ — Operação Estrutura no Ar
-   Cores, fontes e componentes vêm de /marca/tokens.css.
-   Funil fechado: uma etapa por tela, sem menu, sem rodapé, sem saída.
-
-   Cena: a mesa de guerra à noite. O fundo é a foto da mesa (escurecida);
-   cada etapa é uma FICHA de papel puxada do arquivo, com sombra dura.
-   Nascido para 390px; desktop é adaptação.
+   QUIZ · Operação Estrutura no Ar (versão final, tema escuro)
+   Tokens próprios: o quiz não usa /marca/tokens.css.
+   Proibido: contador regressivo, loading falso, preço riscado, selo de
+   urgência, cor de alarme.
    ========================================================================== */
+
+:root {
+  --fundo: #0E1420;
+  --superficie: #161D2B;
+  --superficie-2: #1C2536;
+  --borda: #2A3446;
+  --texto: #FFFFFF;
+  --texto-suave: #A9B3C4;
+  --texto-fraco: #6F7A8E;
+  --acento: #4DA3FF;
+  --acento-fundo: rgba(77, 163, 255, 0.12);
+  --aspas: #F2C94C;
+  --botao: #FFFFFF;
+  --botao-texto: #0E1420;
+
+  --fonte: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --raio: 10px;
+  --largura: 560px;
+}
 
 *, *::before, *::after { box-sizing: border-box; }
 
-/* O display do autor vence o do navegador, então [hidden] precisa ser explícito.
-   Sem isto, as opções do vídeo não esperariam a contagem. */
-[hidden] { display: none !important; }
+html { overflow-x: clip; }
 
 body {
   margin: 0;
-  background: var(--tinta);
-  color: var(--tinta);
-  font-family: var(--font-corpo);
-  font-size: var(--t-corpo);
-  line-height: 1.6;
+  background: var(--fundo);
+  color: var(--texto);
+  font-family: var(--fonte);
+  font-size: 17px;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
-}
-
-/* O fundo é o papel de trabalho da operação, desenhado em CSS: grid tático
-   de mapa (linha forte a cada 5 células) sumindo nas bordas. Na oferta o
-   body ganha .mesa-clara e o grid "acende". */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--tinta-linha) 65%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--tinta-linha) 65%, transparent) 1px, transparent 1px),
-    linear-gradient(to right, var(--tinta-linha) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--tinta-linha) 1px, transparent 1px);
-  background-size: 44px 44px, 44px 44px, 220px 220px, 220px 220px;
-  -webkit-mask-image: radial-gradient(ellipse 110% 85% at 50% 38%, #000 35%, transparent 100%);
-          mask-image: radial-gradient(ellipse 110% 85% at 50% 38%, #000 35%, transparent 100%);
-  opacity: 0.75;
-  transition: opacity 0.8s ease;
-}
-
-body.mesa-clara::before {
-  opacity: 1;
-}
-
-/* Varredura lentíssima de luz sobre o grid (morre em reduced-motion) */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background: linear-gradient(100deg, transparent 44%, rgba(230, 225, 211, 0.05) 50%, transparent 56%);
-  background-size: 260% 100%;
-  animation: varrer 9s linear infinite;
-}
-
-@keyframes varrer {
-  from { background-position: 130% 0; }
-  to   { background-position: -130% 0; }
-}
-
-/* Palavra fantasma: Anton vazada atrás da ficha. */
-.fundo-palavra {
-  position: fixed;
-  z-index: -1;
-  left: 50%;
-  bottom: -0.12em;
-  transform: translateX(-50%) rotate(-2deg);
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(7rem, 34vw, 16rem);
-  line-height: 1;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1.5px color-mix(in srgb, var(--papel) 8%, transparent);
-  white-space: nowrap;
-  pointer-events: none;
-  user-select: none;
-  transition: -webkit-text-stroke-color 0.8s ease;
-}
-
-body.mesa-clara .fundo-palavra {
-  -webkit-text-stroke-color: color-mix(in srgb, var(--oliva-claro) 16%, transparent);
-}
-
-/* No desktop a palavra sobe pela lateral direita */
-@media (min-width: 769px) {
-  .fundo-palavra {
-    writing-mode: vertical-rl;
-    left: auto;
-    right: 4px;
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%) rotate(180deg);
-    font-size: clamp(8rem, 18vh, 13rem);
-  }
-}
-
-h1, h2 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  letter-spacing: 0.4px;
-  line-height: 1.1;
-  text-transform: uppercase;
-  text-wrap: balance;
-}
-h2 { font-size: clamp(1.5rem, 5.6vw, 1.75rem); line-height: 1.25; margin: 0 0 24px; }
-p  { margin: 0 0 16px; }
-
-/* Special Elite fica só nos carimbos: em parágrafo, o manual proíbe. */
-.voz {
-  font-family: var(--font-corpo);
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--tinta-suave);
-}
-
-.quiz {
-  display: flex;
-  flex-direction: column;
   min-height: 100vh;
-  min-height: 100dvh;   /* conta a barra do navegador no celular */
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 16px;
+  min-height: 100dvh;
 }
 
-/* ---------- Tira de topo: a única âncora de marca ---------- */
-.topo {
+h1, h2, h3 { font-weight: 800; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 16px; }
+h1 { font-size: clamp(1.75rem, 7vw, 2.4rem); }
+h2 { font-size: clamp(1.4rem, 5.5vw, 1.85rem); }
+h3 { font-size: 1.2rem; }
+p { margin: 0 0 16px; }
+strong { font-weight: 800; }
+
+/* ---------- Barra de progresso ---------- */
+.progresso {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: transparent;
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 10px;
-  background: rgba(28, 26, 21, 0.88);
+}
+.progresso__barra {
+  height: 100%;
+  width: 0;
+  background: var(--acento);
+  transition: width 0.4s ease;
 }
 
-.topo__marca {
-  font-family: var(--font-ficha);
-  font-size: var(--t-meta);
-  letter-spacing: 2px;
-  color: var(--papel);
-  white-space: nowrap;
-}
-
-.topo__dot {
-  font-family: var(--font-ficha);
-  font-style: normal;
-  font-size: 9px;
-  color: var(--carimbo-claro);
-  animation: piscar 1.6s steps(1) infinite;
-}
-
-/* Hachura "classificado" pendurada na tira de topo */
-.topo::after {
-  content: '';
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  height: 6px;
-  background: repeating-linear-gradient(45deg,
-      color-mix(in srgb, var(--carimbo) 45%, transparent) 0 8px,
-      transparent 8px 16px);
-}
-
-@keyframes piscar {
-  50% { opacity: 0.25; }
-}
-
-/* ---------- Palco: uma ficha por vez, centralizada ---------- */
+/* ---------- Palco ---------- */
 .palco {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 56px 0 40px;
+  max-width: var(--largura);
+  margin: 0 auto;
+  padding: 44px 20px 64px;
 }
 
-/* A ficha de papel sobre a mesa */
-.etapa {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  background: var(--papel);
-  border: var(--borda-forte);
-  box-shadow: var(--sombra-papel);
-  padding: 28px 20px;
-  animation: entrar 0.35s ease-out both;
-}
-
-/* Textura de papel na ficha (decorativa: se não carregar, nada quebra) */
-.etapa::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: url('/.netlify/images?url=/images/textura-papel.png&w=480&q=60') repeat;
-  background-size: 480px;
-  mix-blend-mode: multiply;
-  opacity: 0.06;
-}
-
-.etapa--centro { align-items: center; text-align: center; }
-
-/* A capa é o hero: pinta de primeira, sem fade, sem deslocamento. */
-.etapa--capa {
-  animation: none;
-  align-items: center;
-  text-align: center;
-}
-
-/* A ficha nova entra por baixo, a antiga é puxada para cima */
-@keyframes entrar {
-  from { opacity: 0; transform: translateY(18px) rotate(0.5deg); }
-  to   { opacity: 1; transform: none; }
-}
-
-.etapa--sair {
-  animation: sair 0.2s ease-in both;
-}
-
-@keyframes sair {
-  to { opacity: 0; transform: translateY(-14px) rotate(-0.5deg); }
-}
+.etapa { animation: entrar 0.35s ease both; }
+.etapa--sair { animation: sair 0.2s ease both; }
+@keyframes entrar { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes sair { to { opacity: 0; transform: translateY(-10px); } }
 
 .ficha {
-  font-family: var(--font-ficha);
-  font-size: var(--t-meta);
-  letter-spacing: 3px;
-  color: var(--grafite-papel);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.ficha--carimbo { color: var(--carimbo); letter-spacing: 3px; margin: 14px 0 2px; }
-
-.micro {
-  font-family: var(--font-ficha);
-  font-size: var(--t-ficha);
-  color: var(--grafite-papel);
-  margin: 14px 0 0;
-}
-
-/* ---------- Carimbo que bate ---------- */
-/* O rotate fixo do .carimbo (tokens) vira variável para o keyframe girar até ela */
-.carimbo { --rot: 6deg; transform: rotate(var(--rot)); }
-.carimbo--torto-esq { --rot: -4deg; transform: rotate(var(--rot)); }
-
-.bate {
-  opacity: 0;
-  animation: bater 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both;
-}
-
-@keyframes bater {
-  0%   { opacity: 0; transform: scale(2.2) rotate(calc(var(--rot, 6deg) - 8deg)); }
-  70%  { opacity: 1; transform: scale(0.96) rotate(var(--rot, 6deg)); }
-  100% { opacity: 1; transform: scale(1) rotate(var(--rot, 6deg)); }
-}
-
-/* ==========================================================================
-   ETAPA 0 — CAPA
-   ========================================================================== */
-.etapa--capa .carimbo  { margin-bottom: 20px; }
-.etapa--capa h1 {
-  font-size: clamp(1.625rem, 6.4vw, 2rem);
-  line-height: 1.2;
-  margin: 8px 0 0;
-}
-.incentivo {
-  border: 1px dashed var(--oliva-escuro);
-  padding: 16px 20px;
-  margin: 24px 0 0;
-  font-family: var(--font-corpo);
-  font-weight: 500;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--oliva-escuro);
-}
-.etapa--capa .botao { margin-top: 28px; width: 100%; }
-
-/* ==========================================================================
-   PERGUNTAS
-   ========================================================================== */
-.opcoes { display: grid; gap: 12px; width: 100%; }
-
-.opcao {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  width: 100%;
-  text-align: left;
-  background: var(--papel);
-  border: var(--borda);
-  padding: 16px 18px;
-  cursor: pointer;
-  font-family: var(--font-corpo);
-  font-size: 1rem;
-  line-height: 1.5;
-  color: var(--tinta);
-  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
-}
-.opcao:hover  { background: var(--tinta); color: var(--papel); }
-.opcao:active { transform: scale(0.99); }
-.opcao__icone { font-family: var(--font-ficha); font-size: 1.1rem; line-height: 1.4; flex-shrink: 0; color: var(--carimbo); }
-.opcao:hover .opcao__icone { color: var(--oliva-claro); }
-
-/* A resposta é "anotada no dossiê" antes da ficha virar */
-.opcao--marcada,
-.opcao--marcada:hover {
-  background: var(--tinta);
-  color: var(--papel);
-}
-.opcao--marcada .opcao__icone { color: var(--oliva-claro); }
-
-/* ==========================================================================
-   TELA "LIGUE O SOM"
-   ========================================================================== */
-.icone-som { font-family: var(--font-ficha); font-size: 3rem; line-height: 1; color: var(--oliva-escuro); margin: 8px 0 16px; }
-.etapa--centro .botao { margin-top: 24px; width: 100%; }
-
-/* ==========================================================================
-   ETAPAS DE VÍDEO
-   ========================================================================== */
-.vsl { position: relative; margin-bottom: 18px; }
-.vsl__som {
-  position: absolute; top: -11px; left: 14px; z-index: 2;
-  background: var(--carimbo);
-  color: var(--papel);
-  font-family: var(--font-ficha);
-  font-size: var(--t-meta);
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 2px;
-  padding: 3px 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--texto-fraco);
+  margin: 0 0 12px;
 }
 
-.player {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  background: var(--papel-sombra);
-  border: var(--borda-forte);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.player--prova { margin-bottom: 18px; }
-.player > iframe, .player > video, .player > img {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover; border: 0;
-}
-.player__aviso {
-  font-family: var(--font-ficha);
-  font-size: var(--t-meta);
-  letter-spacing: 1px;
-  color: var(--grafite-papel);
-  text-align: center;
-  padding: 12px;
-  line-height: 1.5;
-}
+.suave { color: var(--texto-suave); }
+.micro { font-size: 0.85rem; color: var(--texto-fraco); text-align: center; margin: 12px 0 0; }
 
-.legenda { margin: 0 0 22px; }
+/* ---------- Capa ---------- */
+.etapa--capa { padding-top: 6vh; text-align: center; }
+.etapa--capa h1 { margin-bottom: 14px; }
+.etapa--capa .sub { font-size: 1.15rem; color: var(--texto-suave); margin: 0 auto 32px; max-width: 460px; }
 
-.acao { display: grid; gap: 12px; width: 100%; }
-.acao .botao { width: 100%; }
-
-/* Contagem até a ação liberar: incentiva assistir o corte */
-.espera {
-  font-family: var(--font-ficha);
-  font-size: var(--t-ficha);
-  color: var(--grafite-papel);
-  text-align: center;
-  margin: 0;
-}
-.espera__num { color: var(--carimbo); font-weight: 600; }
-
-/* ==========================================================================
-   LOADING — a única ficha em tinta: o processamento interno
-   ========================================================================== */
-.etapa--loading {
-  background: var(--tinta);
-  border-color: var(--tinta-linha);
-  color: var(--papel);
-  min-height: 340px;
-  justify-content: center;
-}
-.etapa--loading::after { opacity: 0.1; }
-
-.carga__foto {
-  width: 180px;
-  height: auto;
-  border: 1px solid var(--tinta-linha);
+.selo {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--acento);
+  border: 1px solid var(--acento);
+  border-radius: 999px;
+  padding: 6px 14px;
   margin-bottom: 22px;
 }
 
-.carga {
-  width: 100%;
-  max-width: 420px;
-  height: 8px;
-  border: 1px solid var(--tinta-linha);
-  margin-bottom: 24px;
-}
-.carga__preenche {
-  height: 100%;
-  width: 0;
-  background: var(--oliva-claro);
-}
-.carga__msg {
-  font-size: 1.125rem;
-  color: var(--papel);
-  min-height: 68px;   /* trava a altura: a frase troca sem empurrar a tela */
-  margin: 0;
-  max-width: 420px;
-}
-.carga__fim { margin: 18px 0 0; }
-.carga__fim .carimbo--oliva { border-color: var(--oliva-claro); color: var(--oliva-claro); }
+#capa-b { display: none; }
+html.angulo-erro #capa-a { display: none; }
+html.angulo-erro #capa-b { display: block; }
 
-/* ==========================================================================
-   DIAGNÓSTICO
-   ========================================================================== */
-.liberado {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  letter-spacing: 0.4px;
-  text-transform: uppercase;
-  color: var(--oliva-escuro);
-  margin: 0 0 18px;
+/* ---------- Botões ---------- */
+.botao {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: var(--raio);
+  background: var(--botao);
+  color: var(--botao-texto);
+  font-family: var(--fonte);
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 18px 20px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.12s ease;
 }
-.diagnostico { display: grid; gap: 12px; margin-bottom: 26px; }
-.diagnostico__linha {
-  border-left: 3px solid var(--carimbo);
-  background: var(--papel-sombra);
-  padding: 12px 16px;
-  margin: 0;
-  font-family: var(--font-corpo);
+.botao:hover { opacity: 0.92; }
+.botao:active { transform: scale(0.98); }
+
+.botao--checkout {
+  background: var(--acento);
+  color: #fff;
+  font-size: 1.12rem;
+  padding: 22px 20px;
+  box-shadow: 0 0 0 0 rgba(77, 163, 255, 0.5);
+  animation: pulso 2.4s ease-in-out infinite;
+}
+@keyframes pulso {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(77, 163, 255, 0.45); }
+  50% { box-shadow: 0 0 0 10px rgba(77, 163, 255, 0); }
+}
+
+.acao { margin-top: 26px; }
+
+/* ---------- Opções ---------- */
+.opcoes { display: grid; gap: 10px; margin-top: 22px; }
+
+.opcao {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  text-align: left;
+  background: var(--superficie);
+  color: var(--texto);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  font-family: var(--fonte);
+  font-size: 1rem;
   font-weight: 500;
-  font-size: 1.0625rem;
-  line-height: 1.5;
-  animation: entrar 0.4s ease-out both;
+  line-height: 1.35;
+  padding: 16px 16px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease;
+}
+.opcao:hover { border-color: #3B4861; }
+.opcao__icone {
+  flex: 0 0 auto;
+  width: 22px;
+  text-align: center;
+  color: var(--texto-suave);
+  font-size: 1rem;
+}
+.opcao--marcada { border-color: var(--acento); background: var(--acento-fundo); }
+.opcao--marcada .opcao__icone { color: var(--acento); }
+
+/* múltipla escolha */
+.opcao__caixa {
+  flex: 0 0 auto;
+  width: 22px; height: 22px;
+  border: 2px solid var(--borda);
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #fff;
+}
+.opcao--marcada .opcao__caixa { background: var(--acento); border-color: var(--acento); }
+.opcao--marcada .opcao__caixa::before { content: '✓'; }
+
+/* ---------- Revelação ---------- */
+.citacao {
+  margin: 0 0 20px;
+  padding: 4px 0 4px 16px;
+  border-left: 3px solid var(--aspas);
+  font-style: italic;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--aspas);
+}
+.citacao__fonte {
+  display: block;
+  margin-top: 8px;
+  font-style: normal;
+  font-size: 0.8rem;
+  color: var(--texto-fraco);
+}
+.cit { font-style: italic; color: var(--aspas); }
+
+.num { font-size: 1.3em; font-weight: 800; color: var(--texto); }
+
+.linha-dinamica {
+  background: var(--acento-fundo);
+  border-left: 3px solid var(--acento);
+  border-radius: 0 var(--raio) var(--raio) 0;
+  padding: 12px 16px;
+  margin: 0 0 22px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.lista { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 8px; }
+.lista li { display: flex; gap: 10px; }
+.lista li > i { flex: 0 0 auto; font-style: normal; font-weight: 800; color: var(--acento); }
+
+/* ---------- Tabela rolável ---------- */
+.tabela-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  margin: 0 0 10px;
+}
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+.tabela--3 { min-width: 480px; }
+.tabela th {
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  background: var(--superficie-2);
+  padding: 10px 12px;
+}
+.tabela td { padding: 11px 12px; border-top: 1px solid var(--borda); vertical-align: top; }
+.tabela td:first-child { font-weight: 700; }
+.tabela th:last-child { color: var(--acento); }
+.tabela td:last-child { background: var(--acento-fundo); font-weight: 600; }
+.tabela tr.forte td { font-weight: 800; border-top: 2px solid var(--acento); }
+.tabela-dica { font-size: 0.78rem; color: var(--texto-fraco); margin: 0 0 20px; }
+.tabela-wrap + p:not(.tabela-dica) { margin-top: 20px; }
+@media (min-width: 600px) { .tabela-dica { display: none; } }
+
+/* ---------- Vídeo (slot VTurb) ---------- */
+.player {
+  width: 100%;
+  margin: 8px 0 20px;
+  border-radius: var(--raio);
+  overflow: hidden;
+  background: #000;
+}
+.player vturb-smartplayer { display: block; width: 100%; }
+.player--vazio {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--superficie);
+  border: 1px dashed var(--borda);
+  color: var(--texto-fraco);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.espera { text-align: center; font-size: 0.85rem; color: var(--texto-fraco); margin-top: 16px; }
+
+/* ---------- Diagnóstico ---------- */
+.liberado {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--acento);
+  margin: 0 0 8px;
+}
+.diagnostico__nome { font-size: clamp(1.7rem, 7vw, 2.3rem); margin-bottom: 18px; }
+.diagnostico { display: grid; gap: 10px; margin: 18px 0 8px; }
+.diagnostico__linha {
+  margin: 0;
+  font-size: 1.08rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--acento);
+  padding-left: 14px;
+  border-left: 2px solid var(--acento);
+  animation: entrar 0.4s ease both;
 }
 .diagnostico__linha:nth-child(2) { animation-delay: 0.15s; }
 .diagnostico__linha:nth-child(3) { animation-delay: 0.3s; }
+.diagnostico__linha:nth-child(4) { animation-delay: 0.45s; }
 
-/* ==========================================================================
-   OFERTA
-   ========================================================================== */
-.recap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  width: 100%;
-  margin-bottom: 26px;
+/* ---------- Bloco da oferta ---------- */
+.oferta {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--borda);
 }
-.recap div {
-  border: var(--borda);
-  padding: 14px 10px;
-  font-family: var(--font-ficha);
-  font-size: 0.75rem;
-  line-height: 1.4;
-  animation: entrar 0.35s ease-out both;
+.oferta__data {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--acento);
+  margin: -6px 0 20px;
 }
-.recap div:nth-child(2) { animation-delay: 0.08s; }
-.recap div:nth-child(3) { animation-delay: 0.16s; }
-.recap div:nth-child(4) { animation-delay: 0.24s; }
-
-.de-por { font-size: 0.9375rem; color: var(--grafite-papel); margin: 0; }
-.de-por s { color: var(--grafite-papel); }
-
-.preco {
-  font-family: var(--font-display);
-  font-size: clamp(3.5rem, 16vw, 4.5rem);
-  color: var(--oliva-escuro);
-  line-height: 1;
-  margin: 0;
+.entregas { list-style: none; padding: 0; margin: 0 0 24px; display: grid; gap: 10px; }
+.entregas li {
+  display: flex;
+  gap: 14px;
+  background: var(--superficie);
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 14px 16px;
 }
-
-/* O preço "aterrissa" quando a contagem 99→19 termina */
-.preco.pulso { animation: pulso 0.3s ease-out both; }
-@keyframes pulso {
-  0%   { transform: scale(1.15); }
-  100% { transform: scale(1); }
+.entregas__num { font-size: 1.4rem; font-weight: 800; line-height: 1.1; color: var(--acento); flex: 0 0 auto; }
+.nao { display: grid; gap: 12px; margin: 22px 0; }
+.nao p { margin: 0; color: var(--texto-suave); }
+.nao strong { color: var(--texto); }
+.pior-cenario {
+  border: 1px solid var(--borda);
+  border-radius: var(--raio);
+  padding: 14px 16px;
+  margin: 0 0 24px;
+  color: var(--texto-suave);
 }
+.pior-cenario strong { color: var(--texto); }
 
-.preco__nota {
-  font-size: 0.875rem;
-  line-height: 1.6;
-  color: var(--tinta-suave);
-  max-width: 440px;
-  margin: 16px 0 0;
-}
-.escassez { font-size: 0.8125rem; color: var(--carimbo); margin: 14px 0 0; }
+/* ---------- Tela final ---------- */
+.etapa--final { padding-top: 8vh; }
 
-.etapa--centro .botao--carimbo { margin-top: 24px; }
-
-/* Respiração lenta do CTA final (desligada em reduced-motion) */
-.respira { animation: respirar 2.4s ease-in-out infinite alternate; }
-@keyframes respirar {
-  to { transform: scale(1.015); }
-}
-
-/* ==========================================================================
-   ACESSIBILIDADE
-   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
