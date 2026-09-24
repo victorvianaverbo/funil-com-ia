@@ -19,8 +19,10 @@ var SEGUNDOS_LIBERAR = 5;
 /* Cortes da VSL no VTurb: cole aqui o código de incorporação INTEIRO
    (a tag <vturb-smartplayer> + o <script>). Vazio = quadro "vídeo em breve". */
 var VIDEOS = {
-  corte1: '',   /* etapa 6 · a madrugada (~1 min) */
-  corte2: ''    /* etapa 9 · o que a IA não faz aqui (~35 s) */
+  /* etapa 6 · a madrugada (~1 min, vertical) */
+  corte1: '<vturb-smartplayer id="vid-6ab547375b0835fe519150cd" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/927617eb-9845-4e00-a7b2-72c63a904180/players/6ab547375b0835fe519150cd/v4/player.js", s.async=!0,document.head.appendChild(s); </script>',
+  /* etapa 9 · o que a IA não faz aqui (~35 s, vertical) */
+  corte2: '<vturb-smartplayer id="vid-6ab54711bbeaa2c0e813adc3" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 177.77777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/927617eb-9845-4e00-a7b2-72c63a904180/players/6ab54711bbeaa2c0e813adc3/v4/player.js", s.async=!0,document.head.appendChild(s); </script>'
 };
 
 (function () {

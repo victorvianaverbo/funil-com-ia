@@ -351,3 +351,7 @@ html.angulo-erro #capa-b { display: block; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+/* Player VTurb vertical: centraliza e deixa o fundo da página em volta */
+.player:has(vturb-smartplayer) { background: transparent; border-radius: 0; overflow: visible; }
+.player vturb-smartplayer { border-radius: var(--raio); overflow: hidden; }
