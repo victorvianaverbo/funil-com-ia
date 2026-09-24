@@ -7,7 +7,7 @@
 /* --------------------------------------------------------------------------
    CONFIGURAÇÃO · o que você mexe
    -------------------------------------------------------------------------- */
-var DATA_AULA = 'segunda, 28/09';
+var DATA_AULA = 'segunda, 12/10';
 var HORA_AULA = '20h';
 
 /* Checkout da Hyype (lote R$19). UTMs, sck e src são montados no fim. */
