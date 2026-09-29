@@ -7,7 +7,7 @@
 /* --------------------------------------------------------------------------
    CONFIGURAÇÃO · o que você mexe
    -------------------------------------------------------------------------- */
-var DATA_AULA = 'segunda, 12/10';
+var DATA_AULA = 'terça, 13/10';
 var HORA_AULA = '20h';
 
 /* Checkout da Hyype (lote R$19). UTMs, sck e src são montados no fim. */
@@ -82,7 +82,7 @@ var VIDEOS = {
     pagina: 'A sua maior trava é a página torta. Na aula, você vê esse agente montando a página ao vivo.',
     funil: 'A sua maior trava é a ordem do funil. Na aula, você vê esse agente organizando o funil ao vivo.',
     checkout: 'A sua maior trava é integrar o checkout. Na aula, você vê esse agente integrando ao vivo.',
-    trafego: 'A sua maior trava é o tráfego. Essa parte não fica com IA: é a aula passo a passo, que já vem inclusa assim que você entrar.',
+    trafego: 'A sua maior trava é o tráfego. Essa parte não fica com IA: é a aula passo a passo, que já vem inclusa e fica liberada logo depois da aula ao vivo.',
     naosei: 'Você não sabe qual peça trava. É o caso mais comum. Na aula você vê as 5 montando e enxerga onde tava o buraco.'
   };
   var LINHA3 = [
@@ -127,7 +127,7 @@ var VIDEOS = {
      Fluxo principal em ordem; javende, renda e final só por salto (vai).
      ====================================================================== */
   var ETAPAS = [
-    { id: 'estagio', tipo: 'pergunta', chave: 'estagio', ficha: 'Etapa 1 de 12',
+    { id: 'estagio', tipo: 'pergunta', chave: 'estagio', ficha: '',
       titulo: 'Em que pé tá o que você quer vender?',
       opcoes: [
         { s: '▦', t: 'Tenho o produto pronto', rota: 'diag1' },
@@ -137,7 +137,7 @@ var VIDEOS = {
         { s: '$', t: 'Não tenho nada pra vender. Quero uma renda rápida', rota: 'renda', vai: 'renda' }
       ] },
 
-    { id: 'tentou', tipo: 'multi', chave: 'tentou', ficha: 'Etapa 2 de 12',
+    { id: 'tentou', tipo: 'multi', chave: 'tentou', ficha: '',
       titulo: 'O que você já tentou pra colocar isso no ar?',
       micro: 'Pode marcar mais de uma.',
       opcoes: [
@@ -163,7 +163,7 @@ var VIDEOS = {
           '<p>Te pediram as 5. Sozinho. Antes da primeira venda.<br><strong>Não é falta de capacidade. É matemática.</strong></p>';
       } },
 
-    { id: 'peca', tipo: 'pergunta', chave: 'peca', ficha: 'Etapa 4 de 12',
+    { id: 'peca', tipo: 'pergunta', chave: 'peca', ficha: '',
       titulo: 'Qual dessas 5 mais te trava hoje?',
       opcoes: [
         { s: '✎', k: 'copy', t: 'A copy: não sei escrever o que vende' },
@@ -202,7 +202,7 @@ var VIDEOS = {
         '<p class="suave">É o Greyk. Ele e o sócio, o Victor, vivem de marketing digital há mais de 6 anos.</p>',
       abaixo: '<p><strong>Se isso travava a gente, que vive disso, imagina você tentando sozinho.</strong></p>' },
 
-    { id: 'gasto', tipo: 'pergunta', chave: 'gasto', ficha: 'Etapa 7 de 12',
+    { id: 'gasto', tipo: 'pergunta', chave: 'gasto', ficha: '',
       titulo: 'Somando ferramenta, curso e quem você pagou: quanto já saiu do seu bolso tentando?',
       opcoes: [
         { s: '0', t: 'Nada ainda' },
@@ -235,7 +235,7 @@ var VIDEOS = {
         '<p class="suave">E o motivo é o seu dinheiro.</p>',
       abaixo: '<p><strong>4 agentes executam. O tráfego é passo a passo. Você comanda.</strong></p>' },
 
-    { id: 'pensamento', tipo: 'pergunta', chave: 'pensamento', ficha: 'Etapa 10 de 12',
+    { id: 'pensamento', tipo: 'pergunta', chave: 'pensamento', ficha: '',
       titulo: 'Depois de ver isso, qual foi o seu primeiro pensamento?',
       opcoes: [
         { s: '?', t: 'Parece bom demais pra ser verdade' },
@@ -260,7 +260,7 @@ var VIDEOS = {
           '<p><strong>Se travar, trava na sua frente.</strong></p>';
       } },
 
-    { id: 'depois', tipo: 'pergunta', chave: 'depois', ficha: 'Etapa 12 de 12',
+    { id: 'depois', tipo: 'pergunta', chave: 'depois', ficha: '',
       titulo: 'Se as 5 peças estivessem no lugar essa semana, o que você fazia primeiro?',
       opcoes: [
         { s: '►', t: 'Colocava o produto pra vender, finalmente' },
@@ -424,7 +424,7 @@ var VIDEOS = {
   /* ---------- Pergunta de escolha única: toca e avança ---------- */
   function montarPergunta(secao, etapa) {
     secao.innerHTML =
-      '<p class="ficha">' + etapa.ficha + '</p>' +
+      (etapa.ficha ? '<p class="ficha">' + etapa.ficha + '</p>' : '') +
       '<h2>' + etapa.titulo + '</h2>' +
       '<div class="opcoes"></div>';
     secao.querySelector('.opcoes').appendChild(montarOpcoes(etapa));
@@ -463,7 +463,7 @@ var VIDEOS = {
   /* ---------- Múltipla escolha com opção exclusiva ---------- */
   function montarMulti(secao, etapa) {
     secao.innerHTML =
-      '<p class="ficha">' + etapa.ficha + '</p>' +
+      (etapa.ficha ? '<p class="ficha">' + etapa.ficha + '</p>' : '') +
       '<h2>' + etapa.titulo + '</h2>' +
       '<p class="suave">' + etapa.micro + '</p>' +
       '<div class="opcoes"></div>' +
@@ -519,7 +519,7 @@ var VIDEOS = {
   /* ---------- Revelação: texto + tabela + Continuar ---------- */
   function montarRevelacao(secao, etapa) {
     secao.innerHTML =
-      '<p class="ficha">' + etapa.ficha + '</p>' +
+      (etapa.ficha ? '<p class="ficha">' + etapa.ficha + '</p>' : '') +
       etapa.conteudo(respostas) +
       '<div class="acao"></div>';
     var b = botaoContinuar();
@@ -533,7 +533,7 @@ var VIDEOS = {
     var idSlot = etapa.video === 'corte1' ? 'corte-1' : 'corte-2';
 
     secao.innerHTML =
-      '<p class="ficha">' + etapa.ficha + '</p>' +
+      (etapa.ficha ? '<p class="ficha">' + etapa.ficha + '</p>' : '') +
       etapa.acima +
       '<div class="player' + (embed ? '' : ' player--vazio') + '" id="' + idSlot + '">' +
         (embed ? '' : 'vídeo em breve') +
@@ -616,7 +616,7 @@ var VIDEOS = {
       '<ol class="entregas">' +
         '<li><span class="entregas__num">1</span><span><strong>A demonstração completa.</strong> O exército do zero ao ar, na sua frente.</span></li>' +
         '<li><span class="entregas__num">2</span><span><strong>O mapa da Operação.</strong> Cada etapa na ordem, de produto parado a estrutura no ar.</span></li>' +
-        '<li><span class="entregas__num">3</span><span><strong>A aula de tráfego.</strong> Passo a passo pra copiar. Fica com você pra sempre.</span></li>' +
+        '<li><span class="entregas__num">3</span><span><strong>A aula de tráfego.</strong> Passo a passo pra copiar. Liberada logo depois da aula ao vivo e fica com você pra sempre.</span></li>' +
         '<li><span class="entregas__num">4</span><span><strong>Um agente liberado na hora.</strong> Você comanda e sai com a primeira peça no ar.</span></li>' +
       '</ol>' +
       tabela(['O que', 'Quanto custa', 'O que você vê antes de pagar'], [
