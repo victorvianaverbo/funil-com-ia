@@ -216,7 +216,7 @@ var VIDEOS = {
       conteudo: function () {
         return citacao('Queria só dar o comando e aparecer pronto.') +
           '<p>Foi o que a gente mais ouviu na pesquisa. Foi o que a gente construiu.</p>' +
-          tabela(['Agente', 'O que faz', 'O que você faz'], [
+          tabela(['Agente (IA)', 'O que faz', 'O que você faz'], [
             ['Descoberta', 'Define nicho e avatar com dado de mercado', 'Responde'],
             ['Pesquisa', 'Acha o buraco da sua oferta', 'Dá o comando'],
             ['Narrativa', 'Cria a ideia que diferencia o seu produto', 'Dá o comando'],
@@ -621,7 +621,7 @@ var VIDEOS = {
       '</ol>' +
       tabela(['O que', 'Quanto custa', 'O que você vê antes de pagar'], [
         ['Agência', 'De R$5 mil a R$15 mil', 'Um orçamento'],
-        ['Aula', '<span class="num">R$19</span>', 'O exército montando, ao vivo']
+        ['Aula', '<span class="num">R$19</span>', 'Exército colocando seu produto pra vender com IA']
       ], { forte: 1 }) +
       '<div class="nao">' +
         '<p>✗ <strong>Não é promessa de dinheiro fácil.</strong> São as 5 peças no lugar, pro seu produto ter como vender.</p>' +
